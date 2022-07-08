@@ -1,5 +1,6 @@
 // requires
 const cors = require('cors');
+const multer = require('multer');
 
 // Port used by express server
 const port = process.env.PORT || 5000;
