@@ -10,6 +10,7 @@
     "seed": "ts-node prisma/seed.js"
   },
   "dependencies": {
+    "@prisma/client": "^4.0.0",
     "chance": "^1.1.8",
     "daisyui": "^2.18.1",
     "next": "12.2.1",
