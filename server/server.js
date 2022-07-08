@@ -24,7 +24,7 @@ const io = new Server(httpServer, {
 // use cors
 app.use(cors());
 
-// route that is used to send data to a file
+// route used for web socket test
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
@@ -36,6 +36,33 @@ io.on('connection', (socket) => {
     io.emit('chat message', msg);
   });
 });
+
+// SET STORAGE + multer routes
+app.get('/multer-test', (req, res) => {
+  res.sendFile(__dirname + '/multer.html');
+});
+
+// This is for uploading single file
+app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
+  const file = req.file;
+  if (!file) {
+    const error = new Error('Please upload a file');
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send(file);
+});
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now());
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // Server is listening on that port
 httpServer.listen(port, () => {
