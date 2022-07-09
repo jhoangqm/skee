@@ -9,3 +9,122 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Clients {
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  name          String
+  password      String
+  phoneNumber   String?         @unique
+  createdAt     DateTime        @default(now())
+  firebaseToken String
+  chats         Chat[]
+  bookings      Bookings[]
+  reviews       Reviews[]
+  ClientsSkills ClientsSkills[]
+
+}
+
+model Resorts {
+  id             Int        @id @default(autoincrement())
+  name           String
+  createdAt      DateTime   @default(now())
+  map            String     @unique
+  vert           Int
+  skiableTerrain Int
+  runs           Int
+  lifts          Int
+  easyRuns       Int
+  mediumRuns     Int
+  hardRuns       Int
+  pro            Pros[]
+  bookings       Bookings[]
+}
+
+model Pros {
+  id          Int          @id @default(autoincrement())
+  email       String       @unique
+  name        String
+  password    String
+  bio         String
+  phoneNumber String       @unique
+  certBody    String
+  level       Int
+  createdAt   DateTime     @default(now())
+  resorts     Resorts?     @relation(fields: [resortId], references: [id])
+  resortId    Int?
+  reviews     Reviews[]
+  ProsSkills  ProsSkills[]
+  Chat        Chat[]
+  booking     Bookings[]
+}
+
+model Chat {
+  id       Int      @id @default(autoincrement())
+  message  String?
+  url      String?
+  type     String   @default("img")
+  clients  Clients? @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientId Int?
+  pros     Pros?    @relation(fields: [proId], references: [id], onDelete: Cascade)
+  proId    Int?
+}
+
+model Bookings {
+  id          Int        @id @default(autoincrement())
+  clients     Clients?   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientId    Int?
+  resorts     Resorts?   @relation(fields: [resortId], references: [id], onDelete: Cascade)
+  resortId    Int?
+  timeSlot    timeSlots? @relation(fields: [timeSlotsId], references: [id], onDelete: Cascade)
+  timeSlotsId Int?
+  dateFrom    DateTime
+  dateTo      DateTime
+  accepted    Boolean    @default(false)
+  pending     Boolean    @default(true)
+  Pros        Pros?      @relation(fields: [proId], references: [id])
+  proId       Int?
+}
+
+model timeSlots {
+  id            Int        @id @default(autoincrement())
+  day           DateTime
+  startTime     DateTime
+  duration      Int
+  remainingTime Int        @default(8)
+  bookings      Bookings[]
+}
+
+model Reviews {
+  id        Int      @id @default(autoincrement())
+  clients   Clients? @relation(fields: [clientId], references: [id])
+  clientId  Int?
+  pros      Pros?    @relation(fields: [proId], references: [id])
+  proId     Int?
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+}
+
+model Skills {
+  id            Int             @id @default(autoincrement())
+  skill         String
+  ClientsSkills ClientsSkills[]
+  ProsSkills    ProsSkills[]
+}
+
+model ClientsSkills {
+  id       Int      @id @default(autoincrement())
+  clients  Clients? @relation(fields: [clientId], references: [id])
+  clientId Int?
+  skills   Skills?  @relation(fields: [skillId], references: [id])
+  skillId  Int?
+}
+
+model ProsSkills {
+  id      Int     @id @default(autoincrement())
+  pros    Pros?   @relation(fields: [proId], references: [id], onDelete: Cascade)
+  proId   Int?
+  skills  Skills? @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId Int?
+}
