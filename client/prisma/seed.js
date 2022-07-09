@@ -19,8 +19,8 @@ async function seed() {
   await prisma.clientsSkills.deleteMany();
   await prisma.prosSkills.deleteMany();
   await prisma.resorts.deleteMany();
-  await prisma.timeSlot.deleteMany();
-  await prisma.review.deleteMany();
+  await prisma.timeSlots.deleteMany();
+  await prisma.reviews.deleteMany();
   await prisma.bookings.deleteMany();
 
   for (const r of resort) {

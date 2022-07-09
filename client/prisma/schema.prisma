@@ -37,6 +37,7 @@ model Resorts {
   easyRuns       Int
   mediumRuns     Int
   hardRuns       Int
+  province       String
   pro            Pros[]
   bookings       Bookings[]
 }
