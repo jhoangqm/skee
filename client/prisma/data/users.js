@@ -109,130 +109,121 @@ const pro = [
 ];
 const skill = [
   {
-    skill: chance.word(),
+    skill: 'bumps',
   },
   {
-    skill: chance.word(),
+    skill: 'beginner',
   },
   {
-    skill: chance.word(),
+    skill: 'intermediate',
   },
   {
-    skill: chance.word(),
+    skill: 'advanced',
   },
   {
-    skill: chance.word(),
+    skill: 'freestyle',
   },
   {
-    skill: chance.word(),
+    skill: 'off-piste',
   },
   {
-    skill: chance.word(),
+    skill: 'carving',
   },
   {
-    skill: chance.word(),
-  },
-  {
-    skill: chance.word(),
-  },
-  {
-    skill: chance.word(),
-  },
-  {
-    skill: chance.word(),
+    skill: 'trees',
   },
 ];
 
 const clientsSkill = [
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     clientId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
 ];
 const prosSkill = [
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
   {
     proId: chance.integer({ min: 1, max: 5 }),
-    skillId: chance.integer({ min: 1, max: 10 }),
+    skillId: chance.integer({ min: 1, max: 7 }),
   },
 ];
 const review = [
