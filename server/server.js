@@ -1,14 +1,15 @@
 const cors = require('cors');
 const express = require('express');
 const multer = require('multer');
+// Prisma CRUD's
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 // Create express server app
 const app = express();
 
 // Port used by express server
 const port = process.env.PORT || 5000;
-
-// use cors
 
 // Create http server
 const httpServer = require('http').createServer(app);
@@ -42,17 +43,6 @@ app.get('/multer-test', (req, res) => {
   res.sendFile(__dirname + '/multer.html');
 });
 
-// This is for uploading single file
-app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
-  const file = req.file;
-  if (!file) {
-    const error = new Error('Please upload a file');
-    error.httpStatusCode = 400;
-    return next(error);
-  }
-  res.send(file);
-});
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads');
@@ -63,6 +53,17 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+// This is for uploading single file
+app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
+  const file = req.file;
+  if (!file) {
+    const error = new Error('Please upload a file');
+    error.httpStatusCode = 400;
+    return next(error);
+  }
+  res.send(file);
+});
 
 // Server is listening on that port
 httpServer.listen(port, () => {
