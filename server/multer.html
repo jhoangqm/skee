@@ -9,15 +9,15 @@
  
  <!--  SINGLE FILE -->
  <h1>Single file upload</h1>
-<form action="/uploadfile" enctype="multipart/form-data" method="POST"> 
-   <input type="file" name="myFile" />
+<form action="/upload" enctype="multipart/form-data" method="POST"> 
+  <input type="file" name="myFile" />  <!-- name="myFile" is connected to upload.single -->
    <input type="submit" value="Upload a file"/>
 </form>
  <br>
  <br>
  <br>
  <br>
-<!-- MULTIPLE FILES -->
+<!-- MULTIPLE FILES
  <h1>Multiple files upload</h1>
 <form action="/uploadmultiple"  enctype="multipart/form-data" method="POST">
   Select images: <input type="file" name="myFiles" multiple>
@@ -27,13 +27,13 @@
 <br>
 <br>
 <br>
-  <!--   PHOTO-->
- <h1>Photo upload</h1>
+  <!-   PHOTO-->
+ <!-- <h1>Photo upload</h1>
 <form action="/uploadphoto" enctype="multipart/form-data" method="POST"> 
   <input type="file" name="myImage" accept="image/*" />
   <input type="submit" value="Upload Photo"/>
 </form>
- 
+  --> 
  
  
 </body>
