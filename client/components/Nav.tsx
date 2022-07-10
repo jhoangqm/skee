@@ -5,6 +5,7 @@ const Nav = () => {
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
+          {/* // * this is the responsive Nav */}
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,19 +74,22 @@ const Nav = () => {
             </Link>
           </ul>
         </div>
+        {/* //* this is the normal Nav */}
         <Link href="/">
-          <a className="btn btn-ghost normal-case text-xl">Skee</a>
+          <a className="btn btn-ghost normal-case text-xl hover:bg-info hover:rounded-lg">
+            Skee 🎿
+          </a>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
-          <Link href="/about">
-            <li>
+          <Link href="/mountains">
+            <li className="hover:bg-info hover:rounded-lg">
               <a>Mountains</a>
             </li>
           </Link>
           <li tabIndex={0}>
-            <a>
+            <a className="hover:bg-info hover:rounded-lg">
               Dev Links
               <svg
                 className="fill-current"
@@ -99,37 +103,37 @@ const Nav = () => {
             </a>
             <ul className="p-2">
               <Link href="/faq">
-                <li>
+                <li className="bg-info">
                   <a>FAQ</a>
                 </li>
               </Link>
               <Link href="/userprofile">
-                <li>
+                <li className="bg-info">
                   <a>User Profile</a>
                 </li>
               </Link>
               <Link href="/proprofile">
-                <li>
+                <li className="bg-info">
                   <a>Pro Profile</a>
                 </li>
               </Link>
               <Link href="/booking">
-                <li>
+                <li className="bg-info">
                   <a>Booking</a>
                 </li>
               </Link>
             </ul>
           </li>
           <Link href="/instructors">
-            <li>
+            <li className="hover:bg-info hover:rounded-lg">
               <a>Instructors</a>
             </li>
           </Link>
         </ul>
       </div>
       <Link href="/signup">
-        <div className="navbar-end">
-          <a className="btn">Signup</a>
+        <div className="navbar-end ">
+          <a className="btn bg-transparent hover:bg-success">Signup</a>
         </div>
       </Link>
     </div>
