@@ -67,9 +67,8 @@ app.post('/upload', uploadMiddleware, (req, res) => {
 //------------------------------------------------------------
 
 // route used for web socket test
-app.get('/test', (req, res) => {
+app.get('/', (req, res) => {
   // res.sendFile(__dirname + '/index.html');
-
   res.json({ testing: 'testing sockets' });
 });
 
