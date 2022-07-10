@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/data/users.js", "components/sockets.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prisma/data/users.js"],
   "exclude": ["node_modules"]
 }
