@@ -16,12 +16,12 @@ const Carousel = () => {
   const { data, error } = useSWR<Resorts[]>('/api/resorts', fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
-  console.log(data);
+  // console.log(data);
 
 
   return (
     <>
-      <h1>Checkout your local resort</h1>
+      
       <div className="carousel carousel-center max-w-7xl p-4 space-x-4 bg-neutral rounded-box">
         {data.map((p, i: number) => (
           <div key={i} className="carousel-item">
