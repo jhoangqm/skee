@@ -1,10 +1,14 @@
 import Nav from '../components/Nav';
 import Footer from './Footer';
-const Layout = ({ children, signup }) => {
+interface LayoutProps {
+  children?: JSX.Element | JSX.Element[];
+  signup?: boolean;
+}
+const Layout = (props: LayoutProps) => {
   return (
     <div className="layout">
-      <Nav signup={signup} />
-      <main>{children}</main>
+      <Nav signup={props.signup} />
+      <main>{props.children}</main>
       <Footer />
     </div>
   );

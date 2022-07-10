@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Nav = (signup: any) => {
+const Nav = (props: any) => {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -131,8 +131,8 @@ const Nav = (signup: any) => {
           </Link>
         </ul>
       </div>
-      {console.log(signup)}
-      {signup ? (
+      {/* {console.log(signup)} */}
+      {props.signup ? (
         <Link href="/signup">
           <div className="navbar-end ">
             <a className="btn bg-transparent hover:bg-success">Sign in</a>
