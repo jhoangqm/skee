@@ -22,11 +22,13 @@ function Sockets() {
       setUser(prev => data.username);
       setUsers(prev => data.users);
     });
+    
     socket.on("new user connected", (data) => { // Says to all users
       if (!users.includes(data)) {
         setUsers(data);
       }
     });
+
     socket.on("DISCONNECT", (data) => {
       setUsers(prev => (
         prev.filter(name => name !== data)
