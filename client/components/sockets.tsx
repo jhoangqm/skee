@@ -35,8 +35,8 @@ function Sockets() {
       ));
     });
   }, [user]);
-  console.log(users);
-  console.log(user);
+  // console.log(users);
+  // console.log(user);
   return (
     <div>
       <h1>
