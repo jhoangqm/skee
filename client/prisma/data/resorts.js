@@ -19,6 +19,7 @@ const resort = [
     mediumRuns: chance.integer({ min: 2, max: 20 }),
     hardRuns: chance.integer({ min: 2, max: 20 }),
     province: 'BC',
+    image: 'https://github.com/jhoangqm/skee/blob/index-changing/_docs/resort/cypress.jpg?raw=true'
   },
   {
     name: 'Seymour Mountain',
@@ -31,6 +32,7 @@ const resort = [
     mediumRuns: chance.integer({ min: 2, max: 20 }),
     hardRuns: chance.integer({ min: 2, max: 20 }),
     province: 'BC',
+    image: 'https://i0.wp.com/vancouversbestplaces.com/wp-content/uploads/2020/08/Lodge-Chair-at-Mt-Seymour.jpg?resize=640%2C315&ssl=1'
   },
   {
     name: 'Grouse Mountain',
@@ -43,6 +45,20 @@ const resort = [
     mediumRuns: chance.integer({ min: 2, max: 20 }),
     hardRuns: chance.integer({ min: 2, max: 20 }),
     province: 'BC',
+    image:'https://media.istockphoto.com/photos/grouse-mountain-picture-id1132052313'
+  },
+  {
+    name: 'Whistler Blackcomb',
+    map: chance.url(),
+    vert: chance.integer({ min: 200, max: 1200 }),
+    skiableTerrain: chance.integer({ min: 200, max: 600 }),
+    runs: chance.integer({ min: 2, max: 20 }),
+    lifts: chance.integer({ min: 2, max: 20 }),
+    easyRuns: chance.integer({ min: 2, max: 20 }),
+    mediumRuns: chance.integer({ min: 2, max: 20 }),
+    hardRuns: chance.integer({ min: 2, max: 20 }),
+    province: 'BC',
+    image:'https://github.com/jhoangqm/skee/blob/index-changing/_docs/resort/whistler.jpeg?raw=true'
   },
 ];
 const timeSlot = [

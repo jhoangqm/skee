@@ -18,15 +18,15 @@ const Home: NextPage = () => {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Find you nex ski instructor here!
+          Find you next ski instructor here!
         </h1>
         <p className={styles.description}>
           Click on the map below to find an instructor in your
         </p>
         <Map/>
-        <p className={styles.description}>
+        {/* <p className={styles.description}>
           Search resorts in your area below:
-          </p>
+          </p> */}
         <Carousel/>
       </main>
 
