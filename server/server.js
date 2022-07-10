@@ -5,22 +5,18 @@ const morgan = require('morgan');
 // Upload functions test
 const uploadMiddleware = require('./src/helpers/uploadMiddleware');
 
-// Create express server app
+// App Config
 const app = express();
-
-// Port used by express server
 const port = process.env.PORT || 5000;
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+// Middlewares
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Create http server
+// Socket IO setup
 const httpServer = require('http').createServer(app);
-// Web Socket called on the server with cors
 const { Server } = require('socket.io');
 // CORS is needed because HTTP requests sent by the frontend are allowed to reach the server.
 const io = new Server(httpServer, {
@@ -29,7 +25,38 @@ const io = new Server(httpServer, {
   },
 });
 
-// Route for upload.
+let users = [];
+
+io.on('connection', (socket) => {
+  // generates random string
+  const username = (Math.random() + 1).toString(36).substring(4);
+  console.log(`${username} has connected`);
+
+  const testUser = (username) => {
+    if (users.includes(username)) {
+      testUser();
+    }
+    users.push(username);
+  };
+  testUser(username);
+  // https://socket.io/docs/v4/emit-cheatsheet/
+  socket.emit('welcome', { username, users });
+  socket.name = username;
+  socket.broadcast.emit('new user connected', users);
+
+  socket.on('disconnect', (data) => {
+    // console.log(data)
+    console.log(`${socket.name} has disconnected`);
+    users = users.filter((name) => name !== socket.name);
+    socket.broadcast.emit('DISCONNECT', socket.name);
+  });
+  // console in server
+  socket.on('CLICKED', (data) => {
+    console.log('Someone has clicked the button');
+  });
+});
+
+// Routes for upload.
 app.get('/upload', (req, res) => {
   res.sendFile(__dirname + '/multer.html');
 });
@@ -40,16 +67,10 @@ app.post('/upload', uploadMiddleware, (req, res) => {
 //------------------------------------------------------------
 
 // route used for web socket test
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+app.get('/test', (req, res) => {
+  // res.sendFile(__dirname + '/index.html');
 
-// IO websocket connection
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
-  });
+  res.json({ testing: 'testing sockets' });
 });
 
 // Server is listening on that port
