@@ -131,7 +131,7 @@ const Nav = (props: any) => {
           </Link>
         </ul>
       </div>
-      {/* {console.log(signup)} */}
+      {/* //* signed in propery used here */}
       {props.signup ? (
         <Link href="/signup">
           <div className="navbar-end ">
