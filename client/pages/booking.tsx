@@ -1,5 +1,5 @@
-import Nav from '../components/Nav';
+import Layout from '../components/Layout';
 const Booking = () => {
-  return <Nav />;
+  <Layout home />;
 };
 export default Booking;

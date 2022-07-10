@@ -1,8 +1,7 @@
-import Nav from '../components/Nav';
+import Layout from '../components/Layout';
 const Faq = () => {
   return (
-    <>
-      <Nav />
+    <Layout component>
       <div
         tabIndex={0}
         className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
@@ -47,7 +46,7 @@ const Faq = () => {
           <p>tabindex="0" attribute is necessary to make the div focusable</p>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 export default Faq;

@@ -1,6 +1,6 @@
-import Nav from '../components/Nav';
+import Layout from '../components/Layout';
 const Mountains = () => {
-  return <Nav />;
+  return <Layout home />;
 };
 
 export default Mountains;

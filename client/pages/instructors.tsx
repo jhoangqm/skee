@@ -1,5 +1,5 @@
-import Nav from '../components/Nav';
+import Layout from '../components/Layout';
 const Instructors = () => {
-  return <Nav />;
+  return <Layout instructors />;
 };
 export default Instructors;
