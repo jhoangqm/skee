@@ -19,8 +19,6 @@ function Sockets() {
   useEffect(() => {
     socket.on('greeting', (data) => { // Says hello to a new user
       console.log("Hello received from server");
-      // setUser([])
-      // setUsers([])
       setUser(prev => data.username);
       setUsers(prev => data.users);
     });
@@ -35,8 +33,7 @@ function Sockets() {
       ));
     });
   }, [user]);
-  // console.log(users);
-  // console.log(user);
+
   return (
     <div>
       <h1>
