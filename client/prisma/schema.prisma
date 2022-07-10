@@ -38,6 +38,7 @@ model Resorts {
   mediumRuns     Int
   hardRuns       Int
   province       String
+  image          String?
   pro            Pros[]
   bookings       Bookings[]
 }
