@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Nav = () => {
+const Nav = (signup: any) => {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -131,11 +131,20 @@ const Nav = () => {
           </Link>
         </ul>
       </div>
-      <Link href="/signup">
-        <div className="navbar-end ">
-          <a className="btn bg-transparent hover:bg-success">Signup</a>
-        </div>
-      </Link>
+      {console.log(signup)}
+      {signup ? (
+        <Link href="/signup">
+          <div className="navbar-end ">
+            <a className="btn bg-transparent hover:bg-success">Sign in</a>
+          </div>
+        </Link>
+      ) : (
+        <Link href="/signup">
+          <div className="navbar-end ">
+            <a className="btn bg-transparent hover:bg-success">logout</a>
+          </div>
+        </Link>
+      )}
     </div>
   );
 };

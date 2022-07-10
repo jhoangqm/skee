@@ -1,9 +1,9 @@
 import Nav from '../components/Nav';
 import Footer from './Footer';
-const Layout = ({ children }) => {
+const Layout = ({ children, signup }) => {
   return (
     <div className="layout">
-      <Nav />
+      <Nav signup={signup} />
       <main>{children}</main>
       <Footer />
     </div>
