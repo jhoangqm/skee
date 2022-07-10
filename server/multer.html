@@ -8,33 +8,11 @@
    
  
  <!--  SINGLE FILE -->
- <h1>Single file upload</h1>
+ <h1>File uploads</h1>
 <form action="/upload" enctype="multipart/form-data" method="POST"> 
-  <input type="file" name="singleFile" />  <!-- name="myFile" is connected to upload.single -->
+  <input type="file" name="files" multiple/>  <!-- name="myFile" is connected to upload.single -->
    <input type="submit" value="Upload a file"/>
 </form>
- <br>
- <br>
- <br>
- <br>
-<!-- MULTIPLE FILES
- <h1>Multiple files upload</h1>
-<form action="/uploadmultiple"  enctype="multipart/form-data" method="POST">
-  Select images: <input type="file" name="myFiles" multiple>
-  <input type="submit" value="Upload your files"/>
-</form>
-<br>
-<br>
-<br>
-<br>
-  <!-   PHOTO-->
- <!-- <h1>Photo upload</h1>
-<form action="/uploadphoto" enctype="multipart/form-data" method="POST"> 
-  <input type="file" name="myImage" accept="image/*" />
-  <input type="submit" value="Upload Photo"/>
-</form>
-  --> 
- 
- 
+
 </body>
 </html>

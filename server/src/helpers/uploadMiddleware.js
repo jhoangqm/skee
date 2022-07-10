@@ -18,9 +18,9 @@ const upload = multer({ storage: storage });
 
 // This is the upload function
 const singleUpload = (req, res, next) => {
-  const uploadSingle = upload.single('singleFile');
+  const uploadFiles = upload.array('files', 12);
 
-  uploadSingle(req, res, (err) => {
+  uploadFiles(req, res, (err) => {
     if (err) {
       res.status(500).send({
         message: 'multer error',
