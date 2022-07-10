@@ -2,10 +2,11 @@ import Link from 'next/link';
 
 const Nav = (props: any) => {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 h-24">
       <div className="navbar-start">
         <div className="dropdown">
           {/* // * this is the responsive Nav */}
+          {/* //TODO: update responsive nav text size */}
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +77,7 @@ const Nav = (props: any) => {
         </div>
         {/* //* this is the normal Nav */}
         <Link href="/">
-          <a className="btn btn-ghost normal-case text-xl hover:bg-info hover:rounded-lg">
+          <a className="btn btn-ghost normal-case text-2xl hover:bg-info hover:rounded-lg">
             Skee 🎿
           </a>
         </Link>
@@ -85,11 +86,11 @@ const Nav = (props: any) => {
         <ul className="menu menu-horizontal p-0">
           <Link href="/mountains">
             <li className="hover:bg-info hover:rounded-lg">
-              <a>Mountains</a>
+              <a className="text-2xl">Mountains</a>
             </li>
           </Link>
           <li tabIndex={0}>
-            <a className="hover:bg-info hover:rounded-lg">
+            <a className="hover:bg-info hover:rounded-lg  text-2xl">
               Dev Links
               <svg
                 className="fill-current"
@@ -104,17 +105,17 @@ const Nav = (props: any) => {
             <ul className="p-2">
               <Link href="/faq">
                 <li className="bg-info">
-                  <a>FAQ</a>
+                  <a className="text-2xl">FAQ</a>
                 </li>
               </Link>
               <Link href="/userprofile">
                 <li className="bg-info">
-                  <a>User Profile</a>
+                  <a className="text-2xl">User Profile</a>
                 </li>
               </Link>
               <Link href="/proprofile">
                 <li className="bg-info">
-                  <a>Pro Profile</a>
+                  <a className="text-2xl">Pro Profile</a>
                 </li>
               </Link>
               <Link href="/booking">
@@ -126,7 +127,7 @@ const Nav = (props: any) => {
           </li>
           <Link href="/instructors">
             <li className="hover:bg-info hover:rounded-lg">
-              <a>Instructors</a>
+              <a className="text-2xl">Instructors</a>
             </li>
           </Link>
         </ul>
@@ -134,14 +135,18 @@ const Nav = (props: any) => {
       {/* //* signed in propery used here */}
       {props.signup ? (
         <Link href="/signup">
-          <div className="navbar-end ">
-            <a className="btn bg-transparent hover:bg-success">Sign in</a>
+          <div className="navbar-end text-xl">
+            <a className="btn bg-transparent hover:bg-success text-xl">
+              Sign in
+            </a>
           </div>
         </Link>
       ) : (
         <Link href="/signup">
           <div className="navbar-end ">
-            <a className="btn bg-transparent hover:bg-success">logout</a>
+            <a className="btn bg-transparent hover:bg-success text-xl">
+              logout
+            </a>
           </div>
         </Link>
       )}
