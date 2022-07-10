@@ -30,7 +30,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="flex justify-between items-center mb-6">
+                {/* <div className="flex justify-between items-center mb-6">
                   <div className="form-group form-check">
                     <input
                       type="checkbox"
@@ -51,7 +51,7 @@ const Signup = () => {
                   >
                     Forgot password?
                   </a>
-                </div>
+                </div> */}
 
                 <button
                   type="submit"
