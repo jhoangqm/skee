@@ -1,4 +1,5 @@
 client/prisma/schema.prisma
 client/.env
+server/.env
 client/prisma/migrations/migration_lock.toml
 package-lock.json
