@@ -2,8 +2,9 @@ const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 const fs = require('fs');
-// const multer = require('multer');
-// const path = require('path');
+
+// const session = require('express-session');
+// app.use(session({ keys: ['abc'], name: 'user' }));
 
 // routes require
 // const uploadRouter = require('./routes/uploadRoutes');
@@ -31,37 +32,44 @@ const io = new Server(httpServer, {
   },
 });
 
-let users = [];
+const clients = {};
 
-io.on('connection', (socket) => {
-  // generates random string
-  const username = (Math.random() + 1).toString(36).substring(4);
-  console.log(`${username} has connected`);
+// Creating connection for socket
 
-  const testUser = (username) => {
-    if (users.includes(username)) {
-      testUser();
+io.on('connection', (client) => {
+  const name = (Math.random() + 1).toString(36).substring(4);
+  console.log('Someone connected!', client.id, name);
+  client.name = name;
+  clients[name] = client.id;
+  console.log(clients);
+
+  client.broadcast.emit('server', `${name}: just connected`);
+
+  // console.log(client);
+
+  client.emit('name', name);
+
+  client.on('message', (data) => {
+    console.log('message:', data);
+    data.from = client.name;
+
+    if (data.to) {
+      ///  send to specific user
+      const id = clients[data.to];
+      console.log('message is for: ', data.to, id);
+      io.to(id).emit('user', data);
+      return;
     }
-    users.push(username);
-  };
-  testUser(username);
-  // https://socket.io/docs/v4/emit-cheatsheet/
-  socket.emit('welcome', { username, users });
-  socket.name = username;
-  socket.broadcast.emit('new user connected', users);
 
-  socket.on('disconnect', (data) => {
-    // console.log(data)
-    console.log(`${socket.name} has disconnected`);
-    users = users.filter((name) => name !== socket.name);
-    socket.broadcast.emit('DISCONNECT', socket.name);
+    // Send to all
+    client.broadcast.emit('user', data);
   });
-  // console in server to test if client and server can communicate
-  socket.on('CLICKED', (data) => {
-    console.log(`${socket.name} has clicked the button`);
+
+  client.on('disconnect', () => {
+    delete clients[client.name];
+    console.log('Client Disconnected!', client.name);
   });
 });
-
 // route to test upload
 const uploadMiddleware = require('./src/helpers/uploadMiddleware');
 
