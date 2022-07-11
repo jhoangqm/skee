@@ -13,7 +13,8 @@ datasource db {
 model Clients {
   id            Int             @id @default(autoincrement())
   email         String          @unique
-  name          String
+  firstName     String
+  lastName      String
   password      String
   phoneNumber   String?         @unique
   createdAt     DateTime        @default(now())
@@ -46,9 +47,10 @@ model Resorts {
 model Pros {
   id          Int          @id @default(autoincrement())
   email       String       @unique
-  name        String
+  firstName   String
+  lastName    String
   password    String
-  bio         String
+  bio         String?
   phoneNumber String       @unique
   certBody    String
   level       Int
