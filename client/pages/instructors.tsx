@@ -7,7 +7,7 @@ import Alt from '../components/Alt';
 const Instructors = () => {
   return (
   <Layout signup={false} >
-    <Alt/>
+    
     <Filter/>
     
 

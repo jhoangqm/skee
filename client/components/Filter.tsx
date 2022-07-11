@@ -17,7 +17,7 @@ const Filter = () => {
       <div className="drawer-content">
         {/* <!-- Page content here --> */}
 
-        <label htmlFor="my-drawer" className="btn btn-primary drawer-button ml-10">Filter your instructor</label>
+        <label htmlFor="my-drawer" className="btn btn-primary drawer-button ml-10">Filter your instructor from side bar</label>
         <Instructor />
       </div>
 
