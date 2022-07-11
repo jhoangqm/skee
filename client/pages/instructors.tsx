@@ -1,5 +1,18 @@
 import Layout from '../components/Layout';
+import Instructor from '../components/Description';
+import Filter from '../components/Filter';
+import Alt from '../components/Alt';
+
+
 const Instructors = () => {
-  return <Layout children={undefined} signup={false} />;
+  return (
+  <Layout signup={false} >
+    <Alt/>
+    <Filter/>
+    
+
+  </Layout>
+  
+  )
 };
 export default Instructors;
