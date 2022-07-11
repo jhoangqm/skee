@@ -5,7 +5,7 @@ import { Resorts } from '@prisma/client';
 import { prisma } from '../db';
 
 
-const fetcher = (url: RequestInfo | URL) => fetch(url).then(res => res.json());
+const fetcher = (url: any) => fetch(url).then(res => res.json());
 
 interface ResortProps {
   resorts: Resorts[];
