@@ -32,11 +32,11 @@ const Instructor = () => {
     <>
       <Alt />
       
-      <div className="flex flex-wrap justify-center mt-5" > <Modal showModal={showModal} setShowModal={setShowModal}/>
+      <div className="flex flex-wrap justify-center mt-5" > 
         {data.map((p, i: number) => (
           <div key={i} className="card w-96 bg-base-100 shadow-xl m-6" onClick={openModal}>
             {/* <button className='btn' onClick={openModal}>Modal</button> */}
-            
+            <Modal showModal={showModal} setShowModal={setShowModal}/>
 
             <figure>
               <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
