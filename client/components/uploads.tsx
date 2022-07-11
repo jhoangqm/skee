@@ -6,10 +6,9 @@ function Upload() {
 
   const send = event => {
     const data = new FormData();
-    data.append("name", name);
     data.append("file", file);
 
-    Axios.post("https://httpbin.org/anything", data)
+    Axios.post("http://localhost:5000/upload", data)
       .then(res => console.log(res))
       .catch(err => console.log(err));
   };
@@ -19,15 +18,14 @@ function Upload() {
     <div>
     <h1>File uploads</h1>
     {/* <form action="/upload" encType="multipart/form-data" method="POST">  */}
-      <form action="#">
+      <form>
       <input 
       type="file" 
-      id='file'
       // name="files" 
       onChange={event => {
         const file = event.target.files[0];
         setFile(file)
-      }} 
+      }}
         multiple/>
        <button 
        className='btn' 
