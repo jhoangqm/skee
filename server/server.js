@@ -1,10 +1,11 @@
 const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
-const upload = express.Router();
+// const multer = require('multer');
+// const path = require('path');
 
-// Upload functions test
-const uploadMiddleware = require('./src/helpers/uploadMiddleware');
+// routes require
+// const uploadRouter = require('./routes/uploadRoutes');
 
 // App Config
 const app = express();
@@ -15,6 +16,9 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Router usage not working at the moment
+// app.use('/upload', uploadRouter());
 
 // Socket IO setup
 const httpServer = require('http').createServer(app);
@@ -51,22 +55,19 @@ io.on('connection', (socket) => {
     users = users.filter((name) => name !== socket.name);
     socket.broadcast.emit('DISCONNECT', socket.name);
   });
-  // console in server
+  // console in server to test if client and server can communicate
   socket.on('CLICKED', (data) => {
-    console.log('Someone has clicked the button');
+    console.log(`${socket.name} has clicked the button`);
   });
 });
 
-// Routes for upload.
-upload.get('/upload', (req, res) => {
-  res.sendFile(__dirname + '/multer.html');
-});
+// route to test upload
+const uploadMiddleware = require('./src/helpers/uploadMiddleware');
 
-upload.post('/upload', (req, res) => {
-  console.log('HEY U SENT SOMETHING');
-  // res.send('Uploaded');
+app.post('/upload', uploadMiddleware, (req, res, next) => {
+  console.log(req.body);
+  // res.send({ Success: 'Uploaded' });
 });
-//------------------------------------------------------------
 
 // route used for web socket test
 app.get('/', (req, res) => {
