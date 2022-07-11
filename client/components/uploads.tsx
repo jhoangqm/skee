@@ -8,7 +8,7 @@ function Upload() {
     const data = new FormData();
     data.append("file", file);
 
-    Axios.post("http://localhost:5000/upload", data)
+    Axios.post("/upload", data)
       .then(res => console.log(res))
       .catch(err => console.log(err));
   };
