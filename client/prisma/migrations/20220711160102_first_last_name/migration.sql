@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Clients" ALTER COLUMN "firstName" DROP NOT NULL,
+ALTER COLUMN "lastName" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Pros" ALTER COLUMN "firstName" DROP NOT NULL,
+ALTER COLUMN "lastName" DROP NOT NULL;
