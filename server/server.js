@@ -1,6 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
+const upload = express.Router();
 
 // Upload functions test
 const uploadMiddleware = require('./src/helpers/uploadMiddleware');
@@ -57,19 +58,19 @@ io.on('connection', (socket) => {
 });
 
 // Routes for upload.
-app.get('/upload', (req, res) => {
+upload.get('/upload', (req, res) => {
   res.sendFile(__dirname + '/multer.html');
 });
 
-app.post('/upload', uploadMiddleware, (req, res) => {
-  res.send('Uploaded');
+upload.post('/upload', (req, res) => {
+  console.log('HEY U SENT SOMETHING');
+  // res.send('Uploaded');
 });
 //------------------------------------------------------------
 
 // route used for web socket test
-app.get('/test', (req, res) => {
+app.get('/', (req, res) => {
   // res.sendFile(__dirname + '/index.html');
-
   res.json({ testing: 'testing sockets' });
 });
 
