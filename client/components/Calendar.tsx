@@ -19,7 +19,7 @@ function isWithinRanges(date: Date, ranges: Date[]) {
 }
 // * * * * * * * * * * * * * * * *
 
-export default function Home() {
+export default function BookingCalendar(props: { proId }) {
   const [showModal, setShowModal] = useState(false);
   const [date, setDate] = useState(new Date());
 
@@ -28,7 +28,7 @@ export default function Home() {
 
   const { query } = useRouter();
   // TODO: hard coded query id this need to be dynamic from the modal
-  query.id = '2';
+  query.id = props.proId;
 
   // fetches booking dates using proId from the database
   const { data, error } = useSWR<Bookings[]>(
@@ -44,7 +44,6 @@ export default function Home() {
     // Add class to tiles in month view only
     if (view === 'month') {
       // Check if a date React-Calendar wants to check is within any of the ranges
-      console.log(ranges);
       return isWithinRanges(date, ranges);
     }
   }
