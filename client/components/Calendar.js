@@ -30,7 +30,7 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [date, setDate] = useState(new Date());
   const [disabledRanges, setDisabledRanges] = useState([
-    new Date(2022, 6, 14),
+    new Date(2022, 6, 10),
     new Date(2022, 6, 15),
   ]);
   console.log('dis', disabledRanges);
@@ -45,9 +45,10 @@ export default function Home() {
     // Add class to tiles in month view only
     if (view === 'month') {
       // Check if a date React-Calendar wants to check is within any of the ranges
-      console.log('date', date);
-      console.log('disabled', disabledRanges);
-      console.log('within range',isWithinRange(date, disabledRanges)) 
+      // console.log('date', date);
+      // console.log('disabled', disabledRanges);
+      // console.log('within range',isWithinRange(date, disabledRanges)) 
+      return isWithinRange(date, disabledRanges);
     }
   }
     
@@ -69,7 +70,7 @@ export default function Home() {
             onChange={setDate}
             value={date}
             onClickDay={openModal}
-            tileDisabled={true}
+            tileDisabled={tileDisabled}
           />
           <CalMod showModal={showModal} setShowModal={setShowModal} date={date}/>
         </div>
