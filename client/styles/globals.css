@@ -19,10 +19,9 @@ a {
   box-sizing: border-box;
 }
 
-.modal{
-@apply opacity-20 visible;
+.modal {
+  @apply opacity-20 visible;
 }
 
-.modal-box{
-
+.modal-box {
 }
