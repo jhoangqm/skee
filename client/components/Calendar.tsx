@@ -6,8 +6,6 @@ import { isWithinInterval } from 'date-fns';
 import useSWR from 'swr';
 import { Bookings } from '@prisma/client';
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
-
 // * * * * * * * * * * * * * * * *
 // ! this is for getting blocked off dates for pros
 function isWithinRange(date: Date, range: Date[]) {
@@ -22,6 +20,8 @@ function isWithinRanges(date: Date, ranges: Date[]) {
 export default function BookingCalendar(props: { proId }) {
   const [showModal, setShowModal] = useState(false);
   const [date, setDate] = useState(new Date());
+  const [appData, setAppData] = useState([]);
+  const [error, setError] = useState(null);
 
   // * * * * * * * * * * * * * * * *
   // ! this is for getting blocked off dates for pros
@@ -31,14 +31,14 @@ export default function BookingCalendar(props: { proId }) {
   query.id = props.proId;
 
   // fetches booking dates using proId from the database
-  const { data, error } = useSWR<Bookings[]>(
-    () => query.id && `/api/bookings/${query.id}`,
-    fetcher
-  );
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  const fetchData = () => {
+    console.log('Fetching booking');
+    fetch(`/api/bookings/${props.proId}`)
+      .then(res => res.json())
+      .then(data => setAppData(data));
+  };
 
-  const ranges = data.map(i => [new Date(i.dateFrom), new Date(i.dateTo)]);
+  const ranges = appData.map(i => [new Date(i.dateFrom), new Date(i.dateTo)]);
 
   function tileDisabled({ date, view }: any) {
     // Add class to tiles in month view only
@@ -47,12 +47,17 @@ export default function BookingCalendar(props: { proId }) {
       return isWithinRanges(date, ranges);
     }
   }
+
   // * * * * * * * * * * * * * * * *
 
   const openModal = () => {
     console.log('clicked to openModal');
     setShowModal(prev => !prev);
   };
+
+  useEffect(() => fetchData(), []);
+
+  if (error) return <h1>Yo there was an Error {error}</h1>;
 
   return (
     <div className="app">
@@ -69,6 +74,7 @@ export default function BookingCalendar(props: { proId }) {
             showModal={showModal}
             setShowModal={setShowModal}
             date={date}
+            fetchData={fetchData}
           />
         </div>
       </div>
