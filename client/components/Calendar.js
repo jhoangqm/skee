@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
-import CalMod from '../components/CalendarModal';
+import CalMod from './CalendarModal';
 import { isWithinInterval } from 'date-fns';
 import useSWR from 'swr';
 import { Bookings } from '@prisma/client';
@@ -10,8 +10,8 @@ import { Bookings } from '@prisma/client';
 // fetches all booking dates from the database
 
 
-const isWithinRange = (date: any, ranges: any) => {
-  if (date >= ranges[0][0] && date <= ranges[0][1]) {
+const isWithinRange = (date, ranges) => {
+  if (date >= ranges[0] && date <= ranges[1]) {
     return true;
   }
   return false;
@@ -55,10 +55,7 @@ export default function Home() {
 
   const openModal = () => {
     console.log('clicked to openModal');
-    if(!tileDisabled(date) ) {
     setShowModal(prev => !prev)
-    }
-    return
   }
 
   return (
@@ -72,7 +69,7 @@ export default function Home() {
             onChange={setDate}
             value={date}
             onClickDay={openModal}
-            tileDisabled={tileDisabled}
+            tileDisabled={true}
           />
           <CalMod showModal={showModal} setShowModal={setShowModal} date={date}/>
         </div>

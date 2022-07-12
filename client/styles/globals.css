@@ -22,7 +22,6 @@ a {
 .modal{
 @apply opacity-20 visible;
 }
-
-.modal-box{
-
+.cal-drop extends .dropdown{
+ @apply opacity-100 visible;
 }
