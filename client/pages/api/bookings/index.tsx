@@ -16,6 +16,7 @@ export default async function handler(
         dateTo: date,
       },
     });
+    res.json(booking);
   }
   if (req.method === 'GET') {
     const bookings = await prisma.bookings.findMany();

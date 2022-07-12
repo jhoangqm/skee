@@ -10,13 +10,7 @@ const Booking = (props: { proId }) => {
 
   // TODO: pass down proId props
   query.id = '2';
-  const [calendar, setCalendar] = useState(
-    <BookingCalendar proId={query.id} />
-  );
-
-  useEffect(() => {
-    setCalendar(<BookingCalendar proId={query.id} />);
-  }, []);
+  const [calendar, setCalendar] = useState({});
 
   const { data, error } = useSWR(
     () => query.id && `/api/pros/${query.id}`,
@@ -41,7 +35,9 @@ const Booking = (props: { proId }) => {
         </div>
       </div>
       <div className="flex justify-around m-10">
-        <div className="flex justify-start">{calendar}</div>
+        <div className="flex justify-start">
+          <BookingCalendar proId={query.id} />
+        </div>
         <div className="flex h-80 w-80 bg-blue-200">
           <p className="justify-self-center self-center">
             Booking instructions
