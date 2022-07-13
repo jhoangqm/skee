@@ -61,6 +61,21 @@ export default async function handler(
     }
     res.status(200).json({ message: 'success' });
   }
+  if (req.method === 'PATCH') {
+    const uniqueID = JSON.parse(req.body); 
+    console.log('UniqueID: ', uniqueID)
+    const updateBooking = await prisma.bookings.update({
+      where: {
+        id: uniqueID 
+      },
+      data: {
+        pending: false,
+        accepted: true
+      },
+    });
+    // console.log(updateBooking)
+    res.json(updateBooking)
+  }
   if (req.method === 'GET') {
     const bookings = await prisma.bookings.findMany();
     res.json(bookings);

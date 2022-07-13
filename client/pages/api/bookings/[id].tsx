@@ -4,12 +4,11 @@ export default async function handler({ query: { id } }: any, res: any) {
   console.log('id Params', id);
   const booking = await prisma.bookings.findMany({
     where: {
-      proId: Number(id),
-      timeSlot: {
-        remainingTime: 0,
-      },
+      proId: Number(id)
     },
-    include: { timeSlot: true },
+    orderBy: {
+      id: 'asc'
+    }
   });
   res.json(booking);
 }
