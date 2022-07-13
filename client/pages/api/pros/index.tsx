@@ -1,3 +1,4 @@
+import { env } from 'next.config';
 import { prisma } from '../../../db';
 import { withIronSessionApiRoute } from 'iron-session/next';
 
@@ -23,7 +24,7 @@ export default withIronSessionApiRoute(
           email,
           password,
           certBody,
-          bio: '',
+          bio: "This is my fight song, prove I'm alright song, take back my life sooooooOOOng",
           level: Number(level),
           phoneNumber,
           resortId: Number(resortId),
@@ -43,6 +44,6 @@ export default withIronSessionApiRoute(
   },
   {
     cookieName: 'proLoggedIn',
-    password: 'Ukk3MEP%U&^^6BEpebwcrwVHEyERFqYK$@sk',
+    password: env.COOKIE_PASS,
   }
 );
