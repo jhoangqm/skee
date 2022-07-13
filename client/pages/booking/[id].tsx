@@ -1,23 +1,27 @@
-import Layout from '../components/Layout';
-import BookingCalendar from '../components/Calendar';
+import Layout from '../../components/Layout';
+import BookingCalendar from '../../components/Calendar';
 import useSWR from 'swr';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
+
 const Booking = (props: { proId }) => {
   const { query } = useRouter();
 
   // TODO: pass down proId props
-  query.id = '2';
+  // query.id = '2'
   const [calendar, setCalendar] = useState({});
 
   const { data, error } = useSWR(
     () => query.id && `/api/pros/${query.id}`,
     fetcher
+    
   );
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
+
+console.log("PROID", data);
 
   return (
     <Layout signup={false}>

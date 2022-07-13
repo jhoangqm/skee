@@ -1,9 +1,6 @@
-
 import Layout from '../../components/Layout';
-import Modal from '../../components/Modal';
-import { useState } from 'react';
 import Instructor from '../../components/Instructor';
-import Sidebar from '../../components/Drawer';
+
 import styles from '../../styles/Home.module.css';
 import Filter from '../../components/Filter';
 
