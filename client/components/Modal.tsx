@@ -36,7 +36,7 @@ const Modal = ({ showModal, setShowModal, closeModal , pro }) => {
               <Home />
             </div>
             <div className="modal-action">
-              <Link href='/booking/id'>
+              <Link href='/booking'>
                 <label htmlFor="my-modal-5" className="btn">Book now</label>
               </Link>
             </div>

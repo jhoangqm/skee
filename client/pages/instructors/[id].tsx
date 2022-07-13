@@ -1,8 +1,11 @@
+
 import Layout from '../../components/Layout';
-import Instructor from '../../components/Description';
 import Modal from '../../components/Modal';
 import { useState } from 'react';
-
+import Instructor from '../../components/Instructor';
+import Sidebar from '../../components/Drawer';
+import styles from '../../styles/Home.module.css';
+import Filter from '../../components/Filter';
 
 
 export const getStaticPaths = async () => {
@@ -19,13 +22,13 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }
 
 export const getStaticProps = async (context) => {
-  const id = context.params.id;
-  const res = await fetch(`http://localhost:3000/api/pros/${id}`);
+  const resortId = context.params.id;
+  const res = await fetch(`http://localhost:3000/api/pros/${resortId}`);
   const data = await res.json();
 
   return {
@@ -36,32 +39,15 @@ export const getStaticProps = async (context) => {
 }
 
 const Instructors = ({ pro }) => {
-  const [showModal, setShowModal] = useState(null);
+  
 
-  console.log(pro)
+  
   return (
     <Layout>
-<div className="flex flex-wrap justify-center mt-5" >
-        {pro.map((p) => (         
-          <div key={p.id} className="card w-96 bg-base-100 shadow-xl m-6" onClick={() => setShowModal(p.id)}>
-            
-            <figure>
-              <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
-            </figure><div className="card-body">
-              <h2 className="card-title">
-                {p.firstName} {p.lastName}
-              </h2>
-              <p>{p.bio}</p>
-              <div className="card-actions justify-end">
-                <div className="badge badge-outline">{p.certBody}</div>
-                <div className="badge badge-outline">{p.level}</div>
-              </div>
-            </div>
-            <Modal showModal={showModal === p.id} setShowModal={setShowModal}  pro={p}/>
-          </div>
-        ))}
-      </div>
-
+      <h2 className={styles.title}>These are all of the instructors that you selected</h2>
+      <p className={styles.description}>Click on one to see their description</p>
+      <Filter/>
+      <Instructor pros={pro} />
 
 
     </Layout>

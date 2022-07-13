@@ -125,7 +125,7 @@ const Nav = (props: any) => {
               </Link>
             </ul>
           </li>
-          <Link href="/instructors">
+          <Link href="/instructors/1">
             <li className="hover:bg-info hover:rounded-lg">
               <a className="text-2xl">Instructors</a>
             </li>
