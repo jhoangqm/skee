@@ -31,14 +31,20 @@ export const getStaticProps = async (context) => {
   const res = await fetch(`http://localhost:3000/api/pros/${resortId}`);
   const data = await res.json();
 
+//? Finding resort specifi information
+
+  const res2 = await fetch(`http://localhost:3000/api/resorts/${resortId}`);
+  const data2 = await res2.json();
+  
+
   return {
 
-    props: { pro: data },
+    props: { pro: data, resort: data2 },
 
   }
 }
 
-const Instructors = ({ pro }) => {
+const Instructors = ({ pro, resort }) => {
   
 
   
@@ -46,8 +52,9 @@ const Instructors = ({ pro }) => {
     <Layout>
       <h2 className={styles.title}>These are all of the instructors that you selected</h2>
       <p className={styles.description}>Click on one to see their description</p>
+      <p className={styles.description}> Your are currently looking at instructors based out of {resort[0].name}</p>
       <Filter/>
-      <Instructor pros={pro} />
+      <Instructor pros={pro} resorts={resort}/>
 
 
     </Layout>

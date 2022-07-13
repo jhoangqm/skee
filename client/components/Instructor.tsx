@@ -1,25 +1,19 @@
-import Link from 'next/link'
-import useSWR from 'swr'
-import { useRouter } from 'next/router'
-import { Pros } from '@prisma/client';
-import { prisma } from '../db';
-
 import Modal from '../components/Modal';
 import { useState, useEffect } from 'react';
-import Filter from './Filter';
 
 
 
 
-const Instructor = ({ pros }) => {
+
+const Instructor = ({ pros, resorts }) => {
 
   const [showModal, setShowModal] = useState(false);
-  console.log("pro", pros)
+  // console.log("RESORTS", resorts)
   return (
 
     <>
+    {/* <h1 className="title">Your are currently looking at instructors based out of {resorts[0].name}</h1> */}
       <div className="flex flex-wrap justify-center mt-5" >
-       
         {pros.map((p) => (
           <div key={p.id} className="card w-96 bg-base-100 shadow-xl m-6" onClick={() => setShowModal(p.id)}>
 
