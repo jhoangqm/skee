@@ -1,9 +1,7 @@
 
 import Layout from '../../components/Layout';
-import Modal from '../../components/Modal';
-import { useState } from 'react';
 import Instructor from '../../components/Instructor';
-import Sidebar from '../../components/Drawer';
+
 import styles from '../../styles/Home.module.css';
 import Filter from '../../components/Filter';
 
@@ -28,7 +26,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const resortId = context.params.id;
-  const res = await fetch(`http://localhost:3000/api/pros/${resortId}`);
+  const res = await fetch(`http://localhost:3000/api/pros/resortfinder/${resortId}`);
   const data = await res.json();
 
 //? Finding resort specifi information
@@ -45,7 +43,7 @@ export const getStaticProps = async (context) => {
 }
 
 const Instructors = ({ pro, resort }) => {
-  
+  console.log("PRO PRO", pro)
 
   
   return (
