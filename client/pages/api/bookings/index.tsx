@@ -23,7 +23,6 @@ const createTimeSlot = async (
       day: midnight.toISOString(),
     },
     update: {
-      startTime: hrs,
       remainingTime: 0,
       duration: 6,
     },
