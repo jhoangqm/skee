@@ -4,30 +4,47 @@ import useSWR from 'swr';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+export const getStaticPaths = async () => {
+  const res = await fetch('http://localhost:3000/api/pros')
+  const data = await res.json();
 
-const Booking = (props: { proId }) => {
-  const { query } = useRouter();
+  const paths = data.map(pro => {
+    return {
+      params: {
+        id: pro.id.toString()
+      }
+    }
+  })
 
-  // TODO: pass down proId props
-  // query.id = '2'
-  const [calendar, setCalendar] = useState({});
+  return {
+    paths,
+    fallback: true
+  }
+}
 
-  const { data, error } = useSWR(
-    () => query.id && `/api/pros/${query.id}`,
-    fetcher
-    
-  );
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+export const getStaticProps = async (context) => {
+  const id = context.params.id;
+  // console.log('ID', context.params.id);
+  const res = await fetch(`http://localhost:3000/api/pros/${id}`);
+  const data = await res.json();
 
-console.log("PROID", data);
+  // console.log("DATA",data);
+
+  return {
+
+    props: { pro: data,  },
+
+  }
+}
+
+const Booking = ( { pro }) => {
+  
 
   return (
     <Layout signup={false}>
       <div className="flex justify-center">
         <p className="text-4xl">
-          {data[0].firstName} {data[0].lastName}{' '}
+          {pro[0].firstName} {pro[0].lastName}{' '}
         </p>
       </div>
       <div className="flex justify-around">
@@ -35,12 +52,12 @@ console.log("PROID", data);
           <p className="justify-self-center self-center">Picture</p>
         </div>
         <div className="flex h-80 w-80 bg-blue-200">
-          <p className="justify-self-center self-center">{data[0].bio}</p>
+          <p className="justify-self-center self-center">{pro[0].bio}</p>
         </div>
       </div>
       <div className="flex justify-around m-10">
         <div className="flex justify-start">
-          <BookingCalendar proId={query.id} />
+          <BookingCalendar proId={pro[0].id} />
         </div>
         <div className="flex h-80 w-80 bg-blue-200">
           <p className="justify-self-center self-center">
