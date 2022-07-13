@@ -17,15 +17,15 @@ function BookingRequests(props: {proId}) {
     .then(res => res.json())
     .then(data => setRequest(data)
     )}
-// no data going  thru right now
+
   useEffect(()=> fetchData, [])
 
   // console.log("GET DB info: ", request)
   const pendingStatus = request.filter(p=>p.pending);
   const acceptedStatus = request.filter(p=>p.accepted)
-  console.log('Pending Status: ', pendingStatus)
-  console.log('Accepted Status: ', acceptedStatus);
-  console.log('request: ', request)
+  // console.log('Pending Status: ', pendingStatus)
+  // console.log('Accepted Status: ', acceptedStatus);
+ 
   
   
   const togglePending = (id) => {
