@@ -92,10 +92,10 @@ model Bookings {
 
 model timeSlots {
   id            Int        @id @default(autoincrement())
-  day           DateTime
+  day           DateTime?  @unique
   startTime     DateTime
   duration      Int
-  remainingTime Int        @default(8)
+  remainingTime Int        @default(6)
   bookings      Bookings[]
 }
 
