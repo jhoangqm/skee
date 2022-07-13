@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 
 function BookingRequests(props: {proId}) {
   const [request, setRequest] = useState([])
-  const [showButton, setShowButton] = useState(true)
-  const [hideText, setHideText] = useState(true)
+  // const [bookingData, setBookingData] = useState([]);
+  // const [showButton, setShowButton] = useState(true)
+  // const [hideText, setHideText] = useState(true)
   
   // Get request booking table all bookings that have pending ?
   // fetch from api the booking table, specifically the pending
@@ -14,16 +15,16 @@ function BookingRequests(props: {proId}) {
   const fetchData = () => {
     fetch(`/api/bookings/${props.proId}`)
     .then(res => res.json())
-    .then(data => setRequest(data))}
-
+    .then(data => setRequest(data)
+    )}
+// no data going  thru right now
   useEffect(()=> fetchData, [])
 
   // console.log("GET DB info: ", request)
-  const pendingStatus = request.map(p=>p.pending);
-  const acceptedStatus = request.map(p=>p.accepted === true)
+  const pendingStatus = request.filter(p=>p.pending);
+  const acceptedStatus = request.filter(p=>p.accepted)
   console.log('Pending Status: ', pendingStatus)
   console.log('Accepted Status: ', acceptedStatus);
-  
   console.log('request: ', request)
   
   
@@ -33,6 +34,8 @@ function BookingRequests(props: {proId}) {
       body: JSON.stringify(id)
     })
       .then(res => res.body)
+      .then(data => fetchData())
+      
       // .then(()=> setShowButton(false))
       // .then(() => setHideText(false))
   }
@@ -49,8 +52,10 @@ function BookingRequests(props: {proId}) {
     <>
     <div className='container'>
       <h1 className='text-center'>Booking requests</h1>
-      <div className='contents'> 
-      Total Pending requests: {request.length} 
+      <div className='contents text text-xl'> 
+      Total Pending requests: {pendingStatus.length}
+      </div> 
+      <div>
       {request.map((booking)=>{
         return <div>Pending from user: {booking.clientId}:
         <button 
@@ -61,8 +66,8 @@ function BookingRequests(props: {proId}) {
         >Accept booking</button>
         </div>
       })}
-      <div>
-        Accepted requests
+      <div className='text text-xl'>
+        Accepted requests: {acceptedStatus.length}
       {/* {request.map((booking) => {
         return <div>Request accepted: {booking.id}</div>
       })} */}
