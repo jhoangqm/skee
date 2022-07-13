@@ -33,7 +33,7 @@ export default function BookingCalendar(props: { proId }) {
   // fetches booking dates using proId from the database
   const fetchData = () => {
     console.log('Fetching booking');
-    fetch(`/api/bookings/${props.proId}`)
+    fetch(`/api/calendar/${props.proId}`)
       .then(res => res.json())
       .then(data => setAppData(data));
   };
