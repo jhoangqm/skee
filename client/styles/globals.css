@@ -20,7 +20,7 @@ a {
 }
 
 .modal {
-  @apply opacity-20 visible;
+  @apply opacity-100 visible pointer-events-auto;
 }
 
 .modal-box {

@@ -2,8 +2,9 @@ import { prisma } from '../../../db';
 
 // query function to find all pros
 export default async function handler(req: any, res: any) {
-  const parsed = JSON.parse(req.body);
+  
   if (req.method === 'POST') {
+    const parsed = JSON.parse(req.body);
     const {
       firstName,
       lastName,
