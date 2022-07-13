@@ -25,3 +25,6 @@ a {
 
 .modal-box {
 }
+.react-calendar__tile:disabled {
+  background-color: crimson;
+}

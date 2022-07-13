@@ -1,6 +1,11 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Nav = (props: any) => {
+  const { query } = useRouter();
+  query.id = '2';
+
+  console.log(query.id);
   return (
     <div className="navbar bg-base-100 h-24">
       <div className="navbar-start">
@@ -56,7 +61,7 @@ const Nav = (props: any) => {
                     <a>User Profile</a>
                   </li>
                 </Link>
-                <Link href="/proprofile">
+                <Link href="/pro">
                   <li>
                     <a>Pro Profile</a>
                   </li>
@@ -113,7 +118,8 @@ const Nav = (props: any) => {
                   <a className="text-2xl">User Profile</a>
                 </li>
               </Link>
-              <Link href="/proprofile">
+
+              <Link href="/proprofile/[pid]">
                 <li className="bg-info">
                   <a className="text-2xl">Pro Profile</a>
                 </li>
