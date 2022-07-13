@@ -1,14 +1,15 @@
 import Layout from '../components/Layout';
-import { setCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import { prisma } from '@prisma/client';
 import useSWR from 'swr';
 import { Resorts } from '@prisma/client';
-const axios = require('axios');
+import Cookies from 'universal-cookie';
+import { setCookie } from 'cookies-next';
 
 const fetcher = (url: RequestInfo | URL) => fetch(url).then(res => res.json());
 
 const proSignup = async (e: any) => {
+  e.preventDefault();
   const data: any = {};
   for (const v of e.target.elements) {
     data[v.name] = v.value;
@@ -16,11 +17,8 @@ const proSignup = async (e: any) => {
   const response = await fetch('/api/pros', {
     method: 'POST',
     body: JSON.stringify(data),
-  });
-  const json = await response.json();
-  console.log(json);
+  }).then(res => res.json());
 };
-
 const Signup = () => {
   const [user, setUser] = useState();
 
