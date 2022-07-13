@@ -19,8 +19,11 @@ function BookingRequests(props: {proId}) {
   useEffect(()=> fetchData, [])
 
   // console.log("GET DB info: ", request)
-  const pendingStatus = request.map(p=>p.pending === true);
+  const pendingStatus = request.map(p=>p.pending);
+  const acceptedStatus = request.map(p=>p.accepted === true)
   console.log('Pending Status: ', pendingStatus)
+  console.log('Accepted Status: ', acceptedStatus);
+  
   console.log('request: ', request)
   
   
@@ -38,24 +41,32 @@ function BookingRequests(props: {proId}) {
   // check over requests to see if there's a pending request
   // if pending request is true, we need to set it to false
   // after that it is set to false we need to set accepted to true
-
   
+  // Needs two section 
+  // Pending requests
+  // Accepted requests
   return (
     <>
     <div className='container'>
       <h1 className='text-center'>Booking requests</h1>
-      <div className='flex flex-col'>
+      <div className='contents'> 
+      Total Pending requests: {request.length} 
       {request.map((booking)=>{
         return <div>Pending from user: {booking.clientId}:
-        {showButton && (<button 
+        <button 
         className='btn btn-primary' 
         onClick={() => {
           togglePending(booking.id)
         }}
-        >Accept booking</button>)}
+        >Accept booking</button>
         </div>
       })}
-      
+      <div>
+        Accepted requests
+      {/* {request.map((booking) => {
+        return <div>Request accepted: {booking.id}</div>
+      })} */}
+      </div>
       </div>
     </div>
     </>
