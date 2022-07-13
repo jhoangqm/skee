@@ -75,6 +75,9 @@ const CalMod = ({ showModal, setShowModal, date, fetchData }: any) => {
         <li>
           <a onClick={e => booking(e, parsedDate, 'PM')}>PM</a>
         </li>
+        <li>
+          <a onClick={e => booking(e, parsedDate, 'DAY')}>Full Day</a>
+        </li>
       </>
     );
   };
