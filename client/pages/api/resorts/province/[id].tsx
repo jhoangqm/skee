@@ -1,12 +1,14 @@
-const { prisma } = require('../../../db');
+const { prisma } = require('../../../../db');
 
 export default async function handler({ query: { id } }: any, res: any) {
   
   const resort = await prisma.resorts.findMany({
     where: {
-      id: Number(id),
+      province : String(id),
     },
   });
   res.json(resort);
   
 }
+
+

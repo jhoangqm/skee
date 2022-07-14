@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 
 
 
-
-
 const Instructor = ({ pros, resorts }) => {
 
   const [showModal, setShowModal] = useState(false);
