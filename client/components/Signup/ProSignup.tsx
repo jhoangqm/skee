@@ -2,6 +2,7 @@ import useSWR from 'swr';
 import { useEffect, useState, useRef } from 'react';
 import { Resorts } from '@prisma/client';
 import { useRouter } from 'next/router';
+import bcrypt from 'bcryptjs';
 
 const ProSignup = () => {
   const [user, setUser] = useState();
@@ -14,6 +15,8 @@ const ProSignup = () => {
     for (const v of e.target.elements) {
       data[v.name] = v.value;
     }
+    data.password = bcrypt.hashSync(data.password, process.env.SALT);
+
     const response = await fetch('/api/pros', {
       method: 'POST',
       body: JSON.stringify(data),

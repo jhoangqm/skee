@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
+import bcrypt from 'bcryptjs';
 
 const ClientSignup = () => {
   const [signupError, setSignupError] = useState(false);
@@ -12,6 +13,7 @@ const ClientSignup = () => {
     for (const v of e.target.elements) {
       data[v.name] = v.value;
     }
+    data.password = bcrypt.hashSync(data.password, process.env.SALT);
 
     const response = await fetch('/api/clients', {
       method: 'POST',
