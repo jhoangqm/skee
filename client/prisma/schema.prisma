@@ -54,6 +54,7 @@ model Pros {
   bio         String?
   phoneNumber String       @unique
   certBody    String
+  certImg     String? 
   level       Int
   createdAt   DateTime     @default(now())
   resorts     Resorts?     @relation(fields: [resortId], references: [id])
