@@ -1,82 +1,79 @@
 import { prisma } from '../../../db';
 import type { NextApiRequest, NextApiResponse } from 'next';
-const booking = async (id: number, date: any) =>
+const booking = async (
+  id: number,
+  date: any,
+  proId: string,
+  clientId: string
+) =>
   await prisma.bookings.create({
     data: {
-      clientId: 1,
-      proId: 2,
+      clientId: Number(clientId),
+      proId: Number(proId),
       resortId: 3,
       timeSlotsId: id,
       dateFrom: date,
       dateTo: date,
     },
   });
+
 const createTimeSlot = async (
   hours: number,
   date: Date,
-  bookingDate: string
+  prosId: string,
+  clientId: string
 ) => {
-  const hrs = new Date(date.setHours(hours));
-  const midnight = new Date(date.setHours(-7));
-  const timeSlot = await prisma.timeSlots.upsert({
-    where: {
-      day: midnight.toISOString(),
-    },
-    update: {
-      remainingTime: 0,
-      duration: 6,
-    },
-    create: {
-      day: midnight.toISOString(),
-      duration: 3,
-      startTime: hrs.toISOString(),
-      remainingTime: 3,
-    },
-  });
-  booking(timeSlot.id, bookingDate);
+  const newDate = new Date(date);
+  const hrs = new Date(newDate.setHours(hours));
+  const midnight = new Date(newDate.setHours(-7));
+  try {
+    const timeSlot = await prisma.timeSlots.findMany({
+      where: {
+        day: midnight.toISOString(),
+        startTime: hrs.toISOString(),
+        prosId: Number(prosId),
+      },
+      select: {
+        id: true,
+      },
+    });
+    booking(timeSlot.id, date, prosId, clientId);
+  } catch (error) {
+    console.log('error', error);
+  }
 };
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    let { date, time } = JSON.parse(req.body);
-    const newDate = new Date(date);
+    let { date, time, proId, clientId } = JSON.parse(req.body);
+    console.log('proId', proId, 'clientId', clientId);
     if (time === 'AM') {
-      createTimeSlot(2, newDate, date);
+      createTimeSlot(2, date, proId, clientId);
     } else if (time === 'PM') {
-      createTimeSlot(6, newDate, date);
-    } else {
-      const hrs = new Date(newDate.setHours(2));
-      const midnight = new Date(newDate.setHours(-7));
-      const timeSlot = await prisma.timeSlots.create({
-        data: {
-          day: midnight.toISOString(),
-          duration: 6,
-          startTime: hrs.toISOString(),
-          remainingTime: 0,
-        },
-      });
-      booking(timeSlot.id, date);
+      createTimeSlot(6, date, proId, clientId);
     }
     res.status(200).json({ message: 'success' });
   }
+
   if (req.method === 'PATCH') {
-    const uniqueID = JSON.parse(req.body); 
-    console.log('UniqueID: ', uniqueID)
+    const uniqueID = JSON.parse(req.body);
+    console.log('UniqueID: ', uniqueID);
     const updateBooking = await prisma.bookings.update({
       where: {
-        id: uniqueID 
+        id: uniqueID,
       },
       data: {
         pending: false,
-        accepted: true
+        accepted: true,
       },
     });
     // console.log(updateBooking)
-    res.json(updateBooking)
+    res.json(updateBooking);
   }
-  
+
   if (req.method === 'GET') {
     const bookings = await prisma.bookings.findMany();
     res.json(bookings);
