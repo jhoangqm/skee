@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 function BookingRequests(props: {proId}) {
   const [request, setRequest] = useState([])
-  const [error, setError] = useState(null)
+  // const [error, setError] = useState(null)
   
   // Get request booking table all bookings that have pending ?
   // fetch from api the booking table, specifically the pending
@@ -27,11 +27,13 @@ function BookingRequests(props: {proId}) {
     .then(data => fetchData())
   }
   
-  // console.log("GET DB info: ", request)
+  console.log("GET DB info: ", request)
   const pendingStatus = request.filter(p=>p.pending);
   const acceptedStatus = request.filter(p=>p.accepted)
+  // const pendingStatusTrue = (pendingStatus !== false)
   console.log('Pending Status: ', pendingStatus)
-  // console.log('Accepted Status: ', acceptedStatus);
+  // console.log('Pending Status True: ', pendingStatusTrue)
+  console.log('Accepted Status: ', acceptedStatus);
 
   // button that's going to make an update request change pending to accepted ?
   // check over requests to see if there's a pending request
@@ -42,7 +44,7 @@ function BookingRequests(props: {proId}) {
   // Pending requests
   // Accepted requests
 
-  if (error) return <h1>Yo there was an Error {error}</h1>;
+  // if (error) return <h1>Yo there was an Error {error}</h1>;
 
   return (
     <>
@@ -52,7 +54,7 @@ function BookingRequests(props: {proId}) {
       Total Pending requests: {pendingStatus.length}
       </div> 
       <div>
-      { pendingStatus === true ? request.map((booking)=>{
+      { acceptedStatus === true ? request.map((booking)=>{
     return <div>Pending from user: {booking.clientId}:
     <button 
     className='btn btn-primary' 
