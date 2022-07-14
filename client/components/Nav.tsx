@@ -1,11 +1,67 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 const Nav = (props: any) => {
+  const [user, setUser] = useState(null);
+  const [loginType, setLoginType] = useState('');
+  const [error, setError] = useState(false);
   const { query } = useRouter();
   query.id = '2';
 
-  console.log(query.id);
+  const fetchUser = async (type: string) => {
+    await fetch('/api/user', {
+      method: 'POST',
+      body: JSON.stringify(type),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data === 'No such session') {
+          setError(true);
+        } else setUser(data[0]);
+      });
+  };
+  const onRadioChange = (e: any) => {
+    setLoginType(e.target.value);
+  };
+
+  const logout = async () => {
+    await fetch('/api/logout', {
+      method: 'POST',
+    })
+      .then(res => res.json())
+      .then(data => setUser(null));
+  };
+
+  const loginHandler = async e => {
+    e.preventDefault();
+    const loginData: any = {};
+    for (const v of e.target.elements) {
+      if (v.checked) loginData[v.name] = v.value;
+      loginData[v.name] = v.value;
+    }
+    loginData.userType = loginType;
+
+    await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify(loginData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data === 'login Error') {
+          setError(true);
+        } else {
+          setUser(data);
+          setError(false), e.target.reset();
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchUser('pro');
+  }, [user]);
+
+  // console.log(query.id);
   return (
     <div className="navbar bg-base-100 h-24">
       <div className="navbar-start">
@@ -139,22 +195,98 @@ const Nav = (props: any) => {
         </ul>
       </div>
       {/* //* signed in propery used here */}
-      {props.signup ? (
-        <Link href="/signup">
-          <div className="navbar-end text-xl">
-            <a className="btn bg-transparent hover:bg-success text-xl">
-              Sign in
-            </a>
+      {!user ? (
+        <div className="navbar-end text-xl">
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn m-1">
+              Login/signup
+            </label>
+            <div
+              tabIndex={0}
+              className="dropdown-content card card-compact w-auto p-2 shadow bg-primary text-primary-content "
+            >
+              <div className="card-body pr-10">
+                <form onSubmit={loginHandler} method="post">
+                  <div className="form-control">
+                    <label className="label cursor-pointer">
+                      <span className="label-text">Pro</span>
+                      <input
+                        onChange={onRadioChange}
+                        type="radio"
+                        value="proChecked"
+                        name="userType"
+                        className="radio checked:bg-red-500"
+                      />
+                    </label>
+                  </div>
+                  <div className="form-control">
+                    <label className="label cursor-pointer">
+                      <span className="label-text">Client</span>
+                      <input
+                        onChange={onRadioChange}
+                        type="radio"
+                        value="clientChecked"
+                        name="userType"
+                        className="radio checked:bg-blue-500"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="form-control mb-2">
+                    <label className="input-group">
+                      <span className="w-full">Email</span>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        required
+                        placeholder="info@site.com"
+                        className="input input-bordered "
+                      />
+                    </label>
+                  </div>
+                  <div className="form-control mb-2">
+                    <label className="input-group">
+                      <span>Password</span>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        required
+                        placeholder="password"
+                        className="input input-bordered"
+                      />
+                    </label>
+                  </div>
+                  {error ? <div className="text-red-500">{error}</div> : null}
+                  <button
+                    type="submit"
+                    className="btn bg-transparent hover:bg-success text-xl w-full"
+                  >
+                    Sign in
+                  </button>
+                </form>
+                <Link href="/signup">
+                  <a className="btn bg-transparent hover:bg-success text-xl">
+                    Sign up
+                  </a>
+                </Link>
+              </div>
+            </div>
           </div>
-        </Link>
+        </div>
       ) : (
-        <Link href="/signup">
+        <>
           <div className="navbar-end ">
-            <a className="btn bg-transparent hover:bg-success text-xl">
+            <p className="text-3xl mr-2">{user.firstName}</p>
+            <p
+              className="btn bg-transparent hover:bg-success text-xl"
+              onClick={logout}
+            >
               logout
-            </a>
+            </p>
           </div>
-        </Link>
+        </>
       )}
     </div>
   );

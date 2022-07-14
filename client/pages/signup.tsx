@@ -1,26 +1,33 @@
 import Layout from '../components/Layout';
-import { useEffect, useState } from 'react';
-import { prisma } from '@prisma/client';
+import { useEffect, useState, useRef } from 'react';
 import useSWR from 'swr';
 import { Resorts } from '@prisma/client';
-import Cookies from 'universal-cookie';
-import { setCookie } from 'cookies-next';
 
 const fetcher = (url: RequestInfo | URL) => fetch(url).then(res => res.json());
 
-const proSignup = async (e: any) => {
-  e.preventDefault();
-  const data: any = {};
-  for (const v of e.target.elements) {
-    data[v.name] = v.value;
-  }
-  const response = await fetch('/api/pros', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  }).then(res => res.json());
-};
 const Signup = () => {
   const [user, setUser] = useState();
+  const [signupError, setSignupError] = useState(false);
+  const clearForm = useRef(null);
+  const proSignup = async (e: any) => {
+    e.preventDefault();
+    const data: any = {};
+    for (const v of e.target.elements) {
+      data[v.name] = v.value;
+    }
+    const response = await fetch('/api/pros', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data === 'signup Error') {
+          setSignupError(true);
+        } else {
+          setSignupError(false), e.target.reset();
+        }
+      });
+  };
 
   const { data, error } = useSWR<Resorts[]>('/api/resorts', fetcher);
   if (error) return <div>failed to load</div>;
@@ -35,13 +42,14 @@ const Signup = () => {
         <div className="2xl:container flex justify-center">
           <div className="card bg-base-100 shadow-xl w-2/4">
             <div className="card-body">
-              <form method="post" onSubmit={proSignup}>
+              <form method="post" onSubmit={proSignup} ref={clearForm}>
                 <div className="flex items-center flex-row">
                   <label htmlFor="firstName"></label>
                   <input
                     type="text"
                     name="firstName"
                     id="firstName"
+                    required
                     placeholder="First Name"
                     className="input input-bordered w-full max-w-xs m-1"
                   />
@@ -125,6 +133,13 @@ const Signup = () => {
                     <option value="3">3</option>
                     <option value="4">4</option>
                   </select>
+                </div>
+                <div className="flex justify-center">
+                  {signupError ? (
+                    <div className="error-message text-red-600 text-xl">
+                      Email or Phone number already in use
+                    </div>
+                  ) : null}
                 </div>
                 <div className="flex items-center flex-col">
                   <button
