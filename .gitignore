@@ -2,7 +2,7 @@ client/prisma/schema.prisma
 client/.env
 server/.env
 client/prisma/migrations/migration_lock.toml
-package-lock.json
 .vscode/settings.json
 */next.config.js
 client/next.config.js
+client/package-lock.json
