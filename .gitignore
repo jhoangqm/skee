@@ -6,3 +6,4 @@ client/prisma/migrations/migration_lock.toml
 */next.config.js
 client/next.config.js
 client/package-lock.json
+package-lock.json
