@@ -76,6 +76,7 @@ export default async function handler(
     // console.log(updateBooking)
     res.json(updateBooking)
   }
+  
   if (req.method === 'GET') {
     const bookings = await prisma.bookings.findMany();
     res.json(bookings);

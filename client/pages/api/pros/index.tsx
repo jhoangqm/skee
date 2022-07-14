@@ -1,4 +1,3 @@
-
 import { prisma } from '../../../db';
 import { withIronSessionApiRoute } from 'iron-session/next';
 
@@ -17,25 +16,29 @@ export default withIronSessionApiRoute(
         phoneNumber,
         resortId,
       } = parsed;
-      const pro = await prisma.pros.create({
-        data: {
-          firstName,
-          lastName,
-          email,
-          password,
-          certBody,
-          bio: "This is my fight song, prove I'm alright song, take back my life sooooooOOOng",
-          level: Number(level),
-          phoneNumber,
-          resortId: Number(resortId),
-        },
-      });
-      req.session.user = {
-        id: pro.id,
-        admin: false,
-      };
-      await req.session.save();
-      res.json(pro);
+      try {
+        const pro = await prisma.pros.create({
+          data: {
+            firstName,
+            lastName,
+            email,
+            password,
+            certBody,
+            bio: "This is my fight song, prove I'm alright song, take back my life sooooooOOOng",
+            level: Number(level),
+            phoneNumber,
+            resortId: Number(resortId),
+          },
+        });
+        req.session.user = {
+          id: pro.id,
+          type: 'pro',
+        };
+        await req.session.save();
+        res.json(pro);
+      } catch (error) {
+        res.json('signup Error', error);
+      }
     }
     if (req.method === 'GET') {
       const pros = await prisma.pros.findMany();
@@ -43,7 +46,9 @@ export default withIronSessionApiRoute(
     }
   },
   {
-    cookieName: 'proLoggedIn',
-    password: 'v85zNiWmcmApJFuUKXDeyW$ShGDJx^7QB%t'
+
+    cookieName: 'user',
+    password: 'v85zNiWmcmApJFuUKXDeyW$ShGDJx^7QB%t',
+
   }
 );
