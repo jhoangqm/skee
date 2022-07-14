@@ -7,6 +7,6 @@ export default withIronSessionApiRoute(
   },
   {
     cookieName: 'user',
-    password: 'v85zNiWmcmApJFuUKXDeyW$ShGDJx^7QB%t',
+    password: process.env.COOKIE_PASS,
   }
 );
