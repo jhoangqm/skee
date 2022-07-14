@@ -2,6 +2,7 @@ import BookingCalendar from '../../components/Calendar';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import BookingRequests from '../../components/BookingRequests';
+// import Upload from '../../components/uploads';
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros')
@@ -52,8 +53,11 @@ const ProProfile = ({pro}) => {
         </div>
       </div>
       <div className="flex justify-around">
-        <div className="flex justify-start h-80 w-80 bg-blue-200">
-          <div className="justify-self-center self-center">Picture</div>
+        <div className="flex justify-start h-80 w-80 bg-blue-200">Picture
+          {/* <div className="justify-self-center self-center">Picture
+          <Upload/>
+          </div> */}
+          
         </div>
         <div className="flex h-80 w-80 bg-blue-200">
           <div className="justify-self-center self-center">{pro[0].bio}</div>

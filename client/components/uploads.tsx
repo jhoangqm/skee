@@ -16,7 +16,7 @@ function Upload() {
 
   return (
     <div>
-    <h1>File uploads</h1>
+    <h1>Upload a picture</h1>
     {/* <form action="/upload" encType="multipart/form-data" method="POST">  */}
       <form>
       <input 
