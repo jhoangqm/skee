@@ -1,13 +1,18 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+// * * * * * * * * * * * * * * * * * * * *
+// TODO: Refactor
+// * * * * * * * * * * * * * * * * * * * *
 
 const Nav = (props: any) => {
   const [user, setUser] = useState(null);
   const [loginType, setLoginType] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(false);
-  const { query } = useRouter();
-  query.id = '2';
+  const [typeError, setTypeError] = useState(false);
+  const clearForm = useRef(null);
 
   const fetchUser = async (type: string) => {
     await fetch('/api/user', {
@@ -17,7 +22,6 @@ const Nav = (props: any) => {
       .then(res => res.json())
       .then(data => {
         if (data === 'No such session') {
-          setError(true);
         } else setUser(data[0]);
       });
   };
@@ -30,7 +34,10 @@ const Nav = (props: any) => {
       method: 'POST',
     })
       .then(res => res.json())
-      .then(data => setUser(null));
+      .then(data => {
+        setUser(null);
+        setLoggedIn(false);
+      });
   };
 
   const loginHandler = async e => {
@@ -41,6 +48,10 @@ const Nav = (props: any) => {
       loginData[v.name] = v.value;
     }
     loginData.userType = loginType;
+    if (loginData.userType === '') {
+      setTypeError(true);
+      return;
+    }
 
     await fetch('/api/login', {
       method: 'POST',
@@ -51,7 +62,10 @@ const Nav = (props: any) => {
         if (data === 'login Error') {
           setError(true);
         } else {
+          console.log(data);
           setUser(data);
+          setLoggedIn(true);
+          setTypeError(false);
           setError(false), e.target.reset();
         }
       });
@@ -59,7 +73,10 @@ const Nav = (props: any) => {
 
   useEffect(() => {
     fetchUser('pro');
-  }, [user]);
+  }, [loggedIn]);
+  useEffect(() => {
+    fetchUser('client');
+  }, [loggedIn]);
 
   // console.log(query.id);
   return (
@@ -206,7 +223,7 @@ const Nav = (props: any) => {
               className="dropdown-content card card-compact w-auto p-2 shadow bg-primary text-primary-content "
             >
               <div className="card-body pr-10">
-                <form onSubmit={loginHandler} method="post">
+                <form onSubmit={loginHandler} method="post" ref={clearForm}>
                   <div className="form-control">
                     <label className="label cursor-pointer">
                       <span className="label-text">Pro</span>
@@ -231,7 +248,13 @@ const Nav = (props: any) => {
                       />
                     </label>
                   </div>
-
+                  {typeError ? (
+                    <div className="flex justify-center">
+                      <div className="text-red-500">
+                        Please select a user type
+                      </div>
+                    </div>
+                  ) : null}
                   <div className="form-control mb-2">
                     <label className="input-group">
                       <span className="w-full">Email</span>
@@ -258,7 +281,13 @@ const Nav = (props: any) => {
                       />
                     </label>
                   </div>
-                  {error ? <div className="text-red-500">{error}</div> : null}
+                  {error ? (
+                    <div className="flex justify-center">
+                      <div className="text-red-500">
+                        email, password or user type incorrect
+                      </div>
+                    </div>
+                  ) : null}
                   <button
                     type="submit"
                     className="btn bg-transparent hover:bg-success text-xl w-full"
@@ -278,7 +307,7 @@ const Nav = (props: any) => {
       ) : (
         <>
           <div className="navbar-end ">
-            <p className="text-3xl mr-2">{user.firstName}</p>
+            <p className="text-3xl mr-2">{user?.firstName}</p>
             <p
               className="btn bg-transparent hover:bg-success text-xl"
               onClick={logout}
