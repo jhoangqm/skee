@@ -10,14 +10,18 @@ function BookingRequests(props: {proId}) {
   const { query } = useRouter();
   query.id = props.proId;
 
+  // There's a problem in here somewhere the data is not consistent
+  // It shows up randomly
   const fetchData = () => {
     fetch(`/api/bookings/${props.proId}`)
     .then(res => res.json())
-    .then(data => setRequest(data));
+    .then(data => setRequest(data))
+    .then(() => console.log('setRequest has been done'));
   }
 
   useEffect(()=> fetchData, [])
   
+  // This works beautifully
   const togglePending = (id) => {
     fetch(`/api/bookings`, {
       method: 'PATCH',
@@ -46,34 +50,65 @@ function BookingRequests(props: {proId}) {
 
   // if (error) return <h1>Yo there was an Error {error}</h1>;
 
-  return (
-    <>
-    <div className='container'>
-      <h1 className='text-center'>Booking requests</h1>
-      <div className='contents text text-xl'> 
-      Total Pending requests: {pendingStatus.length}
-      </div> 
-      <div>
-      { acceptedStatus === true ? request.map((booking)=>{
-    return <div>Pending from user: {booking.clientId}:
-    <button 
-    className='btn btn-primary' 
-    onClick={() => {
-      togglePending(booking.id)
-    }}
-    >Accept booking</button>
+//   return (
+//     <>
+//     <div className='container'>
+//       <h1 className='text-center'>Booking requests</h1>
+//       <div className='contents text text-xl'> 
+//       Total Pending requests: {pendingStatus.length}
+//       </div> 
+//       <div>
+//       {request.map((booking)=>{
+//     return <div>Pending from user: {booking.clientId}:
+//     <button 
+//     className='btn btn-primary' 
+//     onClick={() => {
+//       togglePending(booking.id)
+//     }}
+//     >Accept booking</button>
+//     </div>
+//   })}
+//       <div className='text text-xl'>
+//         Accepted requests: {acceptedStatus.length}
+//       {/* {request.map((booking) => {
+//         return <div>Request accepted: {booking.id}</div>
+//       })} */}
+//       </div>
+//       </div>
+//     </div>
+//     </>
+//   )
+// }
+
+return (
+  <>
+  <div className='container'>
+    <h1 className='text-center'>Booking requests</h1>
+    <div className='contents text text-xl'> 
+    Total Pending requests: {pendingStatus.length}
+    </div> 
+    <div>
+    { acceptedStatus === true ? request.map((booking)=>{
+  return <div>Pending from user: {booking.clientId}:
+  <button 
+  className='btn btn-primary' 
+  onClick={() => {
+    togglePending(booking.id)
+  }}
+  >Accept booking</button>
+  </div>
+}) : null }
+    <div className='text text-xl'>
+      Accepted requests: {acceptedStatus.length}
+    {/* {request.map((booking) => {
+      return <div>Request accepted: {booking.id}</div>
+    })} */}
     </div>
-  }) : null }
-      <div className='text text-xl'>
-        Accepted requests: {acceptedStatus.length}
-      {/* {request.map((booking) => {
-        return <div>Request accepted: {booking.id}</div>
-      })} */}
-      </div>
-      </div>
     </div>
-    </>
-  )
+  </div>
+  </>
+)
 }
 
 export default BookingRequests;
+
