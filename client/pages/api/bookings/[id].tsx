@@ -11,4 +11,5 @@ export default async function handler({ query: { id } }: any, res: any) {
     }
   });
   res.json(booking);
+  console.log('Hello from booking: ', booking)
 }
