@@ -18,7 +18,7 @@ model Clients {
   password      String
   phoneNumber   String?         @unique
   createdAt     DateTime        @default(now())
-  firebaseToken String
+  firebaseToken String?
   chats         Chat[]
   bookings      Bookings[]
   reviews       Reviews[]
@@ -40,6 +40,7 @@ model Resorts {
   hardRuns       Int
   province       String
   image          String?
+  description    String     @default("this is a mountain description")
   pro            Pros[]
   bookings       Bookings[]
 }
@@ -57,10 +58,12 @@ model Pros {
   createdAt   DateTime     @default(now())
   resorts     Resorts?     @relation(fields: [resortId], references: [id])
   resortId    Int?
+  image       String       @default("")
   reviews     Reviews[]
   ProsSkills  ProsSkills[]
   Chat        Chat[]
   booking     Bookings[]
+  slots       timeSlots[]
 }
 
 model Chat {
@@ -97,6 +100,8 @@ model timeSlots {
   duration      Int
   remainingTime Int        @default(6)
   bookings      Bookings[]
+  pros          Pros?      @relation(fields: [prosId], references: [id])
+  prosId        Int?
 }
 
 model Reviews {
