@@ -8,7 +8,7 @@ const ProProfile = (props: { proId }) => {
 
   const { query } = useRouter();
    // TODO: pass down proId props
-   query.id = 2;
+   query.id = '2';
 
   return (
     <Layout signup={true}>
