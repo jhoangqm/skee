@@ -15,7 +15,11 @@ const Nav = (props: any) => {
       body: JSON.stringify(type),
     })
       .then(res => res.json())
-      .then(data => setUser(data[0]));
+      .then(data => {
+        if (data === 'No such session') {
+          setError(true);
+        } else setUser(data[0]);
+      });
   };
   const onRadioChange = (e: any) => {
     setLoginType(e.target.value);
