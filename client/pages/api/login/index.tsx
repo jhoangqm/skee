@@ -23,6 +23,25 @@ export default withIronSessionApiRoute(
         res.json('login Error', error);
       }
     }
+    if (loginData.userType === 'clientChecked') {
+      console.log('clientChecked');
+      try {
+        const client = await prisma.clients.findMany({
+          where: {
+            email: loginData.email,
+            password: loginData.password,
+          },
+        });
+        req.session.user = {
+          id: client[0].id,
+          type: 'client',
+        };
+        await req.session.save();
+        res.json(client);
+      } catch (error) {
+        res.json('login Error', error);
+      }
+    }
   },
   {
     cookieName: 'user',
