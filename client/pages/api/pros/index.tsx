@@ -44,6 +44,6 @@ export default withIronSessionApiRoute(
   },
   {
     cookieName: 'proLoggedIn',
-    password: env.COOKIE_PASS,
+    password: 'v85zNiWmcmApJFuUKXDeyW$ShGDJx^7QB%t',
   }
 );
