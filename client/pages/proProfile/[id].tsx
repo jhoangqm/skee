@@ -42,6 +42,8 @@ const ProProfile = ({pro}) => {
   //  // TODO: pass down proId props
   //  query.id = 2;
 
+  console.log('pro id: ', pro[0].id)
+
   return (
     <Layout signup={true}>
       <div className="flex justify-center">
