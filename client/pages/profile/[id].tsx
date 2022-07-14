@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import BookingRequests from '../../components/BookingRequests';
 // import Upload from '../../components/uploads';
+import Pro from '../../components/Profile/Pro';
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros')
@@ -37,7 +38,7 @@ export const getStaticProps = async (context) => {
   }
 }
 
-const ProProfile = ({pro}) => {
+const Profile = ({pro}) => {
 
   // const { query } = useRouter();
   //  // TODO: pass down proId props
@@ -47,34 +48,9 @@ const ProProfile = ({pro}) => {
 
   return (
     <Layout signup={true}>
-      <div className="flex justify-center">
-        <div className='text-4xl'>
-          {pro[0].firstName} {pro[0].lastName}{' '}
-        </div>
-      </div>
-      <div className="flex justify-around">
-        <div className="flex justify-start h-80 w-80 bg-blue-200">Picture
-          {/* <div className="justify-self-center self-center">Picture
-          <Upload/>
-          </div> */}
-          
-        </div>
-        <div className="flex h-80 w-80 bg-blue-200">
-          <div className="justify-self-center self-center">{pro[0].bio}</div>
-        </div>
-      </div>
-      <div className="flex justify-around m-10">
-        <div className="flex justify-start">
-          <BookingCalendar proId={pro[0].id} />
-        </div>
-        <div className="flex h-80 w-80 bg-blue-200">
-          <div className="justify-self-center self-center">
-          <BookingRequests proId={pro[0].id}/>
-          </div>
-        </div>
-      </div>
+      <Pro pro={pro}/>
     </Layout>
   );
 };
 
-export default ProProfile;
+export default Profile;
