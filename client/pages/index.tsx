@@ -7,7 +7,8 @@ import Layout from '../components/Layout';
 import Map from '../components/Map';
 import Carousel from '../components/Carousel';
 
-const Home: NextPage = () => {
+
+const Home: NextPage = ({ resort }) => {
   return (
     <Layout>
       <div className={styles.container}>
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
           <p className={styles.description}>
             Click on the map below to find an instructor in your
           </p>
-          <Map />
+          <Map  resort={resort}/>
           <p className={styles.description}>
           Search resorts in your area below:
           </p>
