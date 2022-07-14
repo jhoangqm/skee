@@ -10,7 +10,7 @@ const Pro = ({ pro }) => {
         {pro[0].firstName} {pro[0].lastName}{' '}
       </div>
     </div><div className="flex justify-around">
-        <div className="flex justify-start h-80 w-80 bg-blue-200">Picture
+        <div className="flex justify-start h-80 w-80 bg-blue-200">{pro[0].certImg}
           {/* <div className="justify-self-center self-center">Picture
     <Upload/>
     </div> */}
