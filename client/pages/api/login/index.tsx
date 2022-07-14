@@ -1,10 +1,13 @@
 import { prisma } from '../../../db';
 import { withIronSessionApiRoute } from 'iron-session/next';
+import bcrypt from 'bcryptjs';
 
 export default withIronSessionApiRoute(
   async function loginHandler(req: any, res: any) {
     const loginData = JSON.parse(req.body);
-    console.log(loginData);
+    loginData.password = bcrypt.hashSync(loginData.password, process.env.SALT);
+    console.log('password', loginData.password);
+
     if (loginData.userType === 'proChecked') {
       try {
         const pro = await prisma.pros.findMany({
@@ -45,6 +48,6 @@ export default withIronSessionApiRoute(
   },
   {
     cookieName: 'user',
-    password: 'v85zNiWmcmApJFuUKXDeyW$ShGDJx^7QB%t',
+    password: process.env.COOKIE_PASS,
   }
 );
