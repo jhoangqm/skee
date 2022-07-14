@@ -28,3 +28,7 @@ a {
 .react-calendar__tile:disabled {
   background-color: crimson;
 }
+
+/* .dropdown .dropdown-content {
+  @apply opacity-100 visible 
+} */

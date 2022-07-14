@@ -43,7 +43,6 @@ export const getStaticProps = async (context) => {
 }
 
 const Instructors = ({ pro, resort }) => {
-  console.log("PRO PRO", pro)
 
   
   return (

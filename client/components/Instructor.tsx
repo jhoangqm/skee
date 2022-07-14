@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 const Instructor = ({ pros, resorts }) => {
 
   const [showModal, setShowModal] = useState(false);
-  console.log("RESORTS", resorts)
+ 
   return (
 
     <>
@@ -29,7 +29,8 @@ const Instructor = ({ pros, resorts }) => {
                 <div className="badge badge-outline">{p.level}</div>
               </div>
             </div>
-            <Modal showModal={showModal === p.id} setShowModal={setShowModal} pro={p} />
+            
+            {showModal === p.id ? <Modal setShowModal={setShowModal} pro={p} /> : null}
           </div>
         ))}
       </div>

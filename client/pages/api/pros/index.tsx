@@ -1,4 +1,4 @@
-import { env } from 'next.config';
+
 import { prisma } from '../../../db';
 import { withIronSessionApiRoute } from 'iron-session/next';
 
@@ -44,6 +44,6 @@ export default withIronSessionApiRoute(
   },
   {
     cookieName: 'proLoggedIn',
-    password: env.COOKIE_PASS,
+    password: 'v85zNiWmcmApJFuUKXDeyW$ShGDJx^7QB%t'
   }
 );
