@@ -46,7 +46,9 @@ export default withIronSessionApiRoute(
     }
   },
   {
+
     cookieName: 'user',
     password: 'v85zNiWmcmApJFuUKXDeyW$ShGDJx^7QB%t',
+
   }
 );
