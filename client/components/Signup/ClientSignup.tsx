@@ -69,6 +69,8 @@ const ClientSignup = () => {
           type="password"
           name="password"
           id="password"
+          minLength={5}
+          maxLength={20}
           required
           placeholder="Password"
           className="input input-bordered w-full max-w-xs m-1"
@@ -77,12 +79,13 @@ const ClientSignup = () => {
       <div className="flex items-center flex-col">
         <label htmlFor="phone">Phone:</label>
         <input
-          type="tel"
+          type="text"
           name="phoneNumber"
           id="phone"
-          maxLength={12}
+          maxLength={14}
           minLength={10}
-          placeholder="(000)000-0000"
+          pattern="^\(\d{3}\)\s\d{3}-\d{4}"
+          placeholder="(000) 000-0000"
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>

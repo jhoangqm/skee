@@ -12,8 +12,16 @@ export default async function handler(
     const slots = await prisma.timeSlots.findMany({
       where: {
         day: day,
+        prosId: Number(parsed.proId),
+        bookings: {
+          none: {},
+        },
+      },
+      include: {
+        bookings: true,
       },
     });
+    console.log(slots);
     res.json(slots);
   }
   if (req.method === 'GET') {

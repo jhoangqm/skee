@@ -75,6 +75,7 @@ export default function BookingCalendar(props: { proId }) {
             setShowModal={setShowModal}
             date={date}
             fetchData={fetchData}
+            proId={props.proId}
           />
         </div>
       </div>
