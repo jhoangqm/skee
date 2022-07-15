@@ -37,7 +37,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
   const timeFetcher = () => {
     fetch('/api/timeSlots', {
       method: 'POST',
-      body: JSON.stringify({ date: parsedDate }),
+      body: JSON.stringify({ date: parsedDate, proId }),
     })
       .then(res => res.json())
       .then(data => {
@@ -52,7 +52,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
       date: date,
       time: time,
       proId: proId,
-      clientId: user.id,
+      clientId: user?.id,
     };
     fetch('/api/bookings', {
       method: 'POST',
@@ -71,37 +71,35 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
   if (!data) return <div>loading...</div>;
 
   const timeSetter = () => {
-    const timeDataHours = new Date(timeData[0]?.startTime);
-    if (timeData[0]?.startTime) {
-      if (timeDataHours.getUTCHours() === 9) {
-        return (
+    if (!timeData[0]) return <div>no time slots available</div>;
+    console.log('time data', timeData);
+    const asDate = new Date(timeData[0].startTime);
+    if (timeData.length === 2) {
+      return (
+        <>
+          <li>
+            <p onClick={e => booking(e, parsedDate, 'AM', proId)}>AM</p>
+          </li>
           <li>
             <a onClick={e => booking(e, parsedDate, 'PM', proId)}>PM</a>
           </li>
-        );
-      }
-      if (timeDataHours.getUTCHours() === 13) {
-        return (
-          <li>
-            <a onClick={e => booking(e, parsedDate, 'AM', proId)}>AM</a>
-          </li>
-        );
-      }
-    }
-    return (
-      <>
+        </>
+      );
+    } else if (asDate?.getUTCHours() === 9) {
+      return (
         <li>
-          <p onClick={e => booking(e, parsedDate, 'AM', proId)}>AM</p>
+          <a onClick={e => booking(e, parsedDate, 'AM', proId)}>AM</a>
         </li>
+      );
+    } else if (asDate?.getUTCHours() === 13) {
+      return (
         <li>
           <a onClick={e => booking(e, parsedDate, 'PM', proId)}>PM</a>
         </li>
-        <li>
-          <a onClick={e => booking(e, parsedDate, 'DAY', proId)}>Full Day</a>
-        </li>
-      </>
-    );
+      );
+    }
   };
+
   return (
     <>
       {showModal ? (
