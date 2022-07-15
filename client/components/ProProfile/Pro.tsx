@@ -3,6 +3,8 @@ import BookingRequests from "../BookingRequests"
 
 import { useState } from "react";
 import InstructorCalendar from "./InsCalender";
+import Certification from "./Certification/Certification";
+import Upload from "../uploads";
 
 
 
@@ -19,7 +21,7 @@ const Pro = ({ pro }) => {
           {pro[0].firstName} {pro[0].lastName}{' '}
         </div>
       </div><div className="flex justify-around">
-          <div className="flex justify-start h-80 w-80 bg-blue-200">Picture
+          <div className="flex justify-start h-80 w-80 bg-blue-200"><Certification proId={pro[0].id}/>
             {/* <div className="justify-self-center self-center">Picture
     <Upload/>
     </div> */}
@@ -33,7 +35,7 @@ const Pro = ({ pro }) => {
   }
   const Edit = () => {
     return (
-      <div></div>
+      <div><Upload/></div>
     )
   }
   const Requests = ({ pro }) => {

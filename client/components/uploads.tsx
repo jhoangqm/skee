@@ -3,6 +3,8 @@ const Axios = require("axios");
 
 function Upload() {
   const [file, setFile] = useState();
+  const [previewUrl, setPreviewUrl] = useState()
+
 
   const send = event => {
     const data = new FormData();
@@ -26,7 +28,7 @@ function Upload() {
         const file = event.target.files[0];
         setFile(file)
       }}
-        multiple/>
+        />
        <button 
        className='btn' 
        type="submit" 

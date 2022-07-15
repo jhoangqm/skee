@@ -1,33 +1,37 @@
 const multer = require('multer');
 const path = require('path');
 
+let imageName = '';
+
 // This is the storage
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads'); // Replace 'upload' with destination (need to put DB)
-  },
+  destination: path.join('./image'),
   filename: function (req, file, cb) {
     console.log('====================');
     console.log('file: ', file);
     console.log('====================');
-    cb(null, Date.now() + path.extname(file.originalname));
+    imageName = Date.now() + path.extname(file.originalname);
+    cb(null, imageName);
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 3000000 },
+});
 
 // This is the upload function
 const singleUpload = (req, res, next) => {
-  const uploadFiles = upload.array('file', 12);
+  const uploadFiles = upload.single('file');
 
   uploadFiles(req, res, (err) => {
-    const files = req.files;
-    if (!files) {
-      const error = new Error('Please choose files');
+    const file = req.file;
+    if (!file) {
+      const error = new Error('Please upload a file');
       error.httpStatusCode = 400;
       return next(error);
     }
-    res.send(files);
+    res.status(201).json({ url: 'http://localhost:5000/image/' + imageName });
   });
 };
 
