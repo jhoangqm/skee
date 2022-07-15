@@ -29,15 +29,13 @@ const createTimeSlot = async (
   try {
     const timeSlot = await prisma.timeSlots.findMany({
       where: {
-        day: midnight.toISOString(),
+        day: midnight,
         startTime: hrs.toISOString(),
         prosId: Number(prosId),
       },
-      select: {
-        id: true,
-      },
     });
-    booking(timeSlot.id, date, prosId, clientId);
+    console.log('this is the timeslot', timeSlot);
+    booking(timeSlot[0].id, date, prosId, clientId);
   } catch (error) {
     console.log('error', error);
   }
@@ -49,7 +47,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     let { date, time, proId, clientId } = JSON.parse(req.body);
-    console.log('proId', proId, 'clientId', clientId);
+
     if (time === 'AM') {
       createTimeSlot(2, date, proId, clientId);
     } else if (time === 'PM') {
