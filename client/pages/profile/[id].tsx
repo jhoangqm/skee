@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import BookingRequests from '../../components/BookingRequests';
 // import Upload from '../../components/uploads';
-import Pro from '../../components/Profile/Pro';
+import Pro from '../../components/ProProfile/Pro';
 import User from '../../components/Profile/User';
 
 export const getStaticPaths = async () => {
