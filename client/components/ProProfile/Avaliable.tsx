@@ -16,7 +16,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
   }, [date]);
 
   const timeFetcher = () => {
-    fetch('/api/timeSlots', {
+    fetch('/api/available', {
       method: 'POST',
       body: JSON.stringify({ date: parsedDate, proId: pro[0].id }),
     })
@@ -42,37 +42,43 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
     })
       .then(res => res.json())
       .then(setShowModal(false));
-    // .then(data => fetchData());
   };
 
   const timeSetter = () => {
-    const timeDataHours = new Date(timeData[0]?.startTime);
-    if (timeData[0]?.startTime) {
-      if (timeDataHours.getUTCHours() === 9) {
-        return (
-          <li onClick={e => booking(e, parsedDate, 'PM', pro)}>
-            <a>Create PM Lesson</a>
+    if (!timeData[0])
+      return (
+        <>
+          <li>
+            <p onClick={e => booking(e, parsedDate, 'AM', pro)}>
+              Create AM lesson
+            </p>
           </li>
-        );
-      }
-      if (timeDataHours.getUTCHours() === 13) {
-        return (
-          <li onClick={e => booking(e, parsedDate, 'AM', pro)}>
-            <a>Create AM Lesson</a>
+          <li>
+            <a onClick={e => booking(e, parsedDate, 'PM', pro)}>
+              Create PM lesson
+            </a>
           </li>
-        );
-      }
+        </>
+      );
+    const asDate = new Date(timeData[0].startTime);
+    if (timeData.length === 2) return <div>You are available all day</div>;
+    if (asDate?.getUTCHours() === 9) {
+      return (
+        <li>
+          <a onClick={e => booking(e, parsedDate, 'PM', pro)}>
+            Create PM lesson
+          </a>
+        </li>
+      );
+    } else if (asDate?.getUTCHours() === 13) {
+      return (
+        <li>
+          <a onClick={e => booking(e, parsedDate, 'AM', pro)}>
+            Create AM lesson
+          </a>
+        </li>
+      );
     }
-    return (
-      <>
-        <li onClick={e => booking(e, parsedDate, 'AM', pro)}>
-          <a>Create AM Lesson</a>
-        </li>
-        <li onClick={e => booking(e, parsedDate, 'PM', pro)}>
-          <a>Create PM Lesson</a>
-        </li>
-      </>
-    );
   };
 
   return (
