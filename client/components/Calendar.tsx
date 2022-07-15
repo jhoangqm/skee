@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import CalMod from './CalendarModal';
-import { useRouter } from 'next/router';
 import { add, isWithinInterval, set } from 'date-fns';
-import useSWR from 'swr';
-import { Bookings } from '@prisma/client';
 
+// TODO: error handling
 // * * * * * * * * * * * * * * * *
-// ! this is for getting blocked off dates for pros
+// ! this is for getting available dates
 function isWithinRange(date: Date, range: Date[]) {
   return isWithinInterval(date, { start: range[0], end: range[1] });
 }
@@ -21,40 +19,18 @@ export default function BookingCalendar(props: { proId }) {
   const [showModal, setShowModal] = useState(false);
   const [date, setDate] = useState(new Date());
   const [appData, setAppData] = useState([]);
-  const [available, setAvailable] = useState([]);
   const [error, setError] = useState(null);
-
-  // * * * * * * * * * * * * * * * *
-  // ! this is for getting blocked off dates for pros
-
-  const { query } = useRouter();
-  // TODO: hard coded query id this need to be dynamic from the modal
-  query.id = props.proId;
 
   // fetches booking dates using proId from the database
   const fetchData = () => {
-    console.log('Fetching bookings', props.proId);
     fetch(`/api/clientcalendar/${props.proId}`)
       .then(res => res.json())
       .then(data => {
-        console.log('Bookings', data);
         setAppData(data);
       });
   };
 
-  const fetchAvailable = () => {
-    console.log('Fetching available');
-    fetch(`/api/clientcalendar`, {
-      method: 'POST',
-      body: JSON.stringify(props.proId),
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log('this is the available booking data', data);
-        setAvailable(data);
-      });
-  };
-
+  // sets the ranges for the available calendar
   const ranges = appData.map(i => [
     add(set(new Date(i.day), { hours: 0o0, minutes: 0o0, seconds: 0o0 }), {
       days: 1,
@@ -73,15 +49,12 @@ export default function BookingCalendar(props: { proId }) {
       }
     }
   }
-  // * * * * * * * * * * * * * * * *
 
   const openModal = () => {
-    console.log('clicked to openModal');
     setShowModal(prev => !prev);
   };
 
   useEffect(() => fetchData(), [date]);
-  useEffect(() => fetchAvailable(), []);
 
   if (error) return <h1>Yo there was an Error {error}</h1>;
 
