@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import CalMod from './CalendarModal';
-import { useRouter } from 'next/router';
-import { isWithinInterval } from 'date-fns';
-import useSWR from 'swr';
-import { Bookings } from '@prisma/client';
+import { add, isWithinInterval, set } from 'date-fns';
 
+// TODO: error handling
 // * * * * * * * * * * * * * * * *
-// ! this is for getting blocked off dates for pros
+// ! this is for getting available dates
 function isWithinRange(date: Date, range: Date[]) {
   return isWithinInterval(date, { start: range[0], end: range[1] });
 }
@@ -23,39 +21,40 @@ export default function BookingCalendar(props: { proId }) {
   const [appData, setAppData] = useState([]);
   const [error, setError] = useState(null);
 
-  // * * * * * * * * * * * * * * * *
-  // ! this is for getting blocked off dates for pros
-
-  const { query } = useRouter();
-  // TODO: hard coded query id this need to be dynamic from the modal
-  query.id = props.proId;
-
   // fetches booking dates using proId from the database
   const fetchData = () => {
-    console.log('Fetching booking');
-    fetch(`/api/calendar/${props.proId}`)
+    fetch(`/api/clientcalendar/${props.proId}`)
       .then(res => res.json())
-      .then(data => setAppData(data));
+      .then(data => {
+        setAppData(data);
+      });
   };
 
-  const ranges = appData.map(i => [new Date(i.dateFrom), new Date(i.dateTo)]);
+  // sets the ranges for the available calendar
+  const ranges = appData.map(i => [
+    add(set(new Date(i.day), { hours: 0o0, minutes: 0o0, seconds: 0o0 }), {
+      days: 1,
+    }),
+    add(set(new Date(i.day), { hours: 0o0, minutes: 0o0, seconds: 0o0 }), {
+      days: 1,
+    }),
+  ]);
 
-  function tileDisabled({ date, view }: any) {
+  function tileEnabled({ date, view }: any) {
     // Add class to tiles in month view only
     if (view === 'month') {
       // Check if a date React-Calendar wants to check is within any of the ranges
-      return isWithinRanges(date, ranges);
+      if (isWithinRanges(date, ranges)) {
+        return 'react-calendar__tile__enabled';
+      }
     }
   }
 
-  // * * * * * * * * * * * * * * * *
-
   const openModal = () => {
-    console.log('clicked to openModal');
     setShowModal(prev => !prev);
   };
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => fetchData(), [date]);
 
   if (error) return <h1>Yo there was an Error {error}</h1>;
 
@@ -68,20 +67,23 @@ export default function BookingCalendar(props: { proId }) {
             onChange={setDate}
             value={date}
             onClickDay={openModal}
-            tileDisabled={tileDisabled}
-          />
-          <CalMod
-            showModal={showModal}
-            setShowModal={setShowModal}
-            date={date}
-            fetchData={fetchData}
-            proId={props.proId}
+            minDetail="year"
+            tileClassName={tileEnabled}
           />
         </div>
       </div>
       <p className="text-center">
         <span className="bold">date selected</span> {date.toDateString()}
       </p>
+      <div className="flex justify-center">
+        <CalMod
+          showModal={showModal}
+          setShowModal={setShowModal}
+          date={date}
+          fetchData={fetchData}
+          proId={props.proId}
+        />
+      </div>
     </div>
   );
 }
