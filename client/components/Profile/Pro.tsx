@@ -1,6 +1,6 @@
 import BookingCalendar from "../Calendar"
 import BookingRequests from "../BookingRequests"
-
+import Certification from "./Certification/Certification"
 
 const Pro = ({ pro }) => {
   return (
@@ -11,6 +11,7 @@ const Pro = ({ pro }) => {
       </div>
     </div><div className="flex justify-around">
         <div className="flex justify-start h-80 w-80 bg-blue-200">{pro[0].certImg}
+        <Certification proId={pro[0].id}/>
           {/* <div className="justify-self-center self-center">Picture
     <Upload/>
     </div> */}
