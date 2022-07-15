@@ -40,7 +40,7 @@ function BookingRequests(props: {proId}) {
   }
   
   
-  console.log("GET DB info: ", request)
+  // console.log("GET DB info: ", request)
   // const pendingStatus = request.filter(p=>p.pending);
   // const acceptedStatus = request.filter(p=>p.accepted)
   // const pendingStatusTrue = (pendingStatus !== false)
