@@ -9,17 +9,16 @@ export default async function handler(
   const am = new Date(date.setHours(2));
   const pm = new Date(date.setHours(6));
   const midnight = new Date(date.setHours(-7));
-  console.log('hi froom blockoff', proId);
-
-  try {
-    const timeSlot = await prisma.timeSlots.findFirstOrThrow({
-      where: {
-        day: midnight.toISOString(),
-        prosId: Number(proId),
-      },
-    });
-  } catch (error) {
-    if (time === 'AM') {
+  if (time === 'AM') {
+    try {
+      await prisma.timeSlots.findFirstOrThrow({
+        where: {
+          day: midnight.toISOString(),
+          prosId: Number(proId),
+          startTime: am.toISOString(),
+        },
+      });
+    } catch (error) {
       const AMSlot = await prisma.timeSlots.create({
         data: {
           day: midnight.toISOString(),
@@ -29,7 +28,17 @@ export default async function handler(
           prosId: Number(proId),
         },
       });
-    } else if (time === 'PM') {
+    }
+  } else if (time === 'PM') {
+    try {
+      await prisma.timeSlots.findFirstOrThrow({
+        where: {
+          day: midnight.toISOString(),
+          prosId: Number(proId),
+          startTime: pm.toISOString(),
+        },
+      });
+    } catch {
       const PMSlot = await prisma.timeSlots.create({
         data: {
           day: midnight.toISOString(),
@@ -41,4 +50,5 @@ export default async function handler(
       });
     }
   }
+  res.json({ message: 'success' });
 }
