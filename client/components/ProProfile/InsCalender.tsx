@@ -45,7 +45,7 @@ export default function InstructorCalendar({ pro }) {
     }),
   ]);
 
-  function tileDisabled({ date, view }: any) {
+  function tileAvailable({ date, view }: any) {
     // Add class to tiles in month view only
     if (view === 'month') {
       // Check if a date React-Calendar wants to check is within any of the ranges
@@ -62,34 +62,35 @@ export default function InstructorCalendar({ pro }) {
     setShowModal(true);
   };
 
-  useEffect(() => fetchData(), [openModal]);
+  useEffect(() => fetchData(), [date]);
 
   if (error) return <h1>Yo there was an Error {error}</h1>;
 
   return (
     <div className="app">
       <h1 className="text-center">React Calendar</h1>
-      <div className="flex justify-center">
+      <div className="flex items-center flex-col">
         <div htmlFor="my-modal-4" className="calendar-container">
           <Calendar
             onChange={setDate}
             value={date}
             onClickDay={openModal}
-            tileClassName={tileDisabled}
+            minDetail="year"
+            tileClassName={tileAvailable}
           />
-          {showModal ? (
-            <TimeSetter
-              setShowModal={setShowModal}
-              date={date}
-              fetchData={fetchData}
-              pro={pro}
-            />
-          ) : null}
         </div>
+        <p className="text-center">
+          <span className="bold">date selected</span> {date.toDateString()}
+        </p>
+        {showModal ? (
+          <TimeSetter
+            setShowModal={setShowModal}
+            date={date}
+            fetchData={fetchData}
+            pro={pro}
+          />
+        ) : null}
       </div>
-      <p className="text-center">
-        <span className="bold">date selected</span> {date.toDateString()}
-      </p>
     </div>
   );
 }
