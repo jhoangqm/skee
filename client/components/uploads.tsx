@@ -1,41 +1,61 @@
-import React, { useState, useEffect } from "react";
-const Axios = require("axios");
+import { useState, useRef } from "react";
+import axios from "axios";
+
 
 function Upload() {
-  const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState()
+  const [image, setImage] = useState("");
+  const [imageFile, setFile] = useState();
+  const [imagePreview, setPreview] = useState();
+  const inputEl = useRef(null); //variable to referring hidden input
+  
+  const getImage = (e) => {
+    setFile(e.target.files[0]);
+    setPreview(URL.createObjectURL(e.target.files[0]));//set preview
+ }
 
 
-  const send = event => {
-    const data = new FormData();
-    data.append("file", file);
+  const uploadImage = (e) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    axios({
+      method: "post",
+      url: "http://localhost:5000/upload",
+      data: formData,
+    })
+     .then((response) => {
+      const { data } = response;
+      setImage(data.url);
+    })
+     .catch((err) => {
+      console.log(err);
+    });
+  }
 
-    Axios.post("http://localhost:5000/upload", data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  };
 
-
-  return (
-    <div>
-    <h1>Upload a picture</h1>
-    {/* <form action="/upload" encType="multipart/form-data" method="POST">  */}
-      <form>
-      <input 
-      type="file" 
-      // name="files" 
-      onChange={event => {
-        const file = event.target.files[0];
-        setFile(file)
-      }}
-        />
-       <button 
-       className='btn' 
-       type="submit" 
-       onClick={send}>Upload</button>
-    </form>
+return (
+    <div className="App">
+      <h4>Image from server</h4>
+      <div className="imageBox">
+        <img src={image} width="100%"></img>
+      </div>
+      <hr></hr>
+      <h4>Image Preview</h4>
+      <form onSubmit={uploadImage}>
+        <div className="imageBox">
+          <img src={imagePreview} width="100%"></img>
+        </div>
+        <input type="file"
+          onChange={getImage}
+          style={{display: "none"}} //hiding input
+          ref={inputEl} //set inputEl to referring this element
+        ></input>
+        <button className='btn'
+          onClick={() => inputEl.current.click()}
+        >select image</button>
+        <button className='btn' type="submit">upload</button>
+      </form>
     </div>
-  )
+  );
 }
-
-export default Upload
+export default Upload;
