@@ -90,7 +90,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
                 <span className="label-text">
                   Select if you want full day option displayed
                 </span>
-                <input type="checkbox" className="toggle" checked={false} />
+                {/* <input type="checkbox" className="toggle" checked={false} /> */}
               </label>
             </div>
           </ul>
