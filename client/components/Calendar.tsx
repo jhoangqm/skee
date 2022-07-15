@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import CalMod from './CalendarModal';
 import { useRouter } from 'next/router';
-import { isWithinInterval } from 'date-fns';
+import { add, isWithinInterval, set } from 'date-fns';
 import useSWR from 'swr';
 import { Bookings } from '@prisma/client';
 
@@ -21,6 +21,7 @@ export default function BookingCalendar(props: { proId }) {
   const [showModal, setShowModal] = useState(false);
   const [date, setDate] = useState(new Date());
   const [appData, setAppData] = useState([]);
+  const [available, setAvailable] = useState([]);
   const [error, setError] = useState(null);
 
   // * * * * * * * * * * * * * * * *
@@ -32,22 +33,46 @@ export default function BookingCalendar(props: { proId }) {
 
   // fetches booking dates using proId from the database
   const fetchData = () => {
-    console.log('Fetching booking');
-    fetch(`/api/calendar/${props.proId}`)
+    console.log('Fetching bookings', props.proId);
+    fetch(`/api/clientcalendar/${props.proId}`)
       .then(res => res.json())
-      .then(data => setAppData(data));
+      .then(data => {
+        console.log('Bookings', data);
+        setAppData(data);
+      });
   };
 
-  const ranges = appData.map(i => [new Date(i.dateFrom), new Date(i.dateTo)]);
+  const fetchAvailable = () => {
+    console.log('Fetching available');
+    fetch(`/api/clientcalendar`, {
+      method: 'POST',
+      body: JSON.stringify(props.proId),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('this is the available booking data', data);
+        setAvailable(data);
+      });
+  };
 
-  function tileDisabled({ date, view }: any) {
+  const ranges = appData.map(i => [
+    add(set(new Date(i.day), { hours: 0o0, minutes: 0o0, seconds: 0o0 }), {
+      days: 1,
+    }),
+    add(set(new Date(i.day), { hours: 0o0, minutes: 0o0, seconds: 0o0 }), {
+      days: 1,
+    }),
+  ]);
+
+  function tileEnabled({ date, view }: any) {
     // Add class to tiles in month view only
     if (view === 'month') {
       // Check if a date React-Calendar wants to check is within any of the ranges
-      return isWithinRanges(date, ranges);
+      if (isWithinRanges(date, ranges)) {
+        return 'react-calendar__tile__enabled';
+      }
     }
   }
-
   // * * * * * * * * * * * * * * * *
 
   const openModal = () => {
@@ -55,7 +80,8 @@ export default function BookingCalendar(props: { proId }) {
     setShowModal(prev => !prev);
   };
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => fetchData(), [date]);
+  useEffect(() => fetchAvailable(), []);
 
   if (error) return <h1>Yo there was an Error {error}</h1>;
 
@@ -68,7 +94,7 @@ export default function BookingCalendar(props: { proId }) {
             onChange={setDate}
             value={date}
             onClickDay={openModal}
-            tileDisabled={tileDisabled}
+            tileClassName={tileEnabled}
           />
           <CalMod
             showModal={showModal}

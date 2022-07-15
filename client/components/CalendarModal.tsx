@@ -72,7 +72,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
 
   const timeSetter = () => {
     if (!timeData[0]) return <div>No time slots available</div>;
-    console.log('time data', timeData);
+
     const asDate = new Date(timeData[0].startTime);
     if (timeData.length === 2) {
       return (
