@@ -81,7 +81,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
         <div className="ava-drop">
           {/* <label tabIndex="0" className="btn m-1">Create booking for this day</label> */}
           <ul
-            tabIndex="0"
+            tabIndex={0}
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
             {timeSetter()}
