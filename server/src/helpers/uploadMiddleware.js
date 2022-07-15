@@ -25,8 +25,8 @@ const singleUpload = (req, res, next) => {
   const uploadFiles = upload.single('file');
 
   uploadFiles(req, res, (err) => {
-    const file = req.file;
-    if (!file) {
+    if (err) {
+      console.log('Error: ', err);
       const error = new Error('Please upload a file');
       error.httpStatusCode = 400;
       return next(error);
