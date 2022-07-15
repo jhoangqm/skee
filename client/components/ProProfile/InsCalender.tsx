@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
-import CalMod from './CalendarModal';
+import CalMod from '../CalendarModal';
 import { useRouter } from 'next/router';
 import { isWithinInterval } from 'date-fns';
 import useSWR from 'swr';
 import { Bookings } from '@prisma/client';
+import TimeSetter from './Avaliable';
 
 // * * * * * * * * * * * * * * * *
 // ! this is for getting blocked off dates for pros
@@ -17,23 +18,21 @@ function isWithinRanges(date: Date, ranges: Date[]) {
 }
 // * * * * * * * * * * * * * * * *
 
-export default function BookingCalendar(props: { proId }) {
+export default function InstructorCalendar({ pro }) {
+
   const [showModal, setShowModal] = useState(false);
   const [date, setDate] = useState(new Date());
   const [appData, setAppData] = useState([]);
   const [error, setError] = useState(null);
 
   // * * * * * * * * * * * * * * * *
-  // ! this is for getting blocked off dates for pros
-
-  const { query } = useRouter();
   // TODO: hard coded query id this need to be dynamic from the modal
-  query.id = props.proId;
+  
 
   // fetches booking dates using proId from the database
   const fetchData = () => {
-    console.log('Fetching booking');
-    fetch(`/api/calendar/${props.proId}`)
+    // console.log('Fetching booking');
+    fetch(`/api/calendar/${pro[0].id}`)
       .then(res => res.json())
       .then(data => setAppData(data));
   };
@@ -51,7 +50,7 @@ export default function BookingCalendar(props: { proId }) {
   // * * * * * * * * * * * * * * * *
 
   const openModal = () => {
-    console.log('clicked to openModal');
+    // console.log('clicked to openModal');
     setShowModal(prev => !prev);
   };
 
@@ -70,13 +69,14 @@ export default function BookingCalendar(props: { proId }) {
             onClickDay={openModal}
             tileDisabled={tileDisabled}
           />
-          <CalMod
+          {showModal ? (
+          <TimeSetter
             showModal={showModal}
             setShowModal={setShowModal}
             date={date}
             fetchData={fetchData}
-            proId={props.proId}
-          />
+            pro={pro}
+          />) : null}
         </div>
       </div>
       <p className="text-center">

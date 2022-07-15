@@ -96,7 +96,7 @@ model Bookings {
 
 model timeSlots {
   id            Int        @id @default(autoincrement())
-  day           DateTime?  @unique
+  day           DateTime
   startTime     DateTime
   duration      Int
   remainingTime Int        @default(6)

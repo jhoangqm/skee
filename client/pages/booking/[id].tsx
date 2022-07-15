@@ -5,24 +5,24 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 export const getStaticPaths = async () => {
-  const res = await fetch('http://localhost:3000/api/pros')
+  const res = await fetch('http://localhost:3000/api/pros');
   const data = await res.json();
 
   const paths = data.map(pro => {
     return {
       params: {
-        id: pro.id.toString()
-      }
-    }
-  })
+        id: pro.id.toString(),
+      },
+    };
+  });
 
   return {
     paths,
-    fallback: true
-  }
-}
+    fallback: true,
+  };
+};
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async context => {
   const id = context.params.id;
   // console.log('ID', context.params.id);
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
@@ -31,15 +31,11 @@ export const getStaticProps = async (context) => {
   // console.log("DATA",data);
 
   return {
+    props: { pro: data },
+  };
+};
 
-    props: { pro: data,  },
-
-  }
-}
-
-const Booking = ( { pro }) => {
-  
-
+const Booking = ({ pro }) => {
   return (
     <Layout signup={false}>
       <div className="flex justify-center">

@@ -75,6 +75,8 @@ const ProSignup = () => {
           type="password"
           name="password"
           id="password"
+          minLength={5}
+          maxLength={20}
           required
           placeholder="Password"
           className="input input-bordered w-full max-w-xs m-1"
@@ -83,24 +85,28 @@ const ProSignup = () => {
       <div className="flex items-center flex-col">
         <label htmlFor="phone">Phone:</label>
         <input
-          type="tel"
+          type="text"
           name="phoneNumber"
           id="phone"
-          maxLength={12}
+          maxLength={14}
           minLength={10}
-          placeholder="(000)000-0000"
+          pattern="^\(\d{3}\)\s\d{3}-\d{4}"
+          placeholder="(000) 000-0000"
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>
       <div className="flex items-center flex-col">
         <label htmlFor="certBody">Certification Body:</label>
-        <input
-          type="text"
-          name="certBody"
+        <select
           id="certBody"
-          placeholder="Certification Body"
-          className="input input-bordered w-full max-w-xs m-1"
-        />
+          name="certBody"
+          className="select select-bordered w-full max-w-xs m-1 mb-3"
+        >
+          <option value="CSIA">CSIA</option>
+          <option value="BASI">BASI</option>
+          <option value="APSI">APSI</option>
+          <option value="NZSIA">NZSIA</option>
+        </select>
       </div>
       <div className="flex items-center flex-col">
         <label htmlFor="resortId">Mountain:</label>

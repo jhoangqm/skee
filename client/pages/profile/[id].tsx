@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import BookingRequests from '../../components/BookingRequests';
 // import Upload from '../../components/uploads';
-import Pro from '../../components/Profile/Pro';
+import Pro from '../../components/ProProfile/Pro';
+import User from '../../components/Profile/User';
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros')
@@ -38,7 +39,7 @@ export const getStaticProps = async (context) => {
   }
 }
 
-const Profile = ({pro}) => {
+const Profile = ({ pro }) => {
 
   // const { query } = useRouter();
   //  // TODO: pass down proId props
@@ -48,6 +49,7 @@ const Profile = ({pro}) => {
 
   return (
     <Layout signup={true}>
+      {/* <User/> */}
       <Pro pro={pro}/>
     </Layout>
   );
