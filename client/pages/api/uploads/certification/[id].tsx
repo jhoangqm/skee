@@ -1,10 +1,10 @@
-const { prisma } = require('../../../../../db');
+const { prisma } = require('../../../../db');
 
 export default async function handler({ query: { id } }: any, res: any) {
-  console.log('id Params', id);
+  console.log('id Params from cert', id);
   const certification = await prisma.pros.findMany({
     where: {
-      proId: Number(id)
+      id: Number(id)
     }
   });
   res.json(certification);
