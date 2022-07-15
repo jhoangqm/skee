@@ -21,7 +21,7 @@ app.use('/image', express.static('image'));
 // Router usage not working at the moment
 // app.use('/upload', uploadRouter());
 
-// Socket IO setup
+// http server created
 const httpServer = require('http').createServer(app);
 
 // route to test upload
