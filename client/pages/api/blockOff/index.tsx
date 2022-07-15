@@ -1,13 +1,15 @@
-import { prisma } from '../../../../db';
+import { prisma } from '../../../db';
 import type { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { proId, time, date } = req.body;
+  let { proId, time, date } = JSON.parse(req.body);
+  date = new Date(date);
   const am = new Date(date.setHours(2));
   const pm = new Date(date.setHours(6));
   const midnight = new Date(date.setHours(-7));
+  console.log('hi froom blockoff', proId);
 
   try {
     const timeSlot = await prisma.timeSlots.findFirstOrThrow({

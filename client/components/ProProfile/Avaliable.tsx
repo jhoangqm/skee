@@ -1,7 +1,6 @@
 import useSWR from 'swr';
-import { Pros } from "@prisma/client";
-import { useEffect, useState } from "react";
-
+import { Pros } from '@prisma/client';
+import { useEffect, useState } from 'react';
 
 // interface ProProps {
 //   resorts: Pros[];
@@ -19,7 +18,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
   const timeFetcher = () => {
     fetch('/api/timeSlots', {
       method: 'POST',
-      body: JSON.stringify({ date: parsedDate }),
+      body: JSON.stringify({ date: parsedDate, proId: pro[0].id }),
     })
       .then(res => res.json())
       .then(data => {
@@ -36,14 +35,14 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
     e.preventDefault();
 
     const bookingRequest = { date: date, time: time, proId: pro[0].id };
-    
-    fetch('/api/bookings/blockoff', {
+
+    fetch('/api/blockOff', {
       method: 'POST',
       body: JSON.stringify(bookingRequest),
     })
       .then(res => res.json())
-      .then(setShowModal(false))
-      // .then(data => fetchData());
+      .then(setShowModal(false));
+    // .then(data => fetchData());
   };
 
   const timeSetter = () => {
@@ -51,20 +50,27 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
     if (timeData[0]?.startTime) {
       if (timeDataHours.getUTCHours() === 9) {
         return (
-          <li onClick={e => booking(e, parsedDate, 'PM', pro)}><a>Create PM Lesson</a></li>
+          <li onClick={e => booking(e, parsedDate, 'PM', pro)}>
+            <a>Create PM Lesson</a>
+          </li>
         );
       }
       if (timeDataHours.getUTCHours() === 13) {
         return (
-          <li onClick={e => booking(e, parsedDate, 'AM', pro)}><a>Create AM Lesson</a></li>
+          <li onClick={e => booking(e, parsedDate, 'AM', pro)}>
+            <a>Create AM Lesson</a>
+          </li>
         );
       }
     }
     return (
       <>
-        <li onClick={e => booking(e, parsedDate, 'AM', pro)}><a>Create AM Lesson</a></li>
-        <li onClick={e => booking(e, parsedDate, 'PM', pro)}><a>Create PM Lesson</a></li>
-
+        <li onClick={e => booking(e, parsedDate, 'AM', pro)}>
+          <a>Create AM Lesson</a>
+        </li>
+        <li onClick={e => booking(e, parsedDate, 'PM', pro)}>
+          <a>Create PM Lesson</a>
+        </li>
       </>
     );
   };
@@ -74,12 +80,16 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
       <div>
         <div className="ava-drop">
           {/* <label tabIndex="0" className="btn m-1">Create booking for this day</label> */}
-          <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-            
+          <ul
+            tabIndex="0"
+            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
             {timeSetter()}
             <div className="form-control">
               <label className="label cursor-pointer">
-                <span className="label-text">Select if you want full day option displayed</span>
+                <span className="label-text">
+                  Select if you want full day option displayed
+                </span>
                 <input type="checkbox" className="toggle" checked={false} />
               </label>
             </div>
@@ -87,9 +97,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
         </div>
       </div>
     </div>
+  );
+};
 
-
-  )
-}
-
-export default TimeSetter
+export default TimeSetter;
