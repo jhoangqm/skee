@@ -25,10 +25,36 @@ a {
 
 .modal-box {
 }
+
+.react-calendar__tile__enabled {
+  background-color: green !important;
+  pointer-events: all !important;
+}
+
+.react-calendar__tile {
+  background-color: rgb(214, 214, 214);
+  margin: 5px 0px 5px 0px;
+  border-radius: 50px;
+}
+.react-calendar__month-view__weekdays__weekday {
+  display: flex;
+  justify-content: center;
+}
+.react-calendar {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 10px;
+}
+.react-calendar__month-view__days {
+  padding: 2px;
+}
+
 .react-calendar__tile:disabled {
   background-color: crimson;
 }
-
 /* .dropdown .dropdown-content {
   @apply opacity-100 visible 
 } */

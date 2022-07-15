@@ -84,7 +84,7 @@ const ClientSignup = () => {
           id="phone"
           maxLength={14}
           minLength={10}
-          pattern="^\(\d{3}\)\s\d{3}-\d{4}"
+          pattern="^\d{3}\d{3}\d{4}"
           placeholder="(000) 000-0000"
           className="input input-bordered w-full max-w-xs m-1"
         />
