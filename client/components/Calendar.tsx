@@ -67,20 +67,23 @@ export default function BookingCalendar(props: { proId }) {
             onChange={setDate}
             value={date}
             onClickDay={openModal}
+            minDetail="year"
             tileClassName={tileEnabled}
-          />
-          <CalMod
-            showModal={showModal}
-            setShowModal={setShowModal}
-            date={date}
-            fetchData={fetchData}
-            proId={props.proId}
           />
         </div>
       </div>
       <p className="text-center">
         <span className="bold">date selected</span> {date.toDateString()}
       </p>
+      <div className="flex justify-center">
+        <CalMod
+          showModal={showModal}
+          setShowModal={setShowModal}
+          date={date}
+          fetchData={fetchData}
+          proId={props.proId}
+        />
+      </div>
     </div>
   );
 }
