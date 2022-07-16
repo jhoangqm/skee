@@ -10,7 +10,7 @@ function Certification(props: {proId}) {
 
   // fetch the cert from the db
   const fetchCert = () => {
-  fetch(`/api/uploads/certification`)
+  fetch(`/api/uploads/certification/${props.proId}`)
   .then(res => res.json())
   .then(data => setCerts(data))
 }
@@ -18,17 +18,20 @@ function Certification(props: {proId}) {
 useEffect(() => fetchCert() ,[])
 
 const certImage = () => {
-  certs.map(c=>c.certImg)
 }
 
-console.log('Hello from certImage: ', certImage)
+const certImgOnly = certs.map(c=>c.certImg)
+const addQuoteCertImg = "'" + certImgOnly.join("','") + "'";
+console.log('Hello from certImageOnly: ', certImgOnly[0])
+console.log('Hello from addQuoteCertImg ', addQuoteCertImg);
+
 
 console.log('certs data: ', certs)
 
   return (
     <div>
       <h4>Image from server</h4>
-      <img src={certImage}>
+      <img src={certImgOnly} width='100%'>
         </img>
     </div>
   )
