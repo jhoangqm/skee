@@ -5,7 +5,7 @@ export default async function handler({ query: { id } }: any, res: any) {
   const pro = await prisma.pros.findMany({
     where: {
       id: Number(id)
-    }
+    },
    
   });
   res.json(pro);
