@@ -73,7 +73,9 @@ export default async function handler(
   }
 
   if (req.method === 'GET') {
-    const bookings = await prisma.bookings.findMany();
+    const bookings = await prisma.bookings.findMany({
+      include: {timeSlot: true}
+    });
     res.json(bookings);
   }
 }
