@@ -7,19 +7,19 @@ import { fil } from 'date-fns/locale';
 
 const Instructor = ({ pros }) => {
 
-  const [filter, setFilter] = useState(pros);
-  const insList = [...new Set(pros.map((list) => list.resorts.name))]
+  const [filter, setFilter] = useState([]);
+  // const insList = [...new Set(pros.map((list) => list.level))]
 
-  // console.log("john", john)
-  // const insList = [...new Set(john)]
-console.log(insList)
-  // useEffect(() => {})
+  useEffect(() => {
+    console.log("filter",filter)
+  },[filter])
 
   const filterItem = (item) => {
-    const newItem = pros.filter((newVal) => {
-      return newVal.level === item
-    });
-    setFilter(newItem);
+    if(filter.includes(item)){
+      setFilter(filter.filter(i => i !== item))
+      return
+    }
+    setFilter([...filter, item]);
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -32,13 +32,13 @@ console.log(insList)
       .then(data => setShowModal(data))
 
   }
-  // console.log("PROS", pros)
+  
   return (
 
     <>
-      <Filter pros={pros} insList={insList} setFilter={setFilter} filterItem={filterItem}/>
+      <Filter pros={pros} setFilter={setFilter} filterItem={filterItem}/>
       <div className="modal-instructor">
-        {filter.map((p) => (
+        {pros.map((p) => (
           <div>
             <div key={p.id} className="flex flex-wrap justify-center  mt-5" onClick={e => onclickhandler(e, p.id)}>
               <div className="card w-96 bg-base-100 shadow-xl m-6" >

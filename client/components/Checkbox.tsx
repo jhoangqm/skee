@@ -1,15 +1,14 @@
 import { pro } from "../prisma/data/users";
 
 
-const Checkbox = ({ level, key, getSelectedCategories } : any)=> {
+const Checkbox = ({ id, filterItem, level  } : any)=> {
 
   return (
 
-
     <div className="form-control">
   <label className="label cursor-pointer">
-    <span className="label-text"> cert level {level} </span> 
-    <input type="checkbox" value={key} onChange={e => getSelectedCategories(e.target.checked)} className="checkbox checkbox-primary" />
+    <span className="label-text">Cert {level}     </span> 
+    <input type="checkbox" value={id} onChange={(e) => filterItem(e.target.value)} className="checkbox checkbox-primary" />
   </label>
 </div>
 
