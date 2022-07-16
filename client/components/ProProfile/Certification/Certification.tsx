@@ -17,9 +17,6 @@ function Certification(props: {proId}) {
 
 useEffect(() => fetchCert() ,[])
 
-const certImage = () => {
-}
-
 // Loops through certs variable to find certImg in the DB
 const certImgOnly = certs.map(c=>c.certImg)
 
@@ -32,7 +29,7 @@ console.log('Hello from addQuoteCertImg ', addQuoteCertImg);
 
   return (
     <div>
-      <h4>Image from server</h4>
+      <h4>Certificate</h4>
       <img src={certImgOnly} width='100%'>
         </img>
     </div>
