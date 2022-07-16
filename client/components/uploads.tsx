@@ -59,12 +59,6 @@ function Upload(props: {proId}) {
 
 return (
     <div className="App">
-      {/* <h4>Image from server</h4>
-      <div className="imageBox">
-    </div> */}
-    {/* <img src={image} width="100%"></img>
-      {image} */}
-      {image}
       <hr></hr>
       <h4>Image Preview</h4>
       <form onSubmit={uploadImage}>
