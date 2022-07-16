@@ -2,7 +2,7 @@ import { useState } from "react";
 
 
 
-const User = () => {
+const User = ({ user}) => {
   
 // const [Profile, setProfile] = useState(true);
 // const [Edit, setEdit] = useState(false);
@@ -40,7 +40,8 @@ return(
   }
   
   
-  const Edit = () => {
+  const Edit = ({user}) => {
+    console.log("BIG USER",user);
   return(
     <div className="flex justify-center"> 
      <form method="post" >
@@ -51,7 +52,7 @@ return(
           name="firstName"
           id="firstName"
           required
-          placeholder="First Name"
+          placeholder={user.name}
           className="input input-bordered w-full max-w-xs m-1"
         />
         <label htmlFor="lastName">Last Name</label>
