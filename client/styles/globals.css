@@ -60,3 +60,8 @@ a {
 /* .dropdown .dropdown-content {
   @apply opacity-100 visible 
 } */
+.modal-instructor{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center
+}

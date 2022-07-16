@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Map from "./Map";
+
 
 
 const MapPopup = ({ setShowMap, resorts }: any) => {
@@ -12,8 +12,8 @@ const MapPopup = ({ setShowMap, resorts }: any) => {
 
         <div className="modal-box relative">
           {resorts.map((resort) => (
-            <><label key={resorts.id} className="btn btn-sm btn-circle absolute right-2 top-2" onClick={() => { setShowMap(false); }}>✕</label>
-            <Link href={`/instructors/${resort.id}`}>
+            <><label key={resorts.id} className="btn btn-sm btn-circle absolute right-2 top-2" onClick={() => { setShowMap(false) }}>✕</label>
+            <Link href={`/mountains/instructors/${resort.id}`}>
             <button className="btn btn-wide">{resort.name}</button>
             </Link>
             {/* <h3 className="text-lg font-bold"></h3>

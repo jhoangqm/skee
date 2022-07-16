@@ -41,7 +41,9 @@ export default withIronSessionApiRoute(
       }
     }
     if (req.method === 'GET') {
-      const pros = await prisma.pros.findMany();
+      const pros = await prisma.pros.findMany(
+        // {include: { resorts: true }}
+      );
       res.json(pros);
     }
   },

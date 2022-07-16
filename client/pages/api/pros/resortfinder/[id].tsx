@@ -7,7 +7,7 @@ export default async function handler({ query: { id } }: any, res: any) {
       resortId:
         Number(id)
     },
-
+include: {resorts: true}
   });
   res.json(pro);
 }
