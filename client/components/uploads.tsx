@@ -1,33 +1,50 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 
-function Upload() {
-  const [image, setImage] = useState("");
-  const [imageFile, setFile] = useState();
+
+function Upload(props: {proId}) {
+  // const [image, setImage] = useState("");
+  const [file, setFile] = useState();
   const [imagePreview, setPreview] = useState();
-  const inputEl = useRef(null); //variable to referring hidden input
+  const inputEl = useRef(null); //ref hidden input
+
+  const { query } = useRouter();
+  query.id = props.proId;
   
   const getImage = (e) => {
     setFile(e.target.files[0]);
-    setPreview(URL.createObjectURL(e.target.files[0]));//set preview
- }
-
+    setPreview(URL.createObjectURL(e.target.files[0]));//shows preview
+  }
+  
+  const updateImageDB = (data) =>{
+    // Creating obj because I can't pass two values in
+    // JSON.stringify's params
+    const certObj = {};
+    certObj.uniqueID = props.proId
+    certObj.certImg = data.url
+    fetch(`/api/uploads/certification`, {
+      method: 'PATCH',
+      body: JSON.stringify(certObj)
+    })
+    .then((res)=>res.json())
+  }
 
   const uploadImage = (e) => {
     e.preventDefault()
     const formData = new FormData();
-    formData.append("file", imageFile);
+    formData.append("file", file);
     axios({
       method: "post",
       url: "http://localhost:5000/upload",
       data: formData,
     })
-     .then((response) => {
+      .then((response) => {
       const { data } = response;
-      setImage(data.url);
+      updateImageDB(data)
     })
-     .catch((err) => {
+      .catch((err) => {
       console.log(err);
     });
   }
@@ -35,10 +52,6 @@ function Upload() {
 
 return (
     <div className="App">
-      <h4>Image from server</h4>
-      <div className="imageBox">
-        <img src={image} width="100%"></img>
-      </div>
       <hr></hr>
       <h4>Image Preview</h4>
       <form onSubmit={uploadImage}>

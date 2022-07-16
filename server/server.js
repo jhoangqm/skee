@@ -21,14 +21,15 @@ app.use('/image', express.static('image'));
 // Router usage not working at the moment
 // app.use('/upload', uploadRouter());
 
-// Socket IO setup
+// http server created
 const httpServer = require('http').createServer(app);
 
-// route to test upload
+// Upload middleware that is used to store multer's logic to make the upload easier
 const uploadMiddleware = require('./src/helpers/uploadMiddleware');
 
+// route used to upload the image
 app.post('/upload', uploadMiddleware, (req, res, next) => {
-  console.log(req.body);
+  console.log('req body says hi: ', req.body);
   // res.send({ Success: 'Uploaded' });
 });
 
