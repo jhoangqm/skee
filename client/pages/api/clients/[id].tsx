@@ -6,7 +6,9 @@ export default async function handler({ query: { id } }: any, res: any) {
     where: {
       id: Number(id)
     },
-   
+
+    include: { bookings: {include : { timeSlot: true, resorts: true, Pros : true} } }
+
   });
   res.json(client);
 }
