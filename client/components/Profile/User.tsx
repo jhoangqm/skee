@@ -17,7 +17,8 @@ const User = ({ user }) => {
 
         </div>
       </div><div className="flex justify-around">
-          <div className="flex justify-start h-80 w-80 bg-blue-200">Picture
+          <div className="flex justify-start h-80 w-80 bg-blue-200">
+            <img src={user[0].avatar} alt="" />
             {/* <div className="justify-self-center self-center">Picture
 <Upload/>
 </div> */}
