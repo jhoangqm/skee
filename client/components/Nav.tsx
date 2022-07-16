@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 
 // * * * * * * * * * * * * * * * * * * * *
@@ -290,13 +289,13 @@ const Nav = (props: any) => {
                   ) : null}
                   <button
                     type="submit"
-                    className="btn bg-transparent hover:bg-success text-xl w-full"
+                    className="btn bg-secondary hover:bg-success text-xl border-transparent w-full"
                   >
                     Sign in
                   </button>
                 </form>
                 <Link href="/signup">
-                  <a className="btn bg-transparent hover:bg-success text-xl">
+                  <a className="btn bg-secondary hover:bg-success text-xl border-transparent">
                     Sign up
                   </a>
                 </Link>

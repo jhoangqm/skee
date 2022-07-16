@@ -9,14 +9,18 @@ const ProSignup = () => {
   const [signupError, setSignupError] = useState(false);
   const router = useRouter();
   const clearForm = useRef(null);
+
+  // pro sign up function
   const proSignup = async (e: any) => {
     e.preventDefault();
     const data: any = {};
     for (const v of e.target.elements) {
       data[v.name] = v.value;
     }
+    //encrypt password
     data.password = bcrypt.hashSync(data.password, process.env.SALT);
 
+    // make request to api to create pro
     const response = await fetch('/api/pros', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -38,7 +42,7 @@ const ProSignup = () => {
   if (!data) return <div>loading...</div>;
   return (
     <form method="post" onSubmit={proSignup} ref={clearForm}>
-      <div className="flex items-center flex-row">
+      <div className="flex justify-center flex-row">
         <label htmlFor="firstName"></label>
         <input
           type="text"
