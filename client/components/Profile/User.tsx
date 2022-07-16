@@ -131,7 +131,7 @@ const User = ({ user }) => {
   //   .replace(/GMT/, ' ')}{' '}
 
   const History = ({ user }) => {
-    console.log(user[0].bookings[0].accepted)
+    console.log(user[0].bookings[0])
     return (
       <div key={user[0].id} className="flex justify-center">
         <>
@@ -140,7 +140,9 @@ const User = ({ user }) => {
               <ul>
                 <li><p>{booking.accepted === true && !booking.pending ? `${booking.Pros.firstName} ${booking.Pros.lastName} is looking forward to seeing you on  ${'  '}${new Date(booking.timeSlot.startTime)
                     .toUTCString()
-                    .replace(/GMT/, ' ')}${' '} ` : `Your booking has not been accepted yet`} </p></li>
+                    .replace(/GMT/, ' ')}${' '} ` : `Your booking has not been accepted yet for ${'  '}${new Date(booking.dateFrom)
+                      .toDateString()
+                      .replace(/GMT/, ' ')}${' '} with ${booking.Pros.firstName} ${booking.Pros.lastName}`} </p></li>
                 <li><p>
                     </p></li>
               </ul>
