@@ -66,7 +66,7 @@ function BookingRequests(props: { proId }) {
                 </p>
                 <p>
                   For{' '}
-                  {new Date(booking.timeSlot.startTime)
+                  {new Date(booking.timeSlot?.startTime)
                     .toUTCString()
                     .replace(/GMT/, ' ')}
                 </p>
@@ -103,9 +103,9 @@ function BookingRequests(props: { proId }) {
                 </h2>
                 <div>
                   For:{'  '}
-                  {new Date(booking.timeSlot.startTime)
+                  {new Date(booking.timeSlot?.startTime)
                     .toUTCString()
-                    .replace(/GMT/, ' ')}{' '}
+                    .replace(/GMT/, '')}{' '}
                 </div>
               </div>
             </div>
