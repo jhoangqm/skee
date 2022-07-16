@@ -10,3 +10,4 @@ export default async function handler({ query: { id } }: any, res: any) {
   res.json(certification);
   console.log('Hello from certification: ', certification)
 }
+
