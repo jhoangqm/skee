@@ -54,7 +54,7 @@ const User = ({ user }) => {
                   type="text"
                   name="firstName"
                   id="firstName"
-                  
+
                   placeholder={user[0].firstName}
                   className="input input-bordered" />
               </label>
@@ -64,12 +64,12 @@ const User = ({ user }) => {
                   type="text"
                   name="firstName"
                   id="firstName"
-                  
+
                   placeholder={user[0].lastName}
                   className="input input-bordered">
 
                 </input>
-                
+
               </label>
             </div>
           </div>
@@ -97,7 +97,7 @@ const User = ({ user }) => {
                   type="text"
                   name="email"
                   id="email"
-                  
+
                   placeholder={user[0].email}
                   className="input input-bordered" />
               </label>
@@ -113,7 +113,7 @@ const User = ({ user }) => {
                   id="password"
                   minLength={5}
                   maxLength={20}
-                  
+
                   placeholder="Password"
                   className="input input-bordered" />
               </label>
@@ -125,23 +125,37 @@ const User = ({ user }) => {
       </div>
     )
   }
+  // For:{'  '}
+  // {new Date(booking.timeSlot.startTime)
+  //   .toUTCString()
+  //   .replace(/GMT/, ' ')}{' '}
 
-  const History = ({ user}) => {
-    console.log(user[0].bookings[0].resorts)
+  const History = ({ user }) => {
+    console.log(user[0].bookings[0].accepted)
     return (
-      <div className="flex justify-center">
+      <div key={user[0].id} className="flex justify-center">
         <>
-        {user[0].bookings.map((booking) => (
-          <>
-          <ul>
-        <li><p>Your with {booking.Pros.firstName} {booking.Pros.lastName} at {booking.resorts.name}</p></li>
-        <li><p>On </p></li>
-        <li><p>Booking has been {booking.accepted}</p></li> 
-        <li><p>Booking has is still {booking.pending}</p></li>
-        
-        </ul>
-        </>
-        ))}</>
+          {user[0].bookings.map((booking) => (
+            <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-primary flex justify-center flex-col">
+              <ul>
+                <li><p>{booking.accepted === true && !booking.pending ? `${booking.Pros.firstName} ${booking.Pros.lastName} is looking forward to seeing you on ` : `Your booking with ${booking.firstName} and ${booking.lastName} has not been accepted yet`} </p></li>
+                <li><p>{'  '}
+                  {new Date(booking.timeSlot.startTime)
+                    .toUTCString()
+                    .replace(/GMT/, ' ')}{' '}
+                    </p></li>
+              </ul>
+              <div className="flex justify-center">
+              <button className="btn btn-success ">
+                <ul>
+                  <li>Contact instructor</li>
+                  <li> to make changes</li>
+                </ul>
+                
+              </button>
+              </div>
+            </div>
+          ))}</>
       </div>
     )
   }
@@ -171,7 +185,7 @@ const User = ({ user }) => {
       </ul>
       {component === "Profile" ? <Profile /> : null}
       {component === "Edit" ? <Edit user={user} /> : null}
-      {component === "History" ? <History user={user}/> : null}
+      {component === "History" ? <History user={user} /> : null}
     </>
 
   )
