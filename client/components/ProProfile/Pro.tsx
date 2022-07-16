@@ -35,7 +35,7 @@ const Pro = ({ pro }) => {
   }
   const Edit = () => {
     return (
-      <div><Upload/></div>
+      <div><Upload proId={pro[0].id}/></div>
     )
   }
   const Requests = ({ pro }) => {
