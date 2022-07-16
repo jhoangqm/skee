@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Calendar from '../../components/Calendar';
 
 export const getStaticPaths = async () => {
-  const res = await fetch('/api/resorts');
+  const res = await fetch('http://localhost:3000/api/resorts/');
   const data = await res.json();
 
   const paths = data.map(resort => {
@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async context => {
   const resortId = context.params.id;
-  const res = await fetch(`/api/resorts/${resortId}`);
+  const res = await fetch(`http://localhost:3000/api/resorts/${resortId}`);
   const data = await res.json();
 
   return {
@@ -50,7 +50,7 @@ const Mountains = ({ resort }) => {
               <li>Blue Runs {resort[0].mediumRuns}</li>
               <li>Black/Double Black Runs {resort[0].hardRuns}</li>
             </div>
-            <Link href={`/instructors/${resort[0].id}`}>
+            <Link href={`/mountains/instructors/${resort[0].id}`}>
               <a className="btn btn-primary">
                 Book an instructor at {resort[0].name}
               </a>

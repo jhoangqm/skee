@@ -49,7 +49,7 @@ const Profile = ({ pro }) => {
 
   return (
     <Layout signup={true}>
-      {/* <User/> */}
+      <User/>
       <Pro pro={pro}/>
     </Layout>
   );
