@@ -3,6 +3,11 @@ import { withIronSessionApiRoute } from 'iron-session/next';
 
 export default withIronSessionApiRoute(
   async function handler(req: any, res: any) {
+    if (req.method === 'GET') {
+      const client = await prisma.clients.findMany();
+      res.json(client);
+    }
+    
     if ((req.method = 'POST')) {
       const parsed = JSON.parse(req.body);
       const { firstName, lastName, email, password, phoneNumber } = parsed;
@@ -26,6 +31,7 @@ export default withIronSessionApiRoute(
         res.json('signup Error', error);
       }
     }
+
   },
   {
     cookieName: 'user',
