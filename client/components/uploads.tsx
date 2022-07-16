@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 
 function Upload(props: {proId}) {
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
   const [file, setFile] = useState();
   const [imagePreview, setPreview] = useState();
   const inputEl = useRef(null); //ref hidden input
@@ -18,8 +18,19 @@ function Upload(props: {proId}) {
     setPreview(URL.createObjectURL(e.target.files[0]));//shows preview
   }
   
+  const updateImageDB = (data) =>{
+    // Creating obj because I can't pass two values in
+    // JSON.stringify's params
+    const certObj = {};
+    certObj.uniqueID = props.proId
+    certObj.certImg = data.url
+    fetch(`/api/uploads/certification`, {
+      method: 'PATCH',
+      body: JSON.stringify(certObj)
+    })
+    .then((res)=>res.json())
+  }
 
- 
   const uploadImage = (e) => {
     e.preventDefault()
     const formData = new FormData();
@@ -28,34 +39,16 @@ function Upload(props: {proId}) {
       method: "post",
       url: "http://localhost:5000/upload",
       data: formData,
-    })  //After axios's post method
+    })
       .then((response) => {
       const { data } = response;
-      // data.url stores the URL
-      setImage(data.url)
-      // Creating obj because I can't pass two values in
-      // JSON.stringify's params
-      const obj = {};
-      obj.uniqueID = props.proId
-      obj.certImg = data.url
-      fetch(`/api/uploads/certification`, {
-        method: 'PATCH',
-        body: JSON.stringify(obj)
-      })
-      .then((res)=>res.json())
+      updateImageDB(data)
     })
       .catch((err) => {
       console.log(err);
     });
   }
 
-  // const uploadImageToDB = () => {
-  //   fetch(`/api/uploads/certification`, {
-  //     method: 'POST',
-  //     body: JSON.stringify(props.proId)
-  //   })
-  //   .then(res => res.json())
-  // }
 
 return (
     <div className="App">
