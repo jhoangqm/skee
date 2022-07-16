@@ -62,7 +62,7 @@ export default function InstructorCalendar({ pro }) {
     setShowModal(true);
   };
 
-  useEffect(() => fetchData(), [date]);
+  useEffect(() => fetchData(), [showModal]);
 
   if (error) return <h1>Yo there was an Error {error}</h1>;
 
@@ -82,6 +82,11 @@ export default function InstructorCalendar({ pro }) {
         <p className="text-center">
           <span className="bold">date selected</span> {date.toDateString()}
         </p>
+        <div className="form-control">
+          <span className="text-m">
+            * AM lesson starts at 9, PM lesson starts at 1 both are 3hr lessons
+          </span>
+        </div>
         {showModal ? (
           <TimeSetter
             setShowModal={setShowModal}

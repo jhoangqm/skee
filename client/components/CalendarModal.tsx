@@ -119,7 +119,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
           ) : (
             <li className="w-80">
               <p className="flex justify-center " onClick={AMConfirmSwitcher}>
-                AM
+                9 AM
               </p>
             </li>
           )}
@@ -129,7 +129,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
           ) : (
             <li>
               <p className="flex justify-center" onClick={PMConfirmSwitcher}>
-                PM
+                1 PM
               </p>
             </li>
           )}
@@ -143,7 +143,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
           ) : (
             <li className="w-80">
               <p className="flex justify-center" onClick={AMConfirmSwitcher}>
-                AM
+                9 AM
               </p>
             </li>
           )}
@@ -157,7 +157,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
           ) : (
             <li className="w-80">
               <p className="flex justify-center" onClick={PMConfirmSwitcher}>
-                PM
+                1 PM
               </p>
             </li>
           )}

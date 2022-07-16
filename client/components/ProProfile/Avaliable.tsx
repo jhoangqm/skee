@@ -91,14 +91,6 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
             {timeSetter()}
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text">
-                  Select if you want full day option displayed
-                </span>
-                {/* <input type="checkbox" className="toggle" checked={false} /> */}
-              </label>
-            </div>
           </ul>
         </div>
       </div>
