@@ -8,7 +8,8 @@ export default async function handler({ query: { id } }: any, res: any) {
     },
     orderBy: {
       id: 'asc'
-    }
+    },
+    include: { clients: true }
   });
   res.json(booking);
   // console.log('Hello from booking: ', booking)

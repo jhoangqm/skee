@@ -1,7 +1,7 @@
 
 import Layout from '../../../components/Layout';
 import Instructor from '../../../components/Instructor';
-import styles from '../../styles/Home.module.css';
+import styles from '../../../styles/Home.module.css';
 import Filter from '../../../components/Filter';
 import useSWR from 'swr';
 import { Pros, Resorts } from '@prisma/client';

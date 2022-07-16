@@ -36,7 +36,7 @@ const Mountains = () => {
                   <li>Blue Runs {resort.mediumRuns}</li>
                   <li>Black/Double Black Runs {resort.hardRuns}</li>
                 </div>
-                <Link href={`/instructors/${resort.id}`}>
+                <Link href={`/mountains/instructors/${resort.id}`}>
                   <a className="btn btn-primary">
                     Book an instructor at {resort.name}
                   </a>
