@@ -73,7 +73,25 @@ export default async function handler(
   }
 
   if (req.method === 'GET') {
-    const bookings = await prisma.bookings.findMany();
+    const bookings = await prisma.bookings.findMany({
+      include: { timeSlot: true },
+    });
     res.json(bookings);
+  }
+
+  // Reject booking
+  if (req.method === 'DELETE') {
+    const uniqueID = JSON.parse(req.body);
+    console.log('UniqueID: ', uniqueID);
+    const rejectBooking = await prisma.bookings.update({
+      where: {
+        id: uniqueID,
+      },
+      data: {
+        pending: false,
+        accepted: false,
+      },
+    });
+    res.json(rejectBooking);
   }
 }

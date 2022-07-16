@@ -42,7 +42,68 @@ return(
   
   const Edit = () => {
   return(
-    <div className="flex justify-center"> sdfgsdfg</div>
+    <div className="flex justify-center"> 
+     <form method="post" >
+      <div className="flex items-center flex-row">
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          required
+          placeholder="First Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          required
+          placeholder="Last Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="Email"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          minLength={5}
+          maxLength={20}
+          required
+          placeholder="Password"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="phone">Phone:</label>
+        <input
+          type="text"
+          name="phoneNumber"
+          id="phone"
+          maxLength={14}
+          minLength={10}
+          pattern="^\d{3}\d{3}\d{4}"
+          placeholder="(000) 000-0000"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>      
+    </form>
+    
+    </div>
   )
   }
 
