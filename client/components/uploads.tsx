@@ -16,7 +16,6 @@ function Upload(props: {proId}) {
   const getImage = (e) => {
     setFile(e.target.files[0]);
     setPreview(URL.createObjectURL(e.target.files[0]));//shows preview
-    console.log('file: ', imagePreview)
   }
   
 
@@ -29,14 +28,19 @@ function Upload(props: {proId}) {
       method: "post",
       url: "http://localhost:5000/upload",
       data: formData,
-    })
+    })  //After axios's post method
       .then((response) => {
       const { data } = response;
-      // setImage(data.url)
-      console.log('data url = ', data.url)
+      // data.url stores the URL
+      setImage(data.url)
+      // Creating obj because I can't pass two values in
+      // JSON.stringify's params
+      const obj = {};
+      obj.uniqueID = props.proId
+      obj.certImg = data.url
       fetch(`/api/uploads/certification`, {
-        method: 'POST',
-        body: JSON.stringify(data.url, props.proId)
+        method: 'PATCH',
+        body: JSON.stringify(obj)
       })
       .then((res)=>res.json())
     })
@@ -55,12 +59,6 @@ function Upload(props: {proId}) {
 
 return (
     <div className="App">
-      {/* <h4>Image from server</h4>
-      <div className="imageBox">
-    </div> */}
-    {/* <img src={image} width="100%"></img>
-      {image} */}
-      {image}
       <hr></hr>
       <h4>Image Preview</h4>
       <form onSubmit={uploadImage}>
