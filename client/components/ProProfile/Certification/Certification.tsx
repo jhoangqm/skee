@@ -17,9 +17,6 @@ function Certification(props: {proId}) {
 
 useEffect(() => fetchCert() ,[])
 
-const certImage = () => {
-}
-
 // Loops through certs variable to find certImg in the DB
 const certImgOnly = certs.map(c=>c.certImg)
 
