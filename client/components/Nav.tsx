@@ -146,7 +146,7 @@ const Nav = (props: any) => {
                 </Link>
               </ul>
             </li>
-            <Link href="/instructors">
+            <Link href="/mountains/instructors/instructors">
               <li>
                 <a>Instructors</a>
               </li>
@@ -204,7 +204,7 @@ const Nav = (props: any) => {
               </Link>
             </ul>
           </li>
-          <Link href="/instructors/1">
+          <Link href="mountains/instructors/instructors/">
             <li className="hover:bg-info hover:rounded-lg">
               <a className="text-2xl">Instructors</a>
             </li>
