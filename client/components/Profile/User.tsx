@@ -138,11 +138,10 @@ const User = ({ user }) => {
           {user[0].bookings.map((booking) => (
             <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-primary flex justify-center flex-col">
               <ul>
-                <li><p>{booking.accepted === true && !booking.pending ? `${booking.Pros.firstName} ${booking.Pros.lastName} is looking forward to seeing you on ` : `Your booking with ${booking.firstName} and ${booking.lastName} has not been accepted yet`} </p></li>
-                <li><p>{'  '}
-                  {new Date(booking.timeSlot.startTime)
+                <li><p>{booking.accepted === true && !booking.pending ? `${booking.Pros.firstName} ${booking.Pros.lastName} is looking forward to seeing you on  ${'  '}${new Date(booking.timeSlot.startTime)
                     .toUTCString()
-                    .replace(/GMT/, ' ')}{' '}
+                    .replace(/GMT/, ' ')}${' '} ` : `Your booking has not been accepted yet`} </p></li>
+                <li><p>
                     </p></li>
               </ul>
               <div className="flex justify-center">
