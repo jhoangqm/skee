@@ -23,7 +23,7 @@ model Clients {
   bookings      Bookings[]
   reviews       Reviews[]
   ClientsSkills ClientsSkills[]
-
+  avatar        String?
 }
 
 model Resorts {
