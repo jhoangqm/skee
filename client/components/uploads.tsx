@@ -1,44 +1,66 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 
-function Upload() {
+
+function Upload(props: {proId}) {
   const [image, setImage] = useState("");
-  const [imageFile, setFile] = useState();
+  const [file, setFile] = useState();
   const [imagePreview, setPreview] = useState();
-  const inputEl = useRef(null); //variable to referring hidden input
+  const inputEl = useRef(null); //ref hidden input
+
+  const { query } = useRouter();
+  query.id = props.proId;
   
   const getImage = (e) => {
     setFile(e.target.files[0]);
-    setPreview(URL.createObjectURL(e.target.files[0]));//set preview
- }
+    setPreview(URL.createObjectURL(e.target.files[0]));//shows preview
+    console.log('file: ', imagePreview)
+  }
+  
 
-
+ 
   const uploadImage = (e) => {
     e.preventDefault()
     const formData = new FormData();
-    formData.append("file", imageFile);
+    formData.append("file", file);
     axios({
       method: "post",
       url: "http://localhost:5000/upload",
       data: formData,
     })
-     .then((response) => {
+      .then((response) => {
       const { data } = response;
-      setImage(data.url);
+      // setImage(data.url)
+      console.log('data url = ', data.url)
+      fetch(`/api/uploads/certification`, {
+        method: 'POST',
+        body: JSON.stringify(data.url, props.proId)
+      })
+      .then((res)=>res.json())
     })
-     .catch((err) => {
+      .catch((err) => {
       console.log(err);
     });
   }
 
+  // const uploadImageToDB = () => {
+  //   fetch(`/api/uploads/certification`, {
+  //     method: 'POST',
+  //     body: JSON.stringify(props.proId)
+  //   })
+  //   .then(res => res.json())
+  // }
 
 return (
     <div className="App">
-      <h4>Image from server</h4>
+      {/* <h4>Image from server</h4>
       <div className="imageBox">
-        <img src={image} width="100%"></img>
-      </div>
+    </div> */}
+    {/* <img src={image} width="100%"></img>
+      {image} */}
+      {image}
       <hr></hr>
       <h4>Image Preview</h4>
       <form onSubmit={uploadImage}>
