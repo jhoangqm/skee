@@ -32,7 +32,7 @@ console.log('Hello from addQuoteCertImg ', addQuoteCertImg);
 
   return (
     <div>
-      <h4>Image from server</h4>
+      <h4>Certificate</h4>
       <img src={certImgOnly} width='100%'>
         </img>
     </div>
