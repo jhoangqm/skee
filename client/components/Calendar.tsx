@@ -15,7 +15,7 @@ function isWithinRanges(date: Date, ranges: Date[]) {
 }
 // * * * * * * * * * * * * * * * *
 
-export default function BookingCalendar(props: { proId }) {
+export default function BookingCalendar(props: { proId; isDisabled }) {
   const [showModal, setShowModal] = useState(false);
   const [date, setDate] = useState(new Date());
   const [appData, setAppData] = useState([]);
@@ -54,6 +54,9 @@ export default function BookingCalendar(props: { proId }) {
     setShowModal(prev => !prev);
   };
 
+  const disableTiles = () => {
+    return props.isDisabled;
+  };
   useEffect(() => fetchData(), [date]);
 
   if (error) return <h1>Yo there was an Error {error}</h1>;
@@ -67,8 +70,9 @@ export default function BookingCalendar(props: { proId }) {
             onChange={setDate}
             value={date}
             onClickDay={openModal}
-            minDetail="year"
+            minDetail="month"
             tileClassName={tileEnabled}
+            tileDisabled={disableTiles}
           />
         </div>
       </div>
