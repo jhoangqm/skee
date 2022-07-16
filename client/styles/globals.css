@@ -26,9 +26,11 @@ a {
 .modal-box {
 }
 
+.react-calendar__tile__disable__clicks {
+  pointer-events: none;
+}
 .react-calendar__tile__enabled {
   background-color: green !important;
-  pointer-events: all !important;
 }
 
 .react-calendar__tile {
@@ -53,7 +55,7 @@ a {
 }
 
 .react-calendar__tile:disabled {
-  background-color: crimson;
+  background-color: rgb(214, 214, 214);
 }
 /* .dropdown .dropdown-content {
   @apply opacity-100 visible 

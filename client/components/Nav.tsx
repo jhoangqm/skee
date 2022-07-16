@@ -197,7 +197,7 @@ const Nav = (props: any) => {
                   <a className="text-2xl">Pro Profile</a>
                 </li>
               </Link>
-              <Link href="/booking">
+              <Link href="/booking/2">
                 <li className="bg-info">
                   <a>Booking</a>
                 </li>
@@ -211,7 +211,7 @@ const Nav = (props: any) => {
           </Link>
         </ul>
       </div>
-      {/* //* signed in propery used here */}
+      {/* //* signed in property used here */}
       {!user ? (
         <div className="navbar-end text-xl">
           <div className="dropdown dropdown-end">
