@@ -1,18 +1,20 @@
 import Modal from '../components/Modal';
 import { useState, useEffect } from 'react';
-import { pro } from '../prisma/data/users';
+
 import Filter from './Filter';
 import { fil } from 'date-fns/locale';
 
 
 const Instructor = ({ pros }) => {
 
+const [showModal, setShowModal] = useState(false);
   const [filter, setFilter] = useState([]);
-  // const insList = [...new Set(pros.map((list) => list.level))]
+ const insList = pros.map((list) => list) 
+console.log("INLIST",insList)
 
   useEffect(() => {
     console.log("filter",filter)
-  },[filter])
+  },[filter]) 
 
   const filterItem = (item) => {
     if(filter.includes(item)){
@@ -22,11 +24,11 @@ const Instructor = ({ pros }) => {
     setFilter([...filter, item]);
   };
 
-  const [showModal, setShowModal] = useState(false);
+  
 
   let onclickhandler = (e, id) => {
     const instructor = id
-    // console.log("instructor", instructor)
+    console.log("instructor", instructor)
     fetch(`/api/pros/${instructor}`)
       .then(res => res.json())
       .then(data => setShowModal(data))
