@@ -35,6 +35,8 @@ export const getStaticProps = async context => {
   };
 };
 
+const contactSubmitHandler = async (e, setError) => {};
+
 const Booking = ({ pro }) => {
   return (
     <Layout signup={false}>
@@ -59,6 +61,56 @@ const Booking = ({ pro }) => {
           <p className="justify-self-center self-center">
             Booking instructions
           </p>
+        </div>
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="flex  card-body items-center flex-col">
+            <p className="text-xl">Contact:</p>
+            <form
+              action={`mailto:${pro[0].email}`}
+              method="post"
+              name="EmailForm"
+              encType="text/plain"
+            >
+              <div className="form-control">
+                <label className="input-group">
+                  <span>Name</span>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="input input-bordered"
+                  />
+                </label>
+              </div>
+              <div className="form-control mt-1">
+                <label className="input-group">
+                  <span className="w-full">Email</span>
+                  <input
+                    type="email"
+                    placeholder="info@site.com"
+                    className="input input-bordered"
+                  />
+                </label>
+              </div>
+              <div className="flex flex-col items-center">
+                <label htmlFor="yourQuery" className="label">
+                  <span className="label-text text-xl">Your Query: </span>
+                </label>
+                <textarea
+                  className="textarea textarea-bordered w-full"
+                  id="yourQuery"
+                  name="Your message content"
+                  placeholder="Your Query"
+                ></textarea>
+              </div>
+              <div className="flex justify-center mt-2">
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-primary"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </Layout>
