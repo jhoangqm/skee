@@ -20,13 +20,15 @@ useEffect(() => fetchCert() ,[])
 const certImage = () => {
 }
 
+// Loops through certs variable to find certImg in the DB
 const certImgOnly = certs.map(c=>c.certImg)
+
+// This variable will add quotes to the certImgOnly variable
 const addQuoteCertImg = "'" + certImgOnly.join("','") + "'";
-console.log('Hello from certImageOnly: ', certImgOnly[0])
+
+// console.log('Hello from certImageOnly: ', certImgOnly[0])
 console.log('Hello from addQuoteCertImg ', addQuoteCertImg);
-
-
-console.log('certs data: ', certs)
+// console.log('certs data: ', certs)
 
   return (
     <div>
