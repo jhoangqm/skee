@@ -7,6 +7,7 @@ const ClientSignup = () => {
   const clearForm = useRef(null);
   const router = useRouter();
 
+  // TODO: Add validation/error handling
   const clientSignup = async (e: any) => {
     e.preventDefault();
     const data: any = {};
@@ -15,6 +16,7 @@ const ClientSignup = () => {
     }
     data.password = bcrypt.hashSync(data.password, process.env.SALT);
 
+    // fetch clients
     const response = await fetch('/api/clients', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -32,7 +34,7 @@ const ClientSignup = () => {
 
   return (
     <form method="post" onSubmit={clientSignup} ref={clearForm}>
-      <div className="flex items-center flex-row">
+      <div className="flex justify-center flex-row">
         <label htmlFor="firstName"></label>
         <input
           type="text"

@@ -1,7 +1,5 @@
 import Layout from '../components/Layout';
-import { useEffect, useState, useRef } from 'react';
-import useSWR from 'swr';
-import { Resorts } from '@prisma/client';
+import { useState } from 'react';
 import ProSignup from '../components/Signup/ProSignup';
 import ClientSignup from '../components/Signup/ClientSignup';
 
@@ -17,26 +15,40 @@ const Signup = () => {
         <div className="flex justify-center">
           <h1 className="text-4xl">Signup!</h1>
         </div>
-        <div className="flex justify-center">
-          <label htmlFor="client">Client Signup</label>
-          <input
-            value="client"
-            type="radio"
-            name="signupType"
-            id="client"
-            onChange={onChangeHandler}
-          />
-          <label htmlFor="pro">Pro Signup</label>
-          <input
-            value="pro"
-            type="radio"
-            name="signupType"
-            id="pro"
-            onChange={onChangeHandler}
-          />
+        <div className="flex items-center flex-col ">
+          <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box">
+            <li>
+              <label htmlFor="client" className="w-40">
+                I am looking for an Instructor
+              </label>
+              <input
+                value="client"
+                type="radio"
+                name="signupType"
+                id="client"
+                className="opacity-0 cursor-pointer w-0"
+                onClick={onChangeHandler}
+              />
+            </li>
+            <li className="pointer-events-none opacity-100">
+              <a className="opacity-100">OR</a>
+            </li>
+            <li>
+              <label htmlFor="pro">I am an Instructor</label>
+              <input
+                value="pro"
+                type="radio"
+                name="signupType"
+                className="opacity-0 cursor-pointer w-0"
+                id="pro"
+                onClick={onChangeHandler}
+              />
+            </li>
+          </ul>
         </div>
-        <div className="2xl:container flex justify-center">
-          <div className="card bg-base-100 shadow-xl w-2/4">
+
+        <div className="flex justify-center">
+          <div className="card bg-base-100 shadow-xl w-1/2">
             <div className="card-body">
               {type === '' ? (
                 <div className="flex justify-center">
