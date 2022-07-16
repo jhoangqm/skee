@@ -126,9 +126,23 @@ const User = ({ user }) => {
     )
   }
 
-  const History = () => {
+  const History = ({ user}) => {
+    console.log(user[0].bookings[0].resorts)
     return (
-      <div className="flex justify-center">gdsfgsdfgsdfgsfgsfdsdfsdfgsdfgsdfgsdfgsfdgsdfg</div>
+      <div className="flex justify-center">
+        <>
+        {user[0].bookings.map((booking) => (
+          <>
+          <ul>
+        <li><p>Your with {booking.Pros.firstName} {booking.Pros.lastName} at {booking.resorts.name}</p></li>
+        <li><p>On </p></li>
+        <li><p>Booking has been {booking.accepted}</p></li> 
+        <li><p>Booking has is still {booking.pending}</p></li>
+        
+        </ul>
+        </>
+        ))}</>
+      </div>
     )
   }
 
@@ -157,7 +171,7 @@ const User = ({ user }) => {
       </ul>
       {component === "Profile" ? <Profile /> : null}
       {component === "Edit" ? <Edit user={user} /> : null}
-      {component === "History" ? <History /> : null}
+      {component === "History" ? <History user={user}/> : null}
     </>
 
   )
