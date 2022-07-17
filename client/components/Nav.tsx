@@ -235,7 +235,7 @@ const Nav = (props: any) => {
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content card card-compact w-auto p-2 shadow bg-primary bg-opacity-90 text-primary-content h-96"
+              className="dropdown-content card card-compact w-auto p-2 shadow bg-primary bg-opacity-90 text-primary-content "
             >
               <div className="card-body pr-10">
                 <form onSubmit={loginHandler} method="post" ref={clearForm}>
