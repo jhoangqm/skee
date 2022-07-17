@@ -9,7 +9,7 @@ const User = ({ user }) => {
   // const [History, setHistory] = useState(false);
 
   const [component, setComponent] = useState("Profile");
-  const [skills, setSkills] = useState()
+  const [skills, setSkills] = useState([])
 
   const displaySkills = () => {
     const skillsMapped = user[0].ClientsSkills.map(s => s.skills)
@@ -33,7 +33,7 @@ console.log('skills: ', skills)
           </div>
           <div className="flex h-80 w-80 bg-blue-200"> Skills: 
             <div className="justify-self-center self-center grid-rows-none"> 
-              {skills}
+              {skills[0]}
             </div>
           </div>
         </div><div className="flex justify-around m-10">
