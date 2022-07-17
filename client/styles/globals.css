@@ -79,3 +79,10 @@ a {
   display: flex;
   justify-content: center;
 }
+
+.modal-mountains{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center
+}
+
