@@ -68,7 +68,7 @@ export default function InstructorCalendar({ pro }) {
 
   return (
     <div className="app">
-      <div className="flex items-center flex-col">
+      <div className="flex items-center flex-col mb-32 mt-10">
         <div className="flex justify-center">
           <h1 className="underline mb-5 text-2xl">Select your availability</h1>
         </div>
@@ -84,7 +84,8 @@ export default function InstructorCalendar({ pro }) {
         <p className="text-center">
           <span className="bold">date selected</span> {date.toDateString()}
         </p>
-        <div className="form-control mb-20">
+
+        <div className="form-control">
           <span className="text-sm">
             * Morning lesson starts at 9AM. Afternoon lesson starts at 1PM. Both
             are 3hr lessons
