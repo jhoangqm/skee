@@ -79,7 +79,7 @@ const Nav = (props: any) => {
 
   // console.log(query.id);
   return (
-    <div className="navbar bg-base-100 h-24">
+    <div className="navbar bg-secondary hover:bg-secondary rounded-b-lg h-22 sticky top-0 z-50 bg-opacity-75">
       <div className="navbar-start">
         <div className="dropdown">
           {/* // * this is the responsive Nav */}
@@ -152,7 +152,9 @@ const Nav = (props: any) => {
             </Link>
           </ul>
         </div>
+
         {/* //* this is the normal Nav */}
+
         <Link href="/">
           <a className="btn btn-ghost normal-case text-2xl hover:bg-info hover:rounded-lg">
             Skee 🎿
@@ -214,12 +216,12 @@ const Nav = (props: any) => {
       {!user ? (
         <div className="navbar-end text-xl">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn m-1">
+            <label tabIndex={0} className="btn btn-primary hover:bg-info m-1">
               Login/signup
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content card card-compact w-auto p-2 shadow bg-primary text-primary-content "
+              className="dropdown-content card card-compact w-auto p-2 shadow bg-primary bg-opacity-90 text-primary-content h-96"
             >
               <div className="card-body pr-10">
                 <form onSubmit={loginHandler} method="post" ref={clearForm}>
@@ -254,7 +256,7 @@ const Nav = (props: any) => {
                       </div>
                     </div>
                   ) : null}
-                  <div className="form-control mb-2">
+                  <div className="form-control my-4">
                     <label className="input-group">
                       <span className="w-full">Email</span>
                       <input
@@ -267,7 +269,7 @@ const Nav = (props: any) => {
                       />
                     </label>
                   </div>
-                  <div className="form-control mb-2">
+                  <div className="form-control my-4">
                     <label className="input-group">
                       <span>Password</span>
                       <input
@@ -289,7 +291,7 @@ const Nav = (props: any) => {
                   ) : null}
                   <button
                     type="submit"
-                    className="btn bg-secondary hover:bg-success text-xl border-transparent w-full"
+                    className="btn bg-secondary hover:bg-success text-xl border-transparent w-full my-2"
                   >
                     Sign in
                   </button>

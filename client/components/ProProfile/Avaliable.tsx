@@ -41,7 +41,10 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
       body: JSON.stringify(bookingRequest),
     })
       .then(res => res.json())
-      .then(setShowModal(false));
+      .then(() => {
+        setShowModal(false);
+        fetchData();
+      });
   };
 
   const timeSetter = () => {

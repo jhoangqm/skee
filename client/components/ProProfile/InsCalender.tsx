@@ -68,9 +68,11 @@ export default function InstructorCalendar({ pro }) {
 
   return (
     <div className="app">
-      <h1 className="text-center">React Calendar</h1>
-      <div className="flex items-center flex-col">
-        <div htmlFor="my-modal-4" className="calendar-container">
+      <div className="flex items-center flex-col mb-32 mt-10">
+        <div className="flex justify-center">
+          <h1 className="underline mb-5 text-2xl">Select your availability</h1>
+        </div>
+        <div htmlFor="my-modal-4" className="calendar-container w-auto">
           <Calendar
             onChange={setDate}
             value={date}
@@ -82,13 +84,16 @@ export default function InstructorCalendar({ pro }) {
         <p className="text-center">
           <span className="bold">date selected</span> {date.toDateString()}
         </p>
+
         <div className="form-control">
-          <span className="text-m">
-            * AM lesson starts at 9, PM lesson starts at 1 both are 3hr lessons
+          <span className="text-sm">
+            * Morning lesson starts at 9AM. Afternoon lesson starts at 1PM. Both
+            are 3hr lessons
           </span>
         </div>
         {showModal ? (
           <TimeSetter
+            showModal={showModal}
             setShowModal={setShowModal}
             date={date}
             fetchData={fetchData}

@@ -1,4 +1,4 @@
-import BookingCalendar from '../Calendar';
+import BookingCalendar from '../BookingCalendar';
 import BookingRequests from '../BookingRequests';
 
 import { useState } from 'react';

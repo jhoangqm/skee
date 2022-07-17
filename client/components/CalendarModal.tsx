@@ -6,7 +6,13 @@ interface ProProps {
   resorts: Pros[];
 }
 
-const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
+const CalMod = ({
+  showModal,
+  setShowModal,
+  date,
+  fetchAvailabilityData,
+  proId,
+}: any) => {
   const [timeData, setTimeData] = useState([{}]);
   const [user, setUser] = useState({});
   const [AMConfirm, setAMConfirm] = useState(false);
@@ -28,7 +34,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
 
   useEffect(() => {
     fetchUser('client');
-  }, []);
+  }, [date]);
 
   useEffect(() => {
     timeFetcher();
@@ -65,7 +71,8 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
         setShowModal(false);
         setAMConfirm(false);
         setPMConfirm(false);
-        fetchData();
+        timeFetcher();
+        fetchAvailabilityData();
       });
   };
 
@@ -73,21 +80,26 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
   const confirmBooking = (date: any, time: string, proId: string, num) => {
     return (
       <div className="flex justify-center flex-col">
-        <button
-          className="btn"
-          onClick={() => {
-            setAMConfirm(false), setPMConfirm(false);
-          }}
-        >
-          Back
-        </button>
         <p>
           Are you sure you want to book this date for {num}
           {time}?
         </p>
-        <button className="btn" onClick={e => booking(e, date, time, proId)}>
-          Confirm Booking
-        </button>
+        <div className="flex justify-center w-full">
+          <button
+            className="btn mr-5 bg-error hover:bg-orange-600"
+            onClick={() => {
+              setAMConfirm(false), setPMConfirm(false);
+            }}
+          >
+            Back
+          </button>
+          <button
+            className="btn w-1/2 bg-primary"
+            onClick={e => booking(e, date, time, proId)}
+          >
+            Confirm Booking
+          </button>
+        </div>
       </div>
     );
   };
