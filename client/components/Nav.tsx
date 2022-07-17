@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
 // * * * * * * * * * * * * * * * * * * * *
-// TODO: Refactor
+// TODO: Refactor, cleanup, move to components, user cookies in separate function
 // * * * * * * * * * * * * * * * * * * * *
 
 const Nav = (props: any) => {
