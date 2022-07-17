@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
@@ -9,7 +9,18 @@ const User = ({ user }) => {
   // const [History, setHistory] = useState(false);
 
   const [component, setComponent] = useState("Profile");
+  const [skills, setSkills] = useState()
 
+  const displaySkills = () => {
+    const skillsMapped = user[0].ClientsSkills.map(s => s.skills)
+    const skillsArray = skillsMapped.map(s => s.skill)
+      setSkills(skillsArray)
+  }
+
+  useEffect(()=> displaySkills(),[])
+
+console.log('skills: ', skills)
+  
   const Profile = () => {
     return (
       <><div className="flex justify-center">
@@ -19,13 +30,11 @@ const User = ({ user }) => {
       </div><div className="flex justify-around">
           <div className="flex justify-start h-80 w-80 bg-blue-200">
             <img src={user[0].avatar} alt="" />
-            {/* <div className="justify-self-center self-center">Picture
-<Upload/>
-</div> */}
-
           </div>
-          <div className="flex h-80 w-80 bg-blue-200">
-            <div className="justify-self-center self-center"></div>
+          <div className="flex h-80 w-80 bg-blue-200"> Skills: 
+            <div className="justify-self-center self-center grid-rows-none"> 
+              {skills}
+            </div>
           </div>
         </div><div className="flex justify-around m-10">
           <div className="flex justify-start">
