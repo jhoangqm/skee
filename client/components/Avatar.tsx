@@ -12,7 +12,6 @@ function Avatar(props: { proId }) {
 
   const prosAvatar = avatars.map(img => img.image);
 
-  console.log('prosAvatars: ', prosAvatar);
   /* 
   Will need to fetch the avatar of each user given the id
   Upload avatar to DB via Express and sends data to nextjs api
@@ -21,6 +20,7 @@ function Avatar(props: { proId }) {
 
   return (
     <div>
+
       <h1>Hello from Avatar</h1>
       <img
         src={prosAvatar}
@@ -28,6 +28,7 @@ function Avatar(props: { proId }) {
         className="flex justify-start bg-blue-200 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
       ></img>
       <UploadAvatar proId={props.proId} />
+
     </div>
   );
 }
