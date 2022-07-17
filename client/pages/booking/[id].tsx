@@ -48,7 +48,9 @@ const Booking = ({ pro }) => {
           </p>
         </div>
         <div className="flex justify-around">
-          <div className="flex justify-start h-80 w-80 bg-blue-200"></div>
+          <div className="flex justify-start h-80 w-auto">
+            <img src={pro[0].image} alt="profileImage" />
+          </div>
           <div className="flex justify-start m-2">
             <BookingCalendar proId={pro[0].id} />
           </div>
