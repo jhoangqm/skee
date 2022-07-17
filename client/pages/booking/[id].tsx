@@ -64,7 +64,7 @@ const Booking = ({ pro }) => {
         <p className="text-2xl  my-10 flex justify-center">Booking Steps</p>
         <div className="flex justify-center">
           <div className="flex  mb-20 rounded-md justify-center w-max">
-            <ul className="steps">
+            <ul className="steps -z-10">
               <li className="step step-primary">
                 Select a lesson date and time
               </li>
@@ -78,8 +78,8 @@ const Booking = ({ pro }) => {
             </ul>
           </div>
         </div>
-        <div className="flex justify-around m-10">
-          <div className="card w-1/2 bg-base-100 shadow-xl -z-10">
+        <div className="flex justify-around m-10 ">
+          <div className=" w-1/2 bg-base-100 shadow-custom rounded-lg p-10 ">
             <ContactForm pro={pro[0]} />
           </div>
         </div>

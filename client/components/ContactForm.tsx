@@ -1,13 +1,13 @@
 const ContactForm = (props: { pro }) => {
   return (
-    <div className="flex card-body items-center min-w-full flex-col">
+    <div className="flex items-center min-w-full flex-col">
       <p className="text-xl">Contact:</p>
       <form
         action={`mailto:${props.pro.email}`}
         method="post"
         name="EmailForm"
         encType="text/plain"
-        className="w-full flex flex-col items-center"
+        className="w-full flex flex-col items-center p-5"
       >
         <div className="form-control">
           <label className="input-group">
