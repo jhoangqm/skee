@@ -30,24 +30,34 @@ a {
   pointer-events: none;
 }
 .react-calendar__tile__enabled {
-  background-color: green !important;
+  background-color: rgb(159, 208, 159) !important;
+}
+.react-calendar__tile__enabled:hover {
+  pointer-events: all !important;
+  background-color: rgb(65, 203, 65) !important;
 }
 
 .react-calendar__tile {
-  background-color: rgb(214, 214, 214);
-  margin: 5px 0px 5px 0px;
+  background-color: rgb(236, 236, 236);
+  margin: 5px 1px 5px 0px;
+  width: 30px;
+  padding: 15px;
   border-radius: 50px;
+}
+.react-calendar__tile:hover {
+  background-color: rgb(213, 213, 213);
 }
 .react-calendar__month-view__weekdays__weekday {
   display: flex;
   justify-content: center;
 }
 .react-calendar {
-  width: 400px;
+  width: 450px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid;
+  box-shadow: 1px 1px 6px 2px #d5d5d5;
   border-radius: 10px;
 }
 .react-calendar__month-view__days {
@@ -55,17 +65,17 @@ a {
 }
 
 .react-calendar__tile:disabled {
-  background-color: rgb(214, 214, 214);
+  background-color: rgb(233, 233, 233);
 }
 /* .dropdown .dropdown-content {
   @apply opacity-100 visible 
 } */
-.modal-instructor{
+.modal-instructor {
   display: flex;
   flex-wrap: wrap;
-  justify-content:center
+  justify-content: center;
 }
-.request-box{
+.request-box {
   display: flex;
   justify-content: center;
 }

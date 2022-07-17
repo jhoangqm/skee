@@ -63,7 +63,6 @@ export default function BookingCalendar(props: { proId; isDisabled }) {
 
   return (
     <div className="app">
-      <h1 className="text-center">React Calendar</h1>
       <div className="flex justify-center">
         <div htmlFor="my-modal-4" className="calendar-container">
           <Calendar
@@ -76,7 +75,7 @@ export default function BookingCalendar(props: { proId; isDisabled }) {
           />
         </div>
       </div>
-      <p className="text-center">
+      <p className="text-center pt-5">
         <span className="bold">date selected</span> {date.toDateString()}
       </p>
       <div className="flex justify-center">

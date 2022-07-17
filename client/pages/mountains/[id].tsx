@@ -1,6 +1,6 @@
 import Layout from '../../components/Layout';
 import Link from 'next/link';
-import Calendar from '../../components/Calendar';
+import Calendar from '../../components/BookingCalendar';
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/resorts/');

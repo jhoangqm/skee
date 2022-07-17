@@ -22,7 +22,11 @@ module.exports = {
 
     '3xl': '1536px',
     // => @media (min-width: 1536px) { ... }
-    extend: {},
+    extend: {
+      boxShadow: {
+        custom: '1px 1px 6px 2px #D5D5D5',
+      },
+    },
   },
   daisyui: {
     themes: [
