@@ -1,4 +1,3 @@
-import BookingCalendar from '../BookingCalendar';
 import BookingRequests from '../BookingRequests';
 
 import { useState } from 'react';
@@ -22,11 +21,8 @@ const Pro = ({ pro }) => {
           </div>
         </div>
         <div className="flex justify-around">
-          <div className="flex justify-start bg-blue-200 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <div>
             <Avatar proId={pro[0].id} />
-            {/* <div className="justify-self-center self-center">Picture
-    <Upload/>
-    </div> */}
           </div>
           <div className="flex h-80 w-80 bg-blue-200">
             <div className="justify-self-center self-center">{pro[0].bio}</div>
@@ -147,9 +143,6 @@ const Pro = ({ pro }) => {
             </li>
             <div className="indicator">
               <li>
-                <span className="indicator-item indicator-bottom indicator-end badge badge-secondary">
-                  In Testing
-                </span>
                 <a
                   onClick={() => {
                     setComponent('Avalibility');
@@ -178,7 +171,7 @@ const Pro = ({ pro }) => {
                     <line x1="8" y1="2" x2="8" y2="6"></line>
                     <line x1="3" y1="10" x2="21" y2="10"></line>
                   </svg>
-                  Edit Avalibility
+                  Edit Availability
                 </a>
               </li>
             </div>

@@ -33,7 +33,7 @@ let onclickhandler = (e) => {
 	
 	return (
 		<div> 
-		<svg width="auto" height="942" viewBox="-24500 -17050 50700 37100">
+		<svg className="cursor-pointer" width="auto" height="942" viewBox="-24500 -17050 50700 37100">
 			<defs id="defs1">
 				<mask id="all">
 					<g>
@@ -568,7 +568,7 @@ let onclickhandler = (e) => {
 				{/* <use xlinkHref="#i-CA-BC" /> */}
 			</g>
 			
-			<g className="hover:scale-110 transition duration-500 hover:fill-secondary" id="AB" fill="#d3d3d3" onClick={(e) => {onclickhandler(e)}}>
+			<g className="hover:scale-110 transition duration-500 hover:fill-secondary " id="AB" fill="#d3d3d3" onClick={(e) => {onclickhandler(e)}}>
 				<path value="AB" mask="url(#all)" d="m-13214-2631A34499 34499 0 0 0-8064-955l-2814 11709a46543 46543 0 0 1-2867-786l-2-5 21-43-44-62 16-67-40-55-111-67-17-161-52-71 15-79 49-93-91-32-4-73 62 3 12-68 40-24-2-44 20-14 8-47-11-83 29-74 18 8 22-104-18-72 25-74-8-75 29-112-57-134-29-161-95-16-53 31 5-65-34-64 28-6-1-94-56 13-112-241 69-6-77-229-149-114 45-81-145-187 47-138-43-28-9-50 16-17-1-17-41-37 12-41-42-87-2-151-49-40-88 92-63-18-7-157-17-31 23-31-111-256 23-112-127-23-43 16-41-98-47-4-37-114 122-52-126-216-74 85-116-5-4-12 56-91-46-196 68-23-43-144 44-74-110-82-29-203 39-63-81-170-47-14-40 106-121-119-15-202-182-90-41-308h21l80 70 32-22-16-107-64-42 38-54-36-19-21-34z" />
 			</g>
 			<g className="hover:scale-110 transition duration-500 hover:fill-secondary" id="SK" fill="#d3d3d3" onClick={(e) => {onclickhandler(e)}}>

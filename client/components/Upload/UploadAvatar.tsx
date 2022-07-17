@@ -1,10 +1,8 @@
-import { useState, useRef, useEffect } from "react";
-import axios from "axios";
+import { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 
-
-
-function UploadAvatar(props: {proId}) {
+function UploadAvatar(props: { proId }) {
   // const [image, setImage] = useState("");
   const [file, setFile] = useState();
   const [imagePreview, setPreview] = useState();
@@ -12,61 +10,66 @@ function UploadAvatar(props: {proId}) {
 
   const { query } = useRouter();
   query.id = props.proId;
-  
-  const getImage = (e) => {
+
+  const getImage = e => {
     setFile(e.target.files[0]);
-    setPreview(URL.createObjectURL(e.target.files[0]));//shows preview
-  }
-  
-  const updateAvatarDB = (data) =>{
+    setPreview(URL.createObjectURL(e.target.files[0])); //shows preview
+  };
+
+  const updateAvatarDB = data => {
     // Creating obj because I can't pass two values in
     // JSON.stringify's params
     const avatarObj = {};
-    avatarObj.uniqueID = props.proId
-    avatarObj.avatar = data.url
+    avatarObj.uniqueID = props.proId;
+    avatarObj.avatar = data.url;
     fetch(`/api/uploads/avatar`, {
       method: 'PATCH',
-      body: JSON.stringify(avatarObj)
-    })
-    .then((res)=>res.json())
-  }
+      body: JSON.stringify(avatarObj),
+    }).then(res => res.json());
+  };
 
-  const uploadAvatar = (e) => {
-    e.preventDefault()
+  const uploadAvatar = e => {
+    e.preventDefault();
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
     axios({
-      method: "post",
-      url: "http://localhost:5000/upload",
+      method: 'post',
+      url: 'http://localhost:5000/upload',
       data: formData,
     })
-      .then((response) => {
-      const { data } = response;
-      updateAvatarDB(data)
-    })
-      .catch((err) => {
-      console.log(err);
-    });
-  }
+      .then(response => {
+        const { data } = response;
+        updateAvatarDB(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-
-return (
+  return (
     <div className="App">
       <hr></hr>
       <h4>Avatar Preview</h4>
       <form onSubmit={uploadAvatar}>
         <div className="imageBox">
-          <img src={imagePreview} width="100%"></img>
+          <div className="avatar">
+            <div className=" w-72 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+              <img src={imagePreview} width="100%" object-fit="contain"></img>
+            </div>
+          </div>
         </div>
-        <input type="file"
+        <input
+          type="file"
           onChange={getImage}
-          style={{display: "none"}} //hiding input
+          style={{ display: 'none' }} //hiding input
           ref={inputEl} //set inputEl to referring this element
         ></input>
-        <button className='btn'
-          onClick={() => inputEl.current.click()}
-        >select image</button>
-        <button className='btn' type="submit">upload</button>
+        <button className="btn" onClick={() => inputEl.current.click()}>
+          select image
+        </button>
+        <button className="btn" type="submit">
+          upload
+        </button>
       </form>
     </div>
   );
