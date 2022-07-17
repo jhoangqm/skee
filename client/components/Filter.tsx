@@ -5,7 +5,7 @@ import Checkbox from "./Checkbox"
 
 const Filter= ({ pros, insList, setFilter, filterItem } : any) => {
 // const [checkbox, setCheckbox] = useState()
-
+console.log()
   return (
   <> 
     <div className="dropdown">

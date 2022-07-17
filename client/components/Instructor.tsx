@@ -2,29 +2,28 @@ import Modal from '../components/Modal';
 import { useState, useEffect } from 'react';
 
 import Filter from './Filter';
-import { fil } from 'date-fns/locale';
+
 
 
 const Instructor = ({ pros }) => {
 
-const [showModal, setShowModal] = useState(false);
-  const [filter, setFilter] = useState([]);
- const insList = pros.map((list) => list) 
-console.log("INLIST",insList)
+  const [showModal, setShowModal] = useState(false);
+  const [filter, setFilter] = useState([pros]);
+  
 
   useEffect(() => {
-    console.log("filter",filter)
-  },[filter]) 
+    console.log("filter", filter)
+  }, [filter])
 
   const filterItem = (item) => {
-    if(filter.includes(item)){
+    if (filter.includes(item)) {
       setFilter(filter.filter(i => i !== item))
       return
     }
     setFilter([...filter, item]);
   };
 
-  
+
 
   let onclickhandler = (e, id) => {
     const instructor = id
@@ -34,13 +33,13 @@ console.log("INLIST",insList)
       .then(data => setShowModal(data))
 
   }
-  
+
   return (
 
     <>
-      <Filter pros={pros} setFilter={setFilter} filterItem={filterItem}/>
+      <Filter pros={pros} setFilter={setFilter} filterItem={filterItem} />
       <div className="modal-instructor">
-        {pros.map((p) => (
+        {filter.map((p) => (
           <div>
             <div key={p.id} className="flex flex-wrap justify-center  mt-5" onClick={e => onclickhandler(e, p.id)}>
               <div className="card w-96 bg-base-100 shadow-xl m-6" >
@@ -55,7 +54,7 @@ console.log("INLIST",insList)
                   <div className="card-actions justify-end">
                     <div className="badge badge-outline">{p.certBody} {p.level}</div>
                     {/* <div className="badge badge-outline"></div> */}
-                    <div className="badge badge-outline">{p.resorts.name}</div>
+                    {/* <div className="badge badge-outline">{p.resorts.name}</div> */}
                   </div>
                 </div>
 
