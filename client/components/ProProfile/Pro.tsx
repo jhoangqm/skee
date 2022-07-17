@@ -10,7 +10,7 @@ import Avatar from '../Avatar';
 
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
-  const [certUpload, setCertUpload] = useState(true)
+  const [certUpload, setCertUpload] = useState()
   // const [avatarUpload, setAvatarUpload] = useState(null)
   
   const Profile = ({ pro }) => {
@@ -45,12 +45,12 @@ const Pro = ({ pro }) => {
       <>
     { certUpload ? (
       <div>
-        <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
+        <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
         <UploadCert proId={pro[0].id} />
       </div>
     ) : (
       <div>
-        <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
+        <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
         <UploadAvatar proId={pro[0].id} />
       </div>
     )}
