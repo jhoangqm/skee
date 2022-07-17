@@ -6,23 +6,23 @@ export default withIronSessionApiRoute(
   async function handler(req: any, res: any) {
     if (req.session.user?.type === 'pro') {
       try {
-        const proSession = await prisma.pros.findMany({
+        const userSession = await prisma.pros.findMany({
           where: {
             id: req.session.user.id,
           },
         });
-        res.send(proSession);
+        res.send({ userSession, ...req.session.user });
       } catch (error) {
         res.json('No such session', error);
       }
     } else if (req.session.user?.type === 'client') {
       try {
-        const clientSession = await prisma.clients.findMany({
+        const userSession = await prisma.clients.findMany({
           where: {
             id: req.session.user.id,
           },
         });
-        res.send(clientSession);
+        res.send({ userSession, ...req.session.user });
       } catch (error) {
         res.json('No such session', error);
       }

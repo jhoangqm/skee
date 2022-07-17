@@ -27,7 +27,7 @@ const CalMod = ({
       .then(res => res.json())
       .then(data => {
         if (data === 'No such session') {
-        } else setUser(data[0]);
+        } else setUser(data.userSession[0]);
       });
   };
   let parsedDate = { date }.date.toISOString();
