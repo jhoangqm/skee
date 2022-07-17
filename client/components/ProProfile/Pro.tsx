@@ -32,7 +32,7 @@ const Pro = ({ pro }) => {
     );
   };
 
-  const updateUserInfo = (e) => {
+  const updateProInfo = (e) => {
     e.preventDefault();
     const {firstName, lastName, bio, email, phoneNumber} = e.target
     const data = {};
@@ -70,7 +70,7 @@ const Pro = ({ pro }) => {
       )}
         <div className="md:w-2/3 w-full">
           <div className='py-8 px-16'>
-          <form method='patch' onSubmit={updateUserInfo}>
+          <form method='patch' onSubmit={updateProInfo}>
             <div>
               <h1>Update your infomation here:</h1>
               <div className="form-control">
