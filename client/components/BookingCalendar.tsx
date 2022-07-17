@@ -22,7 +22,7 @@ export default function BookingCalendar(props: { proId; isDisabled }) {
   const [error, setError] = useState(null);
 
   // fetches booking dates using proId from the database
-  const fetchData = () => {
+  const fetchAvailabilityData = () => {
     fetch(`/api/clientcalendar/${props.proId}`)
       .then(res => res.json())
       .then(data => {
@@ -51,13 +51,13 @@ export default function BookingCalendar(props: { proId; isDisabled }) {
   }
 
   const openModal = () => {
-    setShowModal(prev => !prev);
+    setShowModal(true);
   };
 
   const disableTiles = () => {
     return props.isDisabled;
   };
-  useEffect(() => fetchData(), [date]);
+  useEffect(() => fetchAvailabilityData(), [date]);
 
   if (error) return <h1>Yo there was an Error {error}</h1>;
 
@@ -78,12 +78,13 @@ export default function BookingCalendar(props: { proId; isDisabled }) {
       <p className="text-center pt-5">
         <span className="bold">date selected</span> {date.toDateString()}
       </p>
+      <p className="flex justify-center text-sm">* All lessons are 3hrs long</p>
       <div className="flex justify-center">
         <CalMod
           showModal={showModal}
           setShowModal={setShowModal}
           date={date}
-          fetchData={fetchData}
+          fetchAvailabilityData={fetchAvailabilityData}
           proId={props.proId}
         />
       </div>
