@@ -4,12 +4,15 @@ import BookingRequests from '../BookingRequests';
 import { useState } from 'react';
 import InstructorCalendar from './InsCalender';
 import Certification from './Certification/Certification';
-import Upload from '../Upload/UploadCertification';
+import UploadCert from '../Upload/UploadCertification';
+import UploadAvatar from '../Upload/UploadAvatar';
 import Avatar from '../Avatar';
 
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
-
+  const [certUpload, setCertUpload] = useState(true)
+  // const [avatarUpload, setAvatarUpload] = useState(null)
+  
   const Profile = ({ pro }) => {
     return (
       <>
@@ -32,13 +35,29 @@ const Pro = ({ pro }) => {
       </>
     );
   };
+
   const Edit = () => {
+    
+    const showCert = () => setCertUpload(true)  
+    const unShowCert = () => setCertUpload(false);
+  
     return (
+      <>
+    { certUpload ? (
       <div>
-        <Upload proId={pro[0].id} />
+        <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
+        <UploadCert proId={pro[0].id} />
       </div>
-    );
+    ) : (
+      <div>
+        <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
+        <UploadAvatar proId={pro[0].id} />
+      </div>
+    )}
+      </>
+    )
   };
+
   const Requests = ({ pro }) => {
     return (
       <div className="request-box flex flex-wrap w-full">

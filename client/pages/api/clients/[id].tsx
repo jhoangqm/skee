@@ -7,8 +7,20 @@ export default async function handler({ query: { id } }: any, res: any) {
       id: Number(id)
     },
 
-    include: { bookings: {include : { timeSlot: true, resorts: true, Pros : true} } }
-
+    include: { 
+      bookings: {
+        include : { 
+          timeSlot: true, 
+          resorts: true, 
+          Pros : true
+        } 
+      },  
+      ClientsSkills: {
+        include: {
+          skills: true
+        }
+      }
+    }
   });
   res.json(client);
 }
