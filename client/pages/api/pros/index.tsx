@@ -42,7 +42,7 @@ export default withIronSessionApiRoute(
     }
     if (req.method === 'GET') {
       const pros = await prisma.pros.findMany(
-        // {include: { resorts: true }}
+        {include: {  resorts: true, ProsSkills: { include: {skills: true}}}}
       );
       res.json(pros);
     }
