@@ -20,7 +20,7 @@ const Home: NextPage = ({ resort }) => {
         <main className={styles.main}>
           <h1 className={styles.title}>Find you next ski instructor here!</h1>
           <p className={styles.description}>
-            Click on the map below to find an instructor in your
+            Click on the map below to directy you to your favorite mountain:
           </p>
           <Map  resort={resort}/>
           <p className={styles.description}>
