@@ -1,7 +1,9 @@
 import Layout from '../../components/Layout';
 import Link from 'next/link';
+
 import Calendar from '../../components/Calendar';
 import styles from "../../styles/Home.module.css";
+
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/resorts/');

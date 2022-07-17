@@ -28,7 +28,7 @@ const CalMod = ({ showModal, setShowModal, date, fetchData, proId }: any) => {
 
   useEffect(() => {
     fetchUser('client');
-  }, []);
+  }, [date]);
 
   useEffect(() => {
     timeFetcher();
