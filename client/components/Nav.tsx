@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const Nav = (props: any) => {
   const [user, setUser] = useState(null);
+  const [userType, setUserType] = useState('');
   const [loginType, setLoginType] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(false);
@@ -21,9 +22,13 @@ const Nav = (props: any) => {
       .then(res => res.json())
       .then(data => {
         if (data === 'No such session') {
-        } else setUser(data[0]);
+        } else {
+          setUserType(data.type);
+          setUser(data.userSession[0]);
+        }
       });
   };
+
   const onRadioChange = (e: any) => {
     setLoginType(e.target.value);
   };
@@ -36,6 +41,10 @@ const Nav = (props: any) => {
       .then(data => {
         setUser(null);
         setLoggedIn(false);
+        setUserType('');
+        setLoginType('');
+        setError(false);
+        setTypeError(false);
       });
   };
 
@@ -168,6 +177,21 @@ const Nav = (props: any) => {
               <a className="text-2xl">Mountains</a>
             </li>
           </Link>
+          {user ? (
+            userType === 'client' ? (
+              <Link href={`/profile/client/${user?.id}`}>
+                <li className="hover:bg-info hover:rounded-lg">
+                  <a className="text-2xl">Profile</a>
+                </li>
+              </Link>
+            ) : (
+              <Link href={`/profile/pro/${user?.id}`}>
+                <li className="hover:bg-info hover:rounded-lg">
+                  <a className="text-2xl">Profile</a>
+                </li>
+              </Link>
+            )
+          ) : null}
           <li tabIndex={0}>
             <a className="hover:bg-info hover:rounded-lg  text-2xl">
               Dev Links
@@ -187,17 +211,7 @@ const Nav = (props: any) => {
                   <a className="text-2xl">FAQ</a>
                 </li>
               </Link>
-              <Link href="/userprofile">
-                <li className="bg-info">
-                  <a className="text-2xl">User Profile</a>
-                </li>
-              </Link>
 
-              <Link href="/proprofile/[pid]">
-                <li className="bg-info">
-                  <a className="text-2xl">Pro Profile</a>
-                </li>
-              </Link>
               <Link href="/booking/2">
                 <li className="bg-info">
                   <a>Booking</a>
@@ -308,7 +322,7 @@ const Nav = (props: any) => {
       ) : (
         <>
           <div className="navbar-end ">
-            <p className="text-3xl mr-2">{user?.firstName}</p>
+            <p className="text-xl mr-2">{user?.firstName}</p>
             <p
               className="btn bg-transparent hover:bg-success text-xl"
               onClick={logout}
