@@ -53,13 +53,13 @@ function Upload(props: {proId}) {
 return (
     <div className="App">
       <hr></hr>
-      <h4>Certification Preview</h4>
+      {/* <h4>Certification Preview</h4> */}
       <form onSubmit={uploadImage}>
-        <div className="imageBox">
+        {/* <div className="imageBox">
           <img src={imagePreview} width="100%"></img>
-        </div>
+        </div> */}
         <input type="file"
-          onChange={getImage}
+          // onChange={getImage}
           style={{display: "none"}} //hiding input
           ref={inputEl} //set inputEl to referring this element
         ></input>

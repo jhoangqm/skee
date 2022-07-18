@@ -49,18 +49,18 @@ function UploadAvatar(props: { proId }) {
   return (
     <div className="App">
       <hr></hr>
-      <h4>Avatar Preview</h4>
+      {/* <h4>Avatar Preview</h4> */}
       <form onSubmit={uploadAvatar}>
-        <div className="imageBox">
+        {/* <div className="imageBox">
           <div className="avatar">
-            <div className=" w-72 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+             <div className=" w-72 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
               <img src={imagePreview} width="100%" object-fit="contain"></img>
-            </div>
+            </div> 
           </div>
-        </div>
+        </div> */}
         <input
           type="file"
-          onChange={getImage}
+          // onChange={getImage}
           style={{ display: 'none' }} //hiding input
           ref={inputEl} //set inputEl to referring this element
         ></input>
