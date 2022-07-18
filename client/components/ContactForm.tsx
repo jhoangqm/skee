@@ -32,7 +32,7 @@ const ContactForm = (props: { pro }) => {
           </label>
         </div>
 
-        <div className="flex flex-col items-center w-1/2">
+        <div className="flex flex-col items-center md:w-full lg:w-1/2">
           <label htmlFor="yourQuery" className="label">
             <span className="label-text text-xl mt-7 mb-2">Your Query: </span>
           </label>
