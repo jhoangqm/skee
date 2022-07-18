@@ -10,7 +10,6 @@ import Avatar from '../Avatar';
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
   const [certUpload, setCertUpload] = useState(true);
-  // const [avatarUpload, setAvatarUpload] = useState(null)
 
   const Profile = ({ pro }) => {
     return (
@@ -66,7 +65,7 @@ const Pro = ({ pro }) => {
       </div>
     );
   };
-  const Avalibility = () => {
+  const Availability = () => {
     return <InstructorCalendar pro={pro} />;
   };
 
@@ -148,7 +147,7 @@ const Pro = ({ pro }) => {
               <li>
                 <a
                   onClick={() => {
-                    setComponent('Avalibility');
+                    setComponent('Availability');
                   }}
                 >
                   <svg
@@ -184,7 +183,7 @@ const Pro = ({ pro }) => {
           {component === 'Profile' ? <Profile pro={pro} /> : null}
           {component === 'Edit' ? <Edit /> : null}
           {component === 'Requests' ? <Requests pro={pro} /> : null}
-          {component === 'Avalibility' ? <Avalibility /> : null}
+          {component === 'Availability' ? <Availability /> : null}
         </div>
       </div>
     </div>
