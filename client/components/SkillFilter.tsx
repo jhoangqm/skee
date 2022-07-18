@@ -16,7 +16,7 @@ const LevelFilter = ({ pros, setFilter, filterItem }) => {
   return (
     <>
       <div className="dropdown">
-        <label tabIndex="0" class="btn m-1">Filter Instructors by resort</label>
+        <label tabIndex="0" class="btn m-1">Filter Instructors by Skill</label>
         <ul tabIndex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
           {unique.map((skill) => (
             <li><a> <CheckLevel id={skill} pros={pros} filterItem={filterItem} /></a></li>
