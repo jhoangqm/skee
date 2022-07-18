@@ -88,7 +88,7 @@ const Nav = (props: any) => {
 
   // console.log(query.id);
   return (
-    <div className="navbar bg-secondary hover:bg-secondary rounded-b-lg h-22 sticky top-0 z-50 bg-opacity-75">
+    <div className="navbar bg-secondary hover:bg-secondary rounded-b-lg h-22 fixed top-0 z-50 bg-opacity-75">
       <div className="navbar-start">
         <div className="dropdown">
           {/* // * this is the responsive Nav */}
