@@ -253,9 +253,6 @@ const pro = [
 ];
 const skill = [
   {
-    skill: 'bumps',
-  },
-  {
     skill: 'beginner',
   },
   {
@@ -263,6 +260,9 @@ const skill = [
   },
   {
     skill: 'advanced',
+  },
+  {
+    skill: 'bumps',
   },
   {
     skill: 'freestyle',
