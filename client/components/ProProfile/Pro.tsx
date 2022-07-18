@@ -1,6 +1,6 @@
 import BookingRequests from '../BookingRequests';
 
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import InstructorCalendar from './InsCalender';
 import Certification from './Certification/Certification';
 import UploadCert from '../Upload/UploadCertification';
@@ -9,12 +9,14 @@ import Avatar from '../Avatar';
 
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
-  const [certUpload, setCertUpload] = useState(true);
-
+  const [certUpload, setCertUpload] = useState()
+  const clearForm = useRef(null)
+  // const [avatarUpload, setAvatarUpload] = useState(null)
+  
   const Profile = ({ pro }) => {
     return (
       <>
-        <div className="flex justify-between mt-20">
+        <div className="flex justify-between">
           <div className="text-4xl ml-[16vw]">
             {pro[0].firstName} {pro[0].lastName}{' '}
           </div>
@@ -31,31 +33,119 @@ const Pro = ({ pro }) => {
     );
   };
 
+  const updateProInfo = (e) => {
+    e.preventDefault();
+    const {firstName, lastName, bio, email, phoneNumber} = e.target
+    const data = {};
+    data.uniqueID = pro[0].id
+    data.firstName = firstName.value
+    data.lastName = lastName.value
+    data.bio = bio.value
+    data.email = email.value  
+    data.phoneNumber = phoneNumber.value
+    console.log('Values: ', email.value)
+    fetch(`/api/pros`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    })
+    .then((res)=>res.json())
+  }
+  
   const Edit = () => {
-    const showCert = () => setCertUpload(true);
+    
+    const showCert = () => setCertUpload(true)  
     const unShowCert = () => setCertUpload(false);
-
+  
     return (
       <>
-        {certUpload ? (
-          <div>
-            <button className="btn btn-primary" onClick={showCert}>
-              Upload Certification
-            </button>
-            <UploadCert proId={pro[0].id} />
-          </div>
-        ) : (
-          <div>
-            <button className="btn btn-primary" onClick={unShowCert}>
-              Upload Avatar
-            </button>
-            <UploadAvatar proId={pro[0].id} />
-          </div>
-        )}
-      </>
-    );
+      {certUpload ? (
+        <div>
+          <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
+          <UploadCert proId={pro[0].id} />
+        </div>
+      ) : (
+        <div>
+          <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
+          <UploadAvatar proId={pro[0].id} />
+        </div>
+      )}
+        <div className="md:w-2/3 w-full">
+          <div className='py-8 px-16'>
+        <form method='patch' onSubmit={updateProInfo} ref={clearForm}>
+        <div className="flex justify-center flex-row">
+        <label htmlFor="firstName"></label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          required
+          placeholder="First Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+        <label htmlFor="lastName"></label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          required
+          placeholder="Last Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="Email"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="phone">Phone:</label>
+        <input
+          type="text"
+          name="phoneNumber"
+          id="phone"
+          maxLength={14}
+          minLength={10}
+          pattern="^\d{3}\d{3}\d{4}"
+          placeholder="(000) 000-0000"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="phone">Bio:</label>
+        <input
+          type="text"
+          name="bio"
+          id="bio"
+          maxLength={140}
+          minLength={1}
+          pattern="^\d{3}\d{3}\d{4}"
+          placeholder="Bio"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <button
+          type="submit"
+          className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-1/3"
+          data-mdb-ripple="true"
+          data-mdb-ripple-color="light"
+        >
+          Update profile
+        </button>
+      </div>
+        </form>
+        </div>
+      </div>
+        </>
+    )
   };
-
+  
   const Requests = ({ pro }) => {
     return (
       <div className="request-box flex flex-wrap w-full">
