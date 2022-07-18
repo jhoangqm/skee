@@ -24,7 +24,7 @@ const upload = multer({
 const singleUpload = (req, res, next) => {
   const uploadFiles = upload.single('file');
 
-  uploadFiles(req, res, (err) => {
+  uploadFiles(req, res, err => {
     if (err) {
       console.log('Error: ', err);
       const error = new Error('Please upload a file');
@@ -32,7 +32,7 @@ const singleUpload = (req, res, next) => {
       return next(error);
     }
     console.log('Image name: ', imageName);
-    res.status(201).json({ url: 'http://localhost:5000/image/' + imageName });
+    res.status(201).json({ url: 'http://localhost:8000/image/' + imageName });
   });
 };
 

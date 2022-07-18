@@ -37,7 +37,7 @@ function UploadAvatar(props: { proId }) {
     formData.append('file', file);
     axios({
       method: 'post',
-      url: 'http://localhost:5000/upload',
+      url: 'http://localhost:8000/upload',
       data: formData,
     })
       .then(response => {
@@ -56,11 +56,13 @@ function UploadAvatar(props: { proId }) {
       <form onSubmit={uploadAvatar}>
         <div className="imageBox">
           <div className="avatar">
-             <div className="rounded-full">
-              <img src={imagePreview}  
-              object-fit="contain"
-              style={{ maxWidth: "150px" }}></img>
-            </div> 
+            <div className="rounded-full">
+              <img
+                src={imagePreview}
+                object-fit="contain"
+                style={{ maxWidth: '150px' }}
+              ></img>
+            </div>
           </div>
         </div>
         <input
