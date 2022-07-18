@@ -8,27 +8,27 @@ export default withIronSessionApiRoute(
       res.json(client);
     }
     // Updates user info DB
-    if (req.method === 'PATCH'){
-      const data = JSON.parse(req.body)
-      const {uniqueID, firstName, lastName, email, phoneNumber} = data
+    if (req.method === 'PATCH') {
+      const data = JSON.parse(req.body);
+      const { uniqueID, firstName, lastName, email, phoneNumber } = data;
       const updatedInfo = await prisma.clients.update({
         where: {
-          id: uniqueID
+          id: uniqueID,
         },
-        data:{
+        data: {
           firstName: firstName,
           lastName: lastName,
           email: email,
           phoneNumber: phoneNumber,
-        }
-      })
+        },
+      });
       res.json(updatedInfo);
     }
-   // Adds user info to DB
-    if ((req.method === 'POST')) {
+    // Adds user info to DB
+    if (req.method === 'POST') {
       const parsed = JSON.parse(req.body);
       const { firstName, lastName, email, password, phoneNumber } = parsed;
-      const url = 'http://localhost:5000/image/defaultAvatar.png'
+      const url = 'http://localhost:8000/image/defaultAvatar.png';
       try {
         const client = await prisma.clients.create({
           data: {
@@ -37,7 +37,7 @@ export default withIronSessionApiRoute(
             email,
             password,
             phoneNumber,
-            avatar: url 
+            avatar: url,
           },
         });
         req.session.user = {

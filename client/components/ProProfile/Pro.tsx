@@ -2,15 +2,16 @@ import BookingRequests from '../BookingRequests';
 
 import { useState, useRef } from 'react';
 import InstructorCalendar from './InsCalender';
-import Certification from './Certification/Certification';
 import UploadCert from '../Upload/UploadCertification';
 import UploadAvatar from '../Upload/UploadAvatar';
 import Avatar from '../Avatar';
+import { useRouter } from 'next/router';
 
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
   const [certUpload, setCertUpload] = useState();
   const clearForm = useRef(null);
+  const router = useRouter();
 
   const Profile = ({ pro }) => {
     return (
@@ -66,9 +67,8 @@ const Pro = ({ pro }) => {
   //   </div>
   // </div>
 
- 
   // Function that updates the pro info
-  const updateProInfo = (e) => {
+  const updateProInfo = e => {
     e.preventDefault();
     const { firstName, lastName, bio, email, phoneNumber } = e.target;
     const data = {};
@@ -83,13 +83,14 @@ const Pro = ({ pro }) => {
       method: 'PATCH',
       body: JSON.stringify(data),
     })
-
       .then(res => res.json())
       .then(() => {
         e.target.reset();
+        router.push(`/profile/pro/${pro[0].id}`);
+        setComponent('Profile');
       });
   };
-  
+
   // Function that brings out the edit profile component ( Should probably make a separate component)
   const Edit = () => {
     const showCert = () => setCertUpload(true);
@@ -190,8 +191,6 @@ const Pro = ({ pro }) => {
     );
   };
 
-
-  
   // checks requests from booking requests component
   const Requests = ({ pro }) => {
     return (

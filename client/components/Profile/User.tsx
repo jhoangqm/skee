@@ -1,175 +1,186 @@
-import { useEffect, useState, useRef } from "react";
-
-
+import { useEffect, useState, useRef } from 'react';
 
 const User = ({ user }) => {
-
   // const [Profile, setProfile] = useState(true);
   // const [Edit, setEdit] = useState(false);
   // const [History, setHistory] = useState(false);
 
-  const [component, setComponent] = useState("Profile");
-  const [skills, setSkills] = useState([])
-  const clearForm = useRef(null)
+  const [component, setComponent] = useState('Profile');
+  const [skills, setSkills] = useState([]);
+  const clearForm = useRef(null);
 
   const displaySkills = () => {
-    const skillsMapped = user[0].ClientsSkills.map(s => s.skills)
-    const skillsArray = skillsMapped.map(s => s.skill)
-      setSkills(skillsArray)
-  }
+    const skillsMapped = user[0].ClientsSkills.map(s => s.skills);
+    const skillsArray = skillsMapped.map(s => s.skill);
+    setSkills(skillsArray);
+  };
 
-  useEffect(()=> displaySkills(),[])
+  useEffect(() => displaySkills(), []);
 
-console.log('skills: ', skills)
-  
+  console.log('skills: ', skills);
+
   const Profile = () => {
     return (
-      <><div className="flex justify-center">
-        <div className='text-4xl'>
-          {user[0].firstName}{' '}{user[0].lastName}
-
+      <>
+        <div className="flex justify-center">
+          <div className="text-4xl">
+            {user[0].firstName} {user[0].lastName}
+          </div>
         </div>
-      </div><div className="flex justify-around">
+        <div className="flex justify-around">
           <div className="flex justify-start h-80 w-80 bg-blue-200">
             <img src={user[0].avatar} alt="" />
           </div>
-          <div className="flex h-80 w-80 bg-blue-200"> Skills: 
-            <div className="justify-self-center self-center grid-rows-none"> 
+          <div className="flex h-80 w-80 bg-blue-200">
+            {' '}
+            Skills:
+            <div className="justify-self-center self-center grid-rows-none">
               {skills[0]}
             </div>
           </div>
-        </div><div className="flex justify-around m-10">
-          <div className="flex justify-start">
-
-          </div>
+        </div>
+        <div className="flex justify-around m-10">
+          <div className="flex justify-start"></div>
           <div className="flex h-80 w-80 bg-blue-200">
-            <div className="justify-self-center self-center">
-
-            </div>
+            <div className="justify-self-center self-center"></div>
           </div>
-        </div></>
-    )
-  }
+        </div>
+      </>
+    );
+  };
 
-  const updateUserInfo = (e) => {
+  const updateUserInfo = e => {
     e.preventDefault();
-    const {firstName, lastName, email, phoneNumber} = e.target
+    const { firstName, lastName, email, phoneNumber } = e.target;
     const data = {};
-    data.uniqueID = user[0].id
-    data.firstName = firstName.value
-    data.lastName = lastName.value
-    data.email = email.value  
-    data.phoneNumber = phoneNumber.value
-    console.log('Values: ', e.target)
+    data.uniqueID = user[0].id;
+    data.firstName = firstName.value;
+    data.lastName = lastName.value;
+    data.email = email.value;
+    data.phoneNumber = phoneNumber.value;
+    console.log('Values: ', e.target);
     fetch(`/api/clients`, {
       method: 'PATCH',
-      body: JSON.stringify(data)
-    })
-    .then((res)=>res.json())
-  }
+      body: JSON.stringify(data),
+    }).then(res => res.json());
+  };
 
   const Edit = () => {
     return (
-      <div className="self-center md:w-2/3 w-full pr-60">
-          <div className='py-8 px-16'>
-        <form method='patch' onSubmit={updateUserInfo} ref={clearForm}>
-                <div className="flex items-center flex-col">
-        <label htmlFor="firstName">First Name:</label>
-        <input
-          type="text"
-          name="firstName"
-          id="firstName"
-          required
-          placeholder="First Name"
-          className="input input-bordered w-full max-w-xs m-1"
-        />
+      <div className="self-center  w-full pr-60">
+        <div className="py-8 px-16">
+          <form method="patch" onSubmit={updateUserInfo} ref={clearForm}>
+            <div className="flex items-center flex-col">
+              <label htmlFor="firstName">First Name:</label>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                required
+                placeholder="First Name"
+                className="input input-bordered w-full max-w-xs m-1"
+              />
+            </div>
+            <div className="flex items-center flex-col">
+              <label htmlFor="lastName">Last Name:</label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                required
+                placeholder="Last Name"
+                className="input input-bordered w-full max-w-xs m-1"
+              />
+            </div>
+            <div className="flex items-center flex-col">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                placeholder="Email"
+                className="input input-bordered w-full max-w-xs m-1"
+              />
+            </div>
+            <div className="flex items-center flex-col">
+              <label htmlFor="phone">Phone:</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                id="phone"
+                maxLength={14}
+                minLength={10}
+                pattern="^\d{3}\d{3}\d{4}"
+                placeholder="(000) 000-0000"
+                className="input input-bordered w-full max-w-xs m-1"
+              />
+            </div>
+            <div className="flex items-center flex-col">
+              <button
+                type="submit"
+                className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-1/3"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="light"
+              >
+                Update profile
+              </button>
+            </div>
+          </form>
         </div>
-        <div className="flex items-center flex-col">
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          required
-          placeholder="Last Name"
-          className="input input-bordered w-full max-w-xs m-1"
-        />
       </div>
-      <div className="flex items-center flex-col">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          placeholder="Email"
-          className="input input-bordered w-full max-w-xs m-1"
-        />
-      </div>
-      <div className="flex items-center flex-col">
-        <label htmlFor="phone">Phone:</label>
-        <input
-          type="text"
-          name="phoneNumber"
-          id="phone"
-          maxLength={14}
-          minLength={10}
-          pattern="^\d{3}\d{3}\d{4}"
-          placeholder="(000) 000-0000"
-          className="input input-bordered w-full max-w-xs m-1"
-        />
-      </div>
-      <div className="flex items-center flex-col">
-        <button
-          type="submit"
-          className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-1/3"
-          data-mdb-ripple="true"
-          data-mdb-ripple-color="light"
-        >
-          Update profile
-        </button>
-      </div>
-        </form>
-        </div>
-      </div>
-    )
-  }
+    );
+  };
   // For:{'  '}
   // {new Date(booking.timeSlot.startTime)
   //   .toUTCString()
   //   .replace(/GMT/, ' ')}{' '}
 
   const History = ({ user }) => {
-    console.log(user[0].bookings[0])
+    console.log(user[0].bookings[0]);
     return (
       <div key={user[0].id} className="flex justify-center">
         <>
-          {user[0].bookings.map((booking) => (
+          {user[0].bookings.map(booking => (
             <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-primary flex justify-center flex-col">
               <ul>
-                <li><p>{booking.accepted === true && !booking.pending ? `${booking.Pros.firstName} ${booking.Pros.lastName} is looking forward to seeing you on  ${'  '}${new Date(booking.timeSlot.startTime)
-                    .toUTCString()
-                    .replace(/GMT/, ' ')}${' '} ` : `Your booking has not been accepted yet for ${'  '}${new Date(booking.dateFrom)
-                      .toDateString()
-                      .replace(/GMT/, ' ')}${' '} with ${booking.Pros.firstName} ${booking.Pros.lastName}`} </p></li>
-                <li><p>
-                    </p></li>
+                <li>
+                  <p>
+                    {booking.accepted === true && !booking.pending
+                      ? `${booking.Pros.firstName} ${
+                          booking.Pros.lastName
+                        } is looking forward to seeing you on  ${'  '}${new Date(
+                          booking.timeSlot.startTime
+                        )
+                          .toUTCString()
+                          .replace(/GMT/, ' ')}${' '} `
+                      : `Your booking has not been accepted yet for ${'  '}${new Date(
+                          booking.dateFrom
+                        )
+                          .toDateString()
+                          .replace(/GMT/, ' ')}${' '} with ${
+                          booking.Pros.firstName
+                        } ${booking.Pros.lastName}`}{' '}
+                  </p>
+                </li>
+                <li>
+                  <p></p>
+                </li>
               </ul>
               <div className="flex justify-center">
-              <button className="btn btn-success ">
-                <ul>
-                  <li>Contact instructor</li>
-                  <li> to make changes</li>
-                </ul>
-                
-              </button>
+                <button className="btn btn-success ">
+                  <ul>
+                    <li>Contact instructor</li>
+                    <li> to make changes</li>
+                  </ul>
+                </button>
               </div>
             </div>
-          ))}</>
+          ))}
+        </>
       </div>
-    )
-  }
-
+    );
+  };
 
   return (
     <div className="">
@@ -245,17 +256,16 @@ console.log('skills: ', skills)
                 Booking History
               </a>
             </li>
-            </ul>
+          </ul>
         </div>
         <div className="flex justify-between flex-col w-full">
-          {component === "Profile" ? <Profile/> : null}
-          {component === "Edit" ? <Edit user={user} /> : null}
-          {component === "History" ? <History user={user} /> : null}
+          {component === 'Profile' ? <Profile /> : null}
+          {component === 'Edit' ? <Edit user={user} /> : null}
+          {component === 'History' ? <History user={user} /> : null}
         </div>
       </div>
     </div>
   );
 };
-
 
 export default User;
