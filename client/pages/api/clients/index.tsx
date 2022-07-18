@@ -51,7 +51,6 @@ export default withIronSessionApiRoute(
         res.json('signup Error', error);
       }
     }
-    console.log('Hello FROM CLIENTS', req.method)
   },
   {
     cookieName: 'user',

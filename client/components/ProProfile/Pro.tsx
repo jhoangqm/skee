@@ -1,6 +1,6 @@
 import BookingRequests from '../BookingRequests';
 
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import InstructorCalendar from './InsCalender';
 import Certification from './Certification/Certification';
 import UploadCert from '../Upload/UploadCertification';
@@ -10,6 +10,7 @@ import Avatar from '../Avatar';
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
   const [certUpload, setCertUpload] = useState()
+  const clearForm = useRef(null)
   // const [avatarUpload, setAvatarUpload] = useState(null)
   
   const Profile = ({ pro }) => {
@@ -70,84 +71,77 @@ const Pro = ({ pro }) => {
       )}
         <div className="md:w-2/3 w-full">
           <div className='py-8 px-16'>
-          <form method='patch' onSubmit={updateProInfo}>
-            <div>
-              <h1>Update your infomation here:</h1>
-              <div className="form-control">
-              <label className="input-group input-group-vertical">
-                <span>First name</span>
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  placeholder={pro[0].firstName}
-                  className="input input-bordered" />
-              </label>
-              <label className="input-group input-group-vertical">
-                <span>Last name</span>
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-
-                  placeholder={pro[0].lastName}
-                  className="input input-bordered">
-
-                </input>
-
-              </label>
-            </div>
-          </div>
-            <div>
-              <div className="form-control">
-                <label className="input-group input-group-vertical">
-                  <span>Bio</span>
-                  <input
-                    type="bio"
-                    name="bio"
-                    id="bio"
-                    minLength={1}
-                    maxLength={140}
-  
-                    placeholder="bio"
-                    className="input input-bordered" />
-                </label>
-              </div>
-            </div>
-            <div>
-              <div className="form-control">
-                <label className="input-group input-group-vertical">
-                  <span>Email</span>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-  
-                    placeholder={pro[0].email}
-                    className="input input-bordered" />
-                </label>
-              </div>
-            </div>
-            <div>
-              <div className="form-control">
-                <label className="input-group input-group-vertical">
-                  <span>Phone</span>
-                  <input
-                    type="text"
-                    name="phoneNumber"
-                    id="phone"
-                    maxLength={14}
-                    minLength={10}
-                    pattern="^\d{3}\d{3}\d{4}"
-                    placeholder={pro[0].phoneNumber}
-                    className="input input-bordered" />
-                </label>
-              </div>
-            </div>
-            <button type="submit" className="btn btn-primary">Save</button>
-          </form>
-          </div>
+        <form method='patch' onSubmit={updateProInfo} ref={clearForm}>
+        <div className="flex justify-center flex-row">
+        <label htmlFor="firstName"></label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          required
+          placeholder="First Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+        <label htmlFor="lastName"></label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          required
+          placeholder="Last Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="Email"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="phone">Phone:</label>
+        <input
+          type="text"
+          name="phoneNumber"
+          id="phone"
+          maxLength={14}
+          minLength={10}
+          pattern="^\d{3}\d{3}\d{4}"
+          placeholder="(000) 000-0000"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="phone">Bio:</label>
+        <input
+          type="text"
+          name="bio"
+          id="bio"
+          maxLength={140}
+          minLength={1}
+          pattern="^\d{3}\d{3}\d{4}"
+          placeholder="Bio"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <button
+          type="submit"
+          className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-1/3"
+          data-mdb-ripple="true"
+          data-mdb-ripple-color="light"
+        >
+          Update profile
+        </button>
+      </div>
+        </form>
         </div>
+      </div>
         </>
     )
   };
