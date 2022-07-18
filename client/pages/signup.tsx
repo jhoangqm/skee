@@ -16,7 +16,7 @@ const Signup = () => {
       <section className="">
         {console.log('THIS IS THE SALT', salt)};
         <div className="flex justify-center">
-          <h1 className="text-4xl mt-10">Register now</h1>
+          <h1 className="text-4xl mt-10 mb-5">Register now</h1>
         </div>
         <div className="flex items-center flex-col ">
           <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box">
