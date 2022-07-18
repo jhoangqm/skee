@@ -56,7 +56,7 @@ const Instructor = ({ pros }) => {
   // on click gets data of instructors
   let onclickhandler = (e, id) => {
     const instructor = id;
-    console.log("instructor", instructor);
+    
     fetch(`/api/pros/${instructor}`)
       .then((res) => res.json())
       .then((data) => setShowModal(data));
@@ -79,7 +79,7 @@ const Instructor = ({ pros }) => {
                 <div className="card w-96 bg-base-100 shadow-xl m-6">
                   <figure>
                     <img
-                      src="https://placeimg.com/400/225/arch"
+                      src={p.image}
                       alt="Shoes"
                     />
                   </figure>
@@ -110,7 +110,7 @@ const Instructor = ({ pros }) => {
             >
               <div className="card w-96 bg-base-100 shadow-xl m-6">
                 <figure>
-                  <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+                  <img src={p.image} alt="Shoes" />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">
