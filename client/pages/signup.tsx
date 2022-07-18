@@ -2,18 +2,21 @@ import Layout from '../components/Layout';
 import { useState } from 'react';
 import ProSignup from '../components/Signup/ProSignup';
 import ClientSignup from '../components/Signup/ClientSignup';
+import bcrypt from 'bcryptjs';
 
 const Signup = () => {
   const [type, setType] = useState('');
-
+  const salt = bcrypt.genSaltSync(10);
+  console.log('THIS IS THE ENV SALT', process.env.SALT);
   const onChangeHandler = (e: any) => {
     setType(e.target.value);
   };
   return (
     <Layout signup={true}>
       <section className="">
+        {console.log('THIS IS THE SALT', salt)};
         <div className="flex justify-center">
-          <h1 className="text-4xl">Signup!</h1>
+          <h1 className="text-4xl mt-10">Register now</h1>
         </div>
         <div className="flex items-center flex-col ">
           <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box">
@@ -46,7 +49,6 @@ const Signup = () => {
             </li>
           </ul>
         </div>
-
         <div className="flex justify-center">
           <div className="card bg-base-100 shadow-xl w-1/2">
             <div className="card-body">
@@ -55,8 +57,8 @@ const Signup = () => {
                   <div>Select a signup type</div>
                 </div>
               ) : null}
-              {type === 'pro' ? <ProSignup /> : null}
-              {type === 'client' ? <ClientSignup /> : null}
+              {type === 'pro' ? <ProSignup salt={salt} /> : null}
+              {type === 'client' ? <ClientSignup salt={salt} /> : null}
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { Resorts } from '@prisma/client';
 import { useRouter } from 'next/router';
 import bcrypt from 'bcryptjs';
 
-const ProSignup = () => {
+const ProSignup = (props: { salt: string }) => {
   const [user, setUser] = useState();
   const [signupError, setSignupError] = useState(false);
   const router = useRouter();
@@ -18,7 +18,7 @@ const ProSignup = () => {
       data[v.name] = v.value;
     }
     //encrypt password
-    data.password = bcrypt.hashSync(data.password, process.env.SALT);
+    data.password = bcrypt.hashSync(data.password, props.salt);
 
     // make request to api to create pro
     const response = await fetch('/api/pros', {
@@ -42,7 +42,7 @@ const ProSignup = () => {
   if (!data) return <div>loading...</div>;
   return (
     <form method="post" onSubmit={proSignup} ref={clearForm}>
-      <div className="flex justify-center flex-row">
+      <div className="flex items-center flex-col my-2">
         <label htmlFor="firstName"></label>
         <input
           type="text"
@@ -52,6 +52,8 @@ const ProSignup = () => {
           placeholder="First Name"
           className="input input-bordered w-full max-w-xs m-1"
         />
+      </div>
+      <div className="flex items-center flex-col my-2">
         <label htmlFor="lastName"></label>
         <input
           type="text"
@@ -62,8 +64,8 @@ const ProSignup = () => {
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>
-      <div className="flex items-center flex-col">
-        <label htmlFor="email">Email:</label>
+      <div className="flex items-center flex-col my-2">
+        <label htmlFor="email"></label>
         <input
           type="email"
           name="email"
@@ -74,7 +76,7 @@ const ProSignup = () => {
         />
       </div>
       <div className="flex items-center flex-col">
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password"></label>
         <input
           type="password"
           name="password"
@@ -86,8 +88,8 @@ const ProSignup = () => {
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>
-      <div className="flex items-center flex-col">
-        <label htmlFor="phone">Phone:</label>
+      <div className="flex items-center flex-col my-2">
+        <label htmlFor="phone"></label>
         <input
           type="text"
           name="phoneNumber"
@@ -99,7 +101,7 @@ const ProSignup = () => {
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>
-      <div className="flex items-center flex-col">
+      <div className="flex items-center flex-col my-2">
         <label htmlFor="certBody">Certification Body:</label>
         <select
           id="certBody"
@@ -112,7 +114,7 @@ const ProSignup = () => {
           <option value="NZSIA">NZSIA</option>
         </select>
       </div>
-      <div className="flex items-center flex-col">
+      <div className="flex items-center flex-col my-2">
         <label htmlFor="resortId">Mountain:</label>
         <select
           id="resort"
