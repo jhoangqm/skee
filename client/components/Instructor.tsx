@@ -9,9 +9,11 @@ import SkillFilter from "./SkillFilter";
 const Instructor = ({ pros }) => {
   const [showModal, setShowModal] = useState(false);
   const [filter, setFilter] = useState([]);
+  
   const [filteredPros, setfilteredpros] = useState([]);
 
-  console.log("filter", filter);
+    
+  console.log("filter", filteredPros);
 
   // --------- Sets matches the unique filter key to the pros api --------------- //
   useEffect(() => {
@@ -38,7 +40,7 @@ const Instructor = ({ pros }) => {
       }
       setfilteredpros(temp);
     });
-    console.log("TEMP", temp);
+    // console.log("TEMP", temp);
   }, [filter]);
   console.log("filteredPros", filteredPros);
 
@@ -68,7 +70,7 @@ const Instructor = ({ pros }) => {
       <Filter className="sticky" pros={pros} setFilter={setFilter} filterItem={filterItem} />
       
       <div className="modal-instructor">
-        {filteredPros.length === 0
+        {/* {filteredPros.length === 0
           ? pros.map(p => (
             <div>
               <div
@@ -100,8 +102,8 @@ const Instructor = ({ pros }) => {
                 </div>
               </div>
             </div>
-          )): 
-        filteredPros.map((p) => (
+          )):  */}
+        {filteredPros.map((p) => (
           <div>
             <div
               key={p.id}
@@ -121,13 +123,14 @@ const Instructor = ({ pros }) => {
                     <div className="badge badge-outline">
                       {p.certBody} {p.level}
                     </div>
-                    <div className="badge badge-outline">{p.resorts.name}</div>
+                    {/* <div className="badge badge-outline">{p.resorts.name}</div> */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+        ))
+         } 
         {showModal ? (
           <Modal setShowModal={setShowModal} pro={showModal} />
         ) : null}
