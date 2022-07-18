@@ -1,10 +1,12 @@
 import { prisma } from '../../../db';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import bcrypt from 'bcryptjs';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { IronSessionOptions } from 'iron-session';
 
 // cookies set by iron session
 export default withIronSessionApiRoute(
-  async function loginHandler(req: any, res: any) {
+  async function loginHandler(req: NextApiRequest, res: NextApiResponse) {
     const loginData = JSON.parse(req.body);
     loginData.password = bcrypt.hashSync(loginData.password, process.env.SALT);
     // check which type of user is login in
@@ -23,7 +25,7 @@ export default withIronSessionApiRoute(
         await req.session.save();
         res.json(pro);
       } catch (error) {
-        res.json('login Error', error);
+        res.json('login Error');
       }
     }
     // check which type of user is login in
@@ -42,7 +44,7 @@ export default withIronSessionApiRoute(
         await req.session.save();
         res.json(client);
       } catch (error) {
-        res.json('login Error', error);
+        res.json('login Error');
       }
     }
   },

@@ -1,8 +1,9 @@
 import { prisma } from '../../../db';
 import { withIronSessionApiRoute } from 'iron-session/next';
+import { NextApiRequest, NextApiResponse } from 'next';
 // cookies handled by ironsession
 export default withIronSessionApiRoute(
-  async function handler(req: any, res: any) {
+  async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
       const client = await prisma.clients.findMany();
       res.json(client);
@@ -28,7 +29,9 @@ export default withIronSessionApiRoute(
     if (req.method === 'POST') {
       const parsed = JSON.parse(req.body);
       const { firstName, lastName, email, password, phoneNumber } = parsed;
+
       const url = 'http://localhost:8000/image/defaultAvatar.png';
+
       try {
         const client = await prisma.clients.create({
           data: {

@@ -3,12 +3,22 @@ import { useEffect, useState, useRef } from 'react';
 import { Resorts } from '@prisma/client';
 import { useRouter } from 'next/router';
 import bcrypt from 'bcryptjs';
+import { Skills } from '@prisma/client';
 
 const ProSignup = () => {
-  const [user, setUser] = useState();
+  const [skills, setSkills] = useState();
   const [signupError, setSignupError] = useState(false);
   const router = useRouter();
   const clearForm = useRef(null);
+
+  useEffect(() => {
+    async function fetchSkills() {
+      const res = await fetch('/api/fetchskills');
+      const data = await res.json();
+      setSkills(data);
+    }
+    fetchSkills();
+  }, []);
 
   // pro sign up function
   const proSignup = async (e: any) => {
@@ -17,6 +27,7 @@ const ProSignup = () => {
     for (const v of e.target.elements) {
       data[v.name] = v.value;
     }
+
     //encrypt password
     data.password = bcrypt.hashSync(data.password, process.env.SALT);
 
@@ -125,6 +136,20 @@ const ProSignup = () => {
           {data.map((resort: Resorts) => (
             <option value={resort.id} key={resort.id}>
               {resort.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex items-center flex-col my-3">
+        <label htmlFor="skillsId">Select a proficiency</label>
+        <select
+          id="skill"
+          name="skill"
+          className="select select-bordered w-full max-w-xs"
+        >
+          {skills?.map((skills: Skills) => (
+            <option value={skills.id} key={skills.id}>
+              {skills.skill}
             </option>
           ))}
         </select>
