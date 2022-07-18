@@ -29,7 +29,9 @@ export default withIronSessionApiRoute(
     if (req.method === 'POST') {
       const parsed = JSON.parse(req.body);
       const { firstName, lastName, email, password, phoneNumber } = parsed;
-      const url = 'http://localhost:5000/image/defaultAvatar.png';
+
+      const url = 'http://localhost:8000/image/defaultAvatar.png';
+
       try {
         const client = await prisma.clients.create({
           data: {

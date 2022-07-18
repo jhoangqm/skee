@@ -30,20 +30,17 @@ export const getStaticProps = async context => {
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
   const data = await res.json();
 
-
   return {
     props: { pro: data },
   };
 };
-
-const contactSubmitHandler = async (e, setError) => {};
 
 const Booking = ({ pro }) => {
   return (
     <Layout signup={false}>
       <div className="p-10 px-32">
         <div className="flex justify-center">
-          <p className="text-4xl mb-6 ">
+          <p className="text-4xl mb-6 font-bold">
             {pro[0].firstName} {pro[0].lastName}{' '}
           </p>
         </div>
@@ -55,7 +52,7 @@ const Booking = ({ pro }) => {
             <BookingCalendar proId={pro[0].id} />
           </div>
         </div>
-        <p className=" my-6 flex justify-center text-2xl bold">
+        <p className=" my-6 flex justify-center text-2xl font-bold">
           Instructor bio
         </p>
         <div className="flex justify-around">
@@ -63,10 +60,12 @@ const Booking = ({ pro }) => {
             <p className="justify-self-center self-center">{pro[0].bio}</p>
           </div>
         </div>
-        <p className="text-2xl  my-10 flex justify-center">Booking Steps</p>
+        <p className="text-2xl  my-10 flex font-bold justify-center">
+          Booking Steps
+        </p>
         <div className="flex justify-center">
           <div className="flex  mb-20 rounded-md justify-center w-max">
-            <ul className="steps -z-10">
+            <ul className="steps ">
               <li className="step step-primary">
                 Select a lesson date and time
               </li>
@@ -80,6 +79,7 @@ const Booking = ({ pro }) => {
             </ul>
           </div>
         </div>
+        <p className="text-2xl font-bold flex justify-center">Contact</p>
         <div className="flex justify-around m-10 ">
           <div className=" w-1/2 bg-base-100 shadow-custom rounded-lg p-10 ">
             <ContactForm pro={pro[0]} />
