@@ -9,7 +9,7 @@ import Avatar from '../Avatar';
 
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
-  const [certUpload, setCertUpload] = useState(true)
+  const [certUpload, setCertUpload] = useState()
   // const [avatarUpload, setAvatarUpload] = useState(null)
   
   const Profile = ({ pro }) => {
@@ -32,6 +32,24 @@ const Pro = ({ pro }) => {
     );
   };
 
+  const updateProInfo = (e) => {
+    e.preventDefault();
+    const {firstName, lastName, bio, email, phoneNumber} = e.target
+    const data = {};
+    data.uniqueID = pro[0].id
+    data.firstName = firstName.value
+    data.lastName = lastName.value
+    data.bio = bio.value
+    data.email = email.value  
+    data.phoneNumber = phoneNumber.value
+    console.log('Values: ', email.value)
+    fetch(`/api/pros`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    })
+    .then((res)=>res.json())
+  }
+  
   const Edit = () => {
     
     const showCert = () => setCertUpload(true)  
@@ -39,20 +57,101 @@ const Pro = ({ pro }) => {
   
     return (
       <>
-    { certUpload ? (
-      <div>
-        <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
-        <UploadCert proId={pro[0].id} />
-      </div>
-    ) : (
-      <div>
-        <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
-        <UploadAvatar proId={pro[0].id} />
-      </div>
-    )}
-      </>
+      {certUpload ? (
+        <div>
+          <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
+          <UploadCert proId={pro[0].id} />
+        </div>
+      ) : (
+        <div>
+          <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
+          <UploadAvatar proId={pro[0].id} />
+        </div>
+      )}
+        <div className="md:w-2/3 w-full">
+          <div className='py-8 px-16'>
+          <form method='patch' onSubmit={updateProInfo}>
+            <div>
+              <h1>Update your infomation here:</h1>
+              <div className="form-control">
+              <label className="input-group input-group-vertical">
+                <span>First name</span>
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  placeholder={pro[0].firstName}
+                  className="input input-bordered" />
+              </label>
+              <label className="input-group input-group-vertical">
+                <span>Last name</span>
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+
+                  placeholder={pro[0].lastName}
+                  className="input input-bordered">
+
+                </input>
+
+              </label>
+            </div>
+          </div>
+            <div>
+              <div className="form-control">
+                <label className="input-group input-group-vertical">
+                  <span>Bio</span>
+                  <input
+                    type="bio"
+                    name="bio"
+                    id="bio"
+                    minLength={1}
+                    maxLength={140}
+  
+                    placeholder="bio"
+                    className="input input-bordered" />
+                </label>
+              </div>
+            </div>
+            <div>
+              <div className="form-control">
+                <label className="input-group input-group-vertical">
+                  <span>Email</span>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+  
+                    placeholder={pro[0].email}
+                    className="input input-bordered" />
+                </label>
+              </div>
+            </div>
+            <div>
+              <div className="form-control">
+                <label className="input-group input-group-vertical">
+                  <span>Phone</span>
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    id="phone"
+                    maxLength={14}
+                    minLength={10}
+                    pattern="^\d{3}\d{3}\d{4}"
+                    placeholder={pro[0].phoneNumber}
+                    className="input input-bordered" />
+                </label>
+              </div>
+            </div>
+            <button type="submit" className="btn btn-primary">Save</button>
+          </form>
+          </div>
+        </div>
+        </>
     )
   };
+
 
   const Requests = ({ pro }) => {
     return (

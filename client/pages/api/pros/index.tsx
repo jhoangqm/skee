@@ -46,6 +46,25 @@ export default withIronSessionApiRoute(
       );
       res.json(pros);
     }
+    if (req.method === 'PATCH'){
+      const data = JSON.parse(req.body)
+      const {uniqueID, firstName, lastName, bio, email, phoneNumber, certBody} = data
+      console.log('data is: ', data)
+      const updatedInfo = await prisma.pros.update({
+        where: {
+          id: uniqueID
+        },
+        data:{
+          firstName: firstName,
+          lastName: lastName,
+          bio: bio,
+          email: email,
+          phoneNumber: phoneNumber,
+          certBody: certBody,
+        }
+      })
+      res.json(updatedInfo)
+    }
   },
   {
     cookieName: 'user',

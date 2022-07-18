@@ -9,7 +9,7 @@ const User = ({ user }) => {
   // const [History, setHistory] = useState(false);
 
   const [component, setComponent] = useState("Profile");
-  const [skills, setSkills] = useState()
+  const [skills, setSkills] = useState([])
 
   const displaySkills = () => {
     const skillsMapped = user[0].ClientsSkills.map(s => s.skills)
@@ -25,6 +25,7 @@ console.log('skills: ', skills)
     return (
       <><div className="flex justify-center">
         <div className='text-4xl'>
+          {user[0].firstName}{' '}{user[0].lastName}
 
         </div>
       </div><div className="flex justify-around">
@@ -33,7 +34,7 @@ console.log('skills: ', skills)
           </div>
           <div className="flex h-80 w-80 bg-blue-200"> Skills: 
             <div className="justify-self-center self-center grid-rows-none"> 
-              {skills}
+              {skills[0]}
             </div>
           </div>
         </div><div className="flex justify-around m-10">
@@ -49,12 +50,29 @@ console.log('skills: ', skills)
     )
   }
 
+  const updateUserInfo = (e) => {
+    e.preventDefault();
+    const {firstName, lastName, email, phoneNumber} = e.target
+    const data = {};
+    data.uniqueID = user[0].id
+    data.firstName = firstName.value
+    data.lastName = lastName.value
+    data.email = email.value  
+    data.phoneNumber = phoneNumber.value
+    console.log('Values: ', e.target.firstName.value)
+    fetch(`/api/clients`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    })
+    .then((res)=>res.json())
+  }
 
-  const Edit = ({ user }) => {
+  const Edit = () => {
     console.log("BIG USER", user[0].firstName);
     return (
-      <div className="flex justify-center">
-        <form>
+      <div className="md:w-2/3 w-full">
+          <div className='py-8 px-16'>
+        <form method='patch' onSubmit={updateUserInfo}>
           <div>
             <h1>Update your infomation here:</h1>
             <div className="form-control">
@@ -72,8 +90,8 @@ console.log('skills: ', skills)
                 <span>Last name</span>
                 <input
                   type="text"
-                  name="firstName"
-                  id="firstName"
+                  name="lastName"
+                  id="lastName"
 
                   placeholder={user[0].lastName}
                   className="input input-bordered">
@@ -113,25 +131,9 @@ console.log('skills: ', skills)
               </label>
             </div>
           </div>
-          <div>
-            <div className="form-control">
-              <label className="input-group input-group-vertical">
-                <span>Password</span>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  minLength={5}
-                  maxLength={20}
-
-                  placeholder="Password"
-                  className="input input-bordered" />
-              </label>
-            </div>
-          </div>
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
-
+        </div>
       </div>
     )
   }

@@ -33,7 +33,29 @@ export default withIronSessionApiRoute(
         res.json('signup Error', error);
       }
     }
-
+    // To check with JAMIE ******************
+    if (req.method === 'PATCH'){
+      const data = JSON.parse(req.body)
+      const {uniqueID, firstName, lastName, email, phoneNumber} = data
+      console.log('data is: ', data)
+      const updatedInfo = await prisma.clients.update({
+        where: {
+          id: uniqueID
+        },
+        data:{
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phoneNumber: phoneNumber,
+        }
+      })
+      req.session.user = {
+        id: updatedInfo.id,
+        type: 'client',
+      };
+      await req.session.save();
+      res.json(updatedInfo);
+    }
   },
   {
     cookieName: 'user',
