@@ -11,11 +11,13 @@ function UploadAvatar(props: { proId }) {
   const { query } = useRouter();
   query.id = props.proId;
 
+  // gets image from event
   const getImage = e => {
     setFile(e.target.files[0]);
     setPreview(URL.createObjectURL(e.target.files[0])); //shows preview
   };
 
+  // updates the avatar in the DB
   const updateAvatarDB = data => {
     // Creating obj because I can't pass two values in
     // JSON.stringify's params
@@ -27,7 +29,7 @@ function UploadAvatar(props: { proId }) {
       body: JSON.stringify(avatarObj),
     }).then(res => res.json());
   };
-
+  // upload avatar function
   const uploadAvatar = e => {
     e.preventDefault();
     const formData = new FormData();
@@ -49,13 +51,15 @@ function UploadAvatar(props: { proId }) {
   return (
     <div className="App">
       <hr></hr>
-      <h4>Avatar Preview</h4>
+      {/* <h4>Avatar Preview</h4> */}
       <form onSubmit={uploadAvatar}>
         <div className="imageBox">
           <div className="avatar">
-            <div className=" w-72 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src={imagePreview} width="100%" object-fit="contain"></img>
-            </div>
+             <div className="rounded-full">
+              <img src={imagePreview}  
+              object-fit="contain"
+              style={{ maxWidth: "150px" }}></img>
+            </div> 
           </div>
         </div>
         <input

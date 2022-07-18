@@ -29,6 +29,7 @@ const Nav = (props: any) => {
       });
   };
 
+  // allows user to choose between pro/client login
   const onRadioChange = (e: any) => {
     setLoginType(e.target.value);
   };
@@ -88,7 +89,7 @@ const Nav = (props: any) => {
 
   // console.log(query.id);
   return (
-    <div className="navbar bg-secondary hover:bg-secondary rounded-b-lg h-22 sticky top-0 z-50 bg-opacity-75">
+    <div className="navbar bg-secondary hover:bg-secondary rounded-b-lg h-22 fixed top-0 z-50 bg-opacity-75">
       <div className="navbar-start">
         <div className="dropdown">
           {/* // * this is the responsive Nav */}
@@ -114,49 +115,28 @@ const Nav = (props: any) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <Link href="/mountains">
-              <li>
-                <a>Mountains</a>
+              <li className="hover:bg-info hover:rounded-lg">
+                <a className="text-2xl">Mountains</a>
               </li>
             </Link>
-            <li tabIndex={0}>
-              <a className="justify-between">
-                Dev Links
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <Link href="/faq">
-                  <li>
-                    <a>FAQ</a>
+            {user ? (
+              userType === 'client' ? (
+                <Link href={`/profile/client/${user?.id}`}>
+                  <li className="hover:bg-info hover:rounded-lg">
+                    <a className="text-2xl">Profile</a>
                   </li>
                 </Link>
-                <Link href="/userprofile">
-                  <li>
-                    <a>User Profile</a>
+              ) : (
+                <Link href={`/profile/pro/${user?.id}`}>
+                  <li className="hover:bg-info hover:rounded-lg">
+                    <a className="text-2xl">Profile</a>
                   </li>
                 </Link>
-                <Link href="/pro">
-                  <li>
-                    <a>Pro Profile</a>
-                  </li>
-                </Link>
-                <Link href="/booking">
-                  <li>
-                    <a>Booking</a>
-                  </li>
-                </Link>
-              </ul>
-            </li>
+              )
+            ) : null}
             <Link href="/mountains/instructors/instructors">
               <li>
-                <a>Instructors</a>
+                <a className="text-2xl">Instructors</a>
               </li>
             </Link>
           </ul>
@@ -192,33 +172,7 @@ const Nav = (props: any) => {
               </Link>
             )
           ) : null}
-          <li tabIndex={0}>
-            <a className="hover:bg-info hover:rounded-lg  text-2xl">
-              Dev Links
-              <svg
-                className="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-              </svg>
-            </a>
-            <ul className="p-2">
-              <Link href="/faq">
-                <li className="bg-info">
-                  <a className="text-2xl">FAQ</a>
-                </li>
-              </Link>
 
-              <Link href="/booking/2">
-                <li className="bg-info">
-                  <a>Booking</a>
-                </li>
-              </Link>
-            </ul>
-          </li>
           <Link href="mountains/instructors/instructors/">
             <li className="hover:bg-info hover:rounded-lg">
               <a className="text-2xl">Instructors</a>

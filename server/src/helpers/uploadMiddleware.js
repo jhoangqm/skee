@@ -31,6 +31,7 @@ const singleUpload = (req, res, next) => {
       error.httpStatusCode = 400;
       return next(error);
     }
+    console.log('Image name: ', imageName);
     res.status(201).json({ url: 'http://localhost:5000/image/' + imageName });
   });
 };

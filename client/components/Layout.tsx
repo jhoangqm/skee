@@ -7,9 +7,12 @@ interface LayoutProps {
 // * pass down logged in property to nav component
 const Layout = (props: LayoutProps) => {
   return (
-    <div className="layout">
+    <div className="layout flex flex-col h-screen ">
       <Nav signup={props.signup} />
-      <main>{props.children}</main>
+      <div className="bg-gradient-to-b from-[#EBFFFE] to-white">
+        <main className="my-20 ">{props.children}</main>
+      </div>
+
       <Footer />
     </div>
   );

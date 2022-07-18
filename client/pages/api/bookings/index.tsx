@@ -1,5 +1,6 @@
 import { prisma } from '../../../db';
 import type { NextApiRequest, NextApiResponse } from 'next';
+// create booking
 const booking = async (
   id: number,
   date: any,
@@ -34,10 +35,8 @@ const createTimeSlot = async (
         prosId: Number(prosId),
       },
     });
-    console.log('this is the timeslot', timeSlot);
     booking(timeSlot[0].id, date, prosId, clientId);
   } catch (error) {
-    console.log('error', error);
   }
 };
 
@@ -55,10 +54,9 @@ export default async function handler(
     }
     res.status(200).json({ message: 'success' });
   }
-
+  // receives patch request to update bookings of pro and set pending to false and accepted to true
   if (req.method === 'PATCH') {
     const uniqueID = JSON.parse(req.body);
-    console.log('UniqueID: ', uniqueID);
     const updateBooking = await prisma.bookings.update({
       where: {
         id: uniqueID,
@@ -68,10 +66,9 @@ export default async function handler(
         accepted: true,
       },
     });
-    // console.log(updateBooking)
     res.json(updateBooking);
   }
-
+  // GET all bookings that includes timeSlot
   if (req.method === 'GET') {
     const bookings = await prisma.bookings.findMany({
       include: { timeSlot: true },
@@ -82,7 +79,6 @@ export default async function handler(
   // Reject booking
   if (req.method === 'DELETE') {
     const uniqueID = JSON.parse(req.body);
-    console.log('UniqueID: ', uniqueID);
     const rejectBooking = await prisma.bookings.update({
       where: {
         id: uniqueID,

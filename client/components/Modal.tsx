@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Home from './BookingCalendar';
 import BookingCalendar from './BookingCalendar';
 
+// Modal function that shows the availability of the instructor
 const Modal = ({ setShowModal, pro }) => {
   return (
     <>

@@ -4,7 +4,7 @@ import Layout from '../../../components/Layout';
 import BookingRequests from '../../../components/BookingRequests';
 // import Upload from '../../components/uploads';
 import Pro from '../../../components/ProProfile/Pro';
-import User from '../../../components/Profile/User';
+import User from '../../../components/ClientProfile/Client';
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/clients');

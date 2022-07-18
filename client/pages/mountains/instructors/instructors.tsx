@@ -16,12 +16,13 @@ interface ProProps {
 }
 
 const Instructors = () => {
+
   const { data, error } = useSWR<Pros[]>("/api/pros/", fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
   const pro = data;
-  console.log("PRO PRo", pro);
+
   return (
     <Layout>
       <div className="mt-20">

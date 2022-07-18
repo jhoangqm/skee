@@ -4,7 +4,7 @@ import Layout from '../../../components/Layout';
 import BookingRequests from '../../../components/BookingRequests';
 // import Upload from '../../components/uploads';
 import Pro from '../../../components/ProProfile/Pro';
-import User from '../../../components/Profile/User';
+import User from '../../../components/ClientProfile/Client';
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros');
@@ -26,11 +26,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async context => {
   const id = context.params.id;
-  // console.log('ID', context.params.id);
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
   const data = await res.json();
 
-  // console.log("DATA",data);
 
   return {
     props: { pro: data },
@@ -38,8 +36,6 @@ export const getStaticProps = async context => {
 };
 
 const Profile = ({ pro }) => {
-  console.log('pro id: ', pro[0].id);
-
   return (
     <Layout signup={true}>
       <Pro pro={pro} />

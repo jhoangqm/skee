@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 
 
@@ -10,6 +10,7 @@ const User = ({ user }) => {
 
   const [component, setComponent] = useState("Profile");
   const [skills, setSkills] = useState([])
+  const clearForm = useRef(null)
 
   const displaySkills = () => {
     const skillsMapped = user[0].ClientsSkills.map(s => s.skills)
@@ -59,7 +60,7 @@ console.log('skills: ', skills)
     data.lastName = lastName.value
     data.email = email.value  
     data.phoneNumber = phoneNumber.value
-    console.log('Values: ', e.target.firstName.value)
+    console.log('Values: ', e.target)
     fetch(`/api/clients`, {
       method: 'PATCH',
       body: JSON.stringify(data)
@@ -68,70 +69,66 @@ console.log('skills: ', skills)
   }
 
   const Edit = () => {
-    console.log("BIG USER", user[0].firstName);
     return (
-      <div className="md:w-2/3 w-full">
+      <div className="self-center md:w-2/3 w-full pr-60">
           <div className='py-8 px-16'>
-        <form method='patch' onSubmit={updateUserInfo}>
-          <div>
-            <h1>Update your infomation here:</h1>
-            <div className="form-control">
-              <label className="input-group input-group-vertical">
-                <span>First name</span>
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-
-                  placeholder={user[0].firstName}
-                  className="input input-bordered" />
-              </label>
-              <label className="input-group input-group-vertical">
-                <span>Last name</span>
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-
-                  placeholder={user[0].lastName}
-                  className="input input-bordered">
-
-                </input>
-
-              </label>
-            </div>
-          </div>
-          <div>
-            <div className="form-control">
-              <label className="input-group input-group-vertical">
-                <span>Phone</span>
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  id="phone"
-                  maxLength={14}
-                  minLength={10}
-                  pattern="^\d{3}\d{3}\d{4}"
-                  placeholder={user[0].phoneNumber}
-                  className="input input-bordered" />
-              </label>
-            </div>
-          </div>
-          <div>
-            <div className="form-control">
-              <label className="input-group input-group-vertical">
-                <span>Email</span>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-
-                  placeholder={user[0].email}
-                  className="input input-bordered" />
-              </label>
-            </div>
-          </div>
-          <button type="submit" className="btn btn-primary">Save</button>
+        <form method='patch' onSubmit={updateUserInfo} ref={clearForm}>
+                <div className="flex items-center flex-col">
+        <label htmlFor="firstName">First Name:</label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          required
+          placeholder="First Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+        </div>
+        <div className="flex items-center flex-col">
+        <label htmlFor="lastName">Last Name:</label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          required
+          placeholder="Last Name"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="Email"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <label htmlFor="phone">Phone:</label>
+        <input
+          type="text"
+          name="phoneNumber"
+          id="phone"
+          maxLength={14}
+          minLength={10}
+          pattern="^\d{3}\d{3}\d{4}"
+          placeholder="(000) 000-0000"
+          className="input input-bordered w-full max-w-xs m-1"
+        />
+      </div>
+      <div className="flex items-center flex-col">
+        <button
+          type="submit"
+          className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-1/3"
+          data-mdb-ripple="true"
+          data-mdb-ripple-color="light"
+        >
+          Update profile
+        </button>
+      </div>
         </form>
         </div>
       </div>
@@ -175,33 +172,90 @@ console.log('skills: ', skills)
 
 
   return (
-    <>
-      <ul className="menu bg-base-100 w-56 p-2 rounded-box">
-        <li>
-          <a onClick={() => { setComponent('Profile') }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" /><circle cx="12" cy="10" r="3" /><circle cx="12" cy="12" r="10" /></svg>
-            Profile
-          </a>
-        </li>
-        <li>
-          <a onClick={() => { setComponent('Edit') }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
-            Edit Profile
-          </a>
-        </li>
-        <li>
-          <a onClick={() => { setComponent('History') }}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-            Booking History
-          </a>
-        </li>
-      </ul>
-      {component === "Profile" ? <Profile /> : null}
-      {component === "Edit" ? <Edit user={user} /> : null}
-      {component === "History" ? <History user={user} /> : null}
-    </>
+    <div className="">
+      <div className="flex flex-row w-auto justify-between">
+        <div>
+          <ul className="menu bg-base-100 w-56 p-2 rounded-box">
+            <li>
+              <a
+                onClick={() => {
+                  setComponent('Profile');
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
+                  <circle cx="12" cy="10" r="3" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  setComponent('Edit');
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                  <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                </svg>
+                Edit Profile
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  setComponent('History');
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Booking History
+              </a>
+            </li>
+            </ul>
+        </div>
+        <div className="flex justify-between flex-col w-full">
+          {component === "Profile" ? <Profile/> : null}
+          {component === "Edit" ? <Edit user={user} /> : null}
+          {component === "History" ? <History user={user} /> : null}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-  )
-}
 
-export default User
+export default User;

@@ -51,6 +51,9 @@ const Instructor = ({ pros }) => {
     setFilter([...filter, item]);
   };
 
+
+  
+  // on click gets data of instructors
   let onclickhandler = (e, id) => {
     const instructor = id;
     console.log("instructor", instructor);

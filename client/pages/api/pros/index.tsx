@@ -4,6 +4,7 @@ import { withIronSessionApiRoute } from 'iron-session/next';
 // query function to find all pros
 export default withIronSessionApiRoute(
   async function handler(req: any, res: any) {
+    // creates pro info
     if (req.method === 'POST') {
       const parsed = JSON.parse(req.body);
       const {
@@ -41,15 +42,16 @@ export default withIronSessionApiRoute(
       }
     }
     if (req.method === 'GET') {
+
       const pros = await prisma.pros.findMany({
         include: {resorts: true, ProsSkills: {select: {skills: true}}}
        } );
       res.json(pros);
     }
+    // updates pros info
     if (req.method === 'PATCH'){
       const data = JSON.parse(req.body)
       const {uniqueID, firstName, lastName, bio, email, phoneNumber, certBody} = data
-      console.log('data is: ', data)
       const updatedInfo = await prisma.pros.update({
         where: {
           id: uniqueID

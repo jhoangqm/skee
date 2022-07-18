@@ -11,7 +11,6 @@ import { data } from 'cypress/types/jquery';
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros')
   const data = await res.json();
- console.log("DATA", data);
   const paths = data.map(resort => {
     return {
       params: {
@@ -27,7 +26,6 @@ export const getStaticPaths = async () => {
 }
  
 export const getStaticProps = async (context) => {
-  console.log("MR", context.params.id)
   const resortId = context.params.id;
   const res = await fetch(`http://localhost:3000/api/pros/resortfinder/${resortId}`);
   const data = await res.json();

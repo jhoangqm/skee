@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ContactForm from '../../components/ContactForm';
 
+// Next JS to get static paths
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros');
   const data = await res.json();
@@ -23,13 +24,12 @@ export const getStaticPaths = async () => {
   };
 };
 
+// Next JS to get static props
 export const getStaticProps = async context => {
   const id = context.params.id;
-  // console.log('ID', context.params.id);
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
   const data = await res.json();
 
-  // console.log("DATA",data);
 
   return {
     props: { pro: data },
@@ -47,19 +47,19 @@ const Booking = ({ pro }) => {
             {pro[0].firstName} {pro[0].lastName}{' '}
           </p>
         </div>
-        <div className="flex justify-around">
-          <div className="flex justify-start h-80 w-auto">
+        <div className="flex lg:justify-around md:justify-center">
+          <div className="flex justify-start h-80 lg:w-auto lg:visible md:invisible md:w-0">
             <img src={pro[0].image} alt="profileImage" />
           </div>
           <div className="flex justify-start m-2">
             <BookingCalendar proId={pro[0].id} />
           </div>
         </div>
-        <p className="text-xl my-6 flex justify-center text-2xl bold">
+        <p className=" my-6 flex justify-center text-2xl bold">
           Instructor bio
         </p>
         <div className="flex justify-around">
-          <div className="flex rounded-md  shadow-custom p-8">
+          <div className="flex rounded-md  shadow-custom p-8 bg-white">
             <p className="justify-self-center self-center">{pro[0].bio}</p>
           </div>
         </div>
