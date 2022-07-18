@@ -59,21 +59,21 @@ const Pro = ({ pro }) => {
     return (
       <>
       {certUpload ? (
-        <div>
-          <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
+        <div className='self-center pr-60'>
+          <button className='btn btn-primary' onClick={unShowCert}>Click to Upload Avatar</button>
           <UploadCert proId={pro[0].id} />
         </div>
       ) : (
-        <div>
-          <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
+        <div className='self-center pr-60'>
+          <button className='btn btn-primary' onClick={showCert}>Click to Upload Certification</button>
           <UploadAvatar proId={pro[0].id} />
         </div>
       )}
-        <div className="md:w-2/3 w-full">
+        <div className="self-center md:w-2/3 w-full pr-60">
           <div className='py-8 px-16'>
         <form method='patch' onSubmit={updateProInfo} ref={clearForm}>
-        <div className="flex justify-center flex-row">
-        <label htmlFor="firstName"></label>
+        <div className="flex items-center flex-col">
+        <label htmlFor="firstName">First Name:</label>
         <input
           type="text"
           name="firstName"
@@ -82,7 +82,9 @@ const Pro = ({ pro }) => {
           placeholder="First Name"
           className="input input-bordered w-full max-w-xs m-1"
         />
-        <label htmlFor="lastName"></label>
+        </div>
+        <div className="flex items-center flex-col">
+        <label htmlFor="lastName">Last Name:</label>
         <input
           type="text"
           name="lastName"
@@ -118,17 +120,16 @@ const Pro = ({ pro }) => {
       </div>
       <div className="flex items-center flex-col">
         <label htmlFor="phone">Bio:</label>
-        <input
-          type="text"
+        <textarea
           name="bio"
           id="bio"
           maxLength={140}
           minLength={1}
-          pattern="^\d{3}\d{3}\d{4}"
-          placeholder="Bio"
-          className="input input-bordered w-full max-w-xs m-1"
-        />
+          placeholder="Enter your bio information here"
+          className="textarea textarea-bordered w-full max-w-xs m-1"
+        ></textarea>
       </div>
+
       <div className="flex items-center flex-col">
         <button
           type="submit"

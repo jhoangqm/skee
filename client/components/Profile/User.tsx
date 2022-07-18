@@ -70,11 +70,11 @@ console.log('skills: ', skills)
 
   const Edit = () => {
     return (
-      <div className="md:w-2/3 w-full">
+      <div className="self-center md:w-2/3 w-full pr-60">
           <div className='py-8 px-16'>
         <form method='patch' onSubmit={updateUserInfo} ref={clearForm}>
-        <div className="flex justify-center flex-row">
-        <label htmlFor="firstName"></label>
+                <div className="flex items-center flex-col">
+        <label htmlFor="firstName">First Name:</label>
         <input
           type="text"
           name="firstName"
@@ -83,7 +83,9 @@ console.log('skills: ', skills)
           placeholder="First Name"
           className="input input-bordered w-full max-w-xs m-1"
         />
-        <label htmlFor="lastName"></label>
+        </div>
+        <div className="flex items-center flex-col">
+        <label htmlFor="lastName">Last Name:</label>
         <input
           type="text"
           name="lastName"
