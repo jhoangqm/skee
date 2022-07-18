@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import bcrypt from 'bcryptjs';
 
-const ClientSignup = () => {
+const ClientSignup = (props: { salt: string }) => {
   const [signupError, setSignupError] = useState(false);
   const clearForm = useRef(null);
   const router = useRouter();
@@ -14,7 +14,7 @@ const ClientSignup = () => {
     for (const v of e.target.elements) {
       data[v.name] = v.value;
     }
-    data.password = bcrypt.hashSync(data.password, process.env.SALT);
+    data.password = bcrypt.hashSync(data.password, props.salt);
 
     // fetch clients
     const response = await fetch('/api/clients', {
@@ -34,7 +34,7 @@ const ClientSignup = () => {
 
   return (
     <form method="post" onSubmit={clientSignup} ref={clearForm}>
-      <div className="flex justify-center flex-row">
+      <div className="flex items-center flex-col my-2">
         <label htmlFor="firstName"></label>
         <input
           type="text"
@@ -44,6 +44,8 @@ const ClientSignup = () => {
           placeholder="First Name"
           className="input input-bordered w-full max-w-xs m-1"
         />
+      </div>
+      <div className="flex items-center flex-col my-2">
         <label htmlFor="lastName"></label>
         <input
           type="text"
@@ -54,8 +56,8 @@ const ClientSignup = () => {
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>
-      <div className="flex items-center flex-col">
-        <label htmlFor="email">Email:</label>
+      <div className="flex items-center flex-col my-2">
+        <label htmlFor="email"></label>
         <input
           type="email"
           name="email"
@@ -65,8 +67,8 @@ const ClientSignup = () => {
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>
-      <div className="flex items-center flex-col">
-        <label htmlFor="password">Password:</label>
+      <div className="flex items-center flex-col my-2">
+        <label htmlFor="password"></label>
         <input
           type="password"
           name="password"
@@ -78,8 +80,8 @@ const ClientSignup = () => {
           className="input input-bordered w-full max-w-xs m-1"
         />
       </div>
-      <div className="flex items-center flex-col">
-        <label htmlFor="phone">Phone:</label>
+      <div className="flex items-center flex-col my-2">
+        <label htmlFor="phone"></label>
         <input
           type="text"
           name="phoneNumber"
