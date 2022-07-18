@@ -1,9 +1,22 @@
+import { useState } from 'react';
 const ContactForm = (props: { pro }) => {
+  const [body, setBody] = useState('');
+  const openEmail = e => {
+    e.preventDefault();
+    const query = document.getElementById('yourQuery');
+    const subject = document.getElementById('subject');
+    return window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${props.pro.email}&su=${subject.value}&body=${query.value}`,
+      '_blank',
+      'location=yes, height=570, width=520, scrollbars=yes, status=yes'
+    );
+  };
   return (
     <div className="flex items-center min-w-full flex-col">
       <p className="text-xl">Contact:</p>
       <form
-        action={`mailto:${props.pro.email}`}
+        onSubmit={openEmail}
+        target="_blank"
         method="post"
         name="EmailForm"
         encType="text/plain"
@@ -11,24 +24,16 @@ const ContactForm = (props: { pro }) => {
       >
         <div className="form-control">
           <label className="input-group">
-            <span>Name</span>
+            <span>Subject</span>
             <input
               type="text"
+              id="subject"
               placeholder="Your Name"
               className="input input-bordered"
             />
           </label>
         </div>
-        <div className="form-control mt-3">
-          <label className="input-group">
-            <span className="">Email</span>
-            <input
-              type="email"
-              placeholder="info@site.com"
-              className="input input-bordered"
-            />
-          </label>
-        </div>
+
         <div className="flex flex-col items-center w-full">
           <label htmlFor="yourQuery" className="label">
             <span className="label-text text-xl">Your Query: </span>

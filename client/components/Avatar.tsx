@@ -20,16 +20,17 @@ function Avatar(props: { proId }) {
 
   return (
     <div className="imageBox">
-    <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-      <div className="relative">
-        <img 
-        alt='...'
-        src={prosAvatar} 
-        className="shadow-xl rounded-full h-auto align-middle border-none"
-        style={{ maxWidth: "150px" }}></img>
+      <div className="w-full px-4 lg:order-2 flex justify-center">
+        <div className="relative">
+          <img
+            alt="..."
+            src={prosAvatar}
+            className="shadow-xl rounded-full h-auto align-middle border-none"
+            style={{ maxWidth: '150px' }}
+          ></img>
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 

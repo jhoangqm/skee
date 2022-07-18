@@ -115,49 +115,28 @@ const Nav = (props: any) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <Link href="/mountains">
-              <li>
-                <a>Mountains</a>
+              <li className="hover:bg-info hover:rounded-lg">
+                <a className="text-2xl">Mountains</a>
               </li>
             </Link>
-            <li tabIndex={0}>
-              <a className="justify-between">
-                Dev Links
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <Link href="/faq">
-                  <li>
-                    <a>FAQ</a>
+            {user ? (
+              userType === 'client' ? (
+                <Link href={`/profile/client/${user?.id}`}>
+                  <li className="hover:bg-info hover:rounded-lg">
+                    <a className="text-2xl">Profile</a>
                   </li>
                 </Link>
-                <Link href="/userprofile">
-                  <li>
-                    <a>User Profile</a>
+              ) : (
+                <Link href={`/profile/pro/${user?.id}`}>
+                  <li className="hover:bg-info hover:rounded-lg">
+                    <a className="text-2xl">Profile</a>
                   </li>
                 </Link>
-                <Link href="/pro">
-                  <li>
-                    <a>Pro Profile</a>
-                  </li>
-                </Link>
-                <Link href="/booking">
-                  <li>
-                    <a>Booking</a>
-                  </li>
-                </Link>
-              </ul>
-            </li>
+              )
+            ) : null}
             <Link href="/mountains/instructors/instructors">
               <li>
-                <a>Instructors</a>
+                <a className="text-2xl">Instructors</a>
               </li>
             </Link>
           </ul>

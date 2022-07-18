@@ -67,7 +67,7 @@ export default function InstructorCalendar({ pro }) {
   if (error) return <h1>Yo there was an Error {error}</h1>;
 
   return (
-    <div className="app">
+    <div className="app w-[87%]">
       <div className="flex items-center flex-col mb-32 mt-10">
         <div className="flex justify-center">
           <h1 className="underline mb-5 text-2xl">Select your availability</h1>

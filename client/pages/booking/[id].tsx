@@ -47,8 +47,8 @@ const Booking = ({ pro }) => {
             {pro[0].firstName} {pro[0].lastName}{' '}
           </p>
         </div>
-        <div className="flex justify-around">
-          <div className="flex justify-start h-80 w-auto">
+        <div className="flex lg:justify-around md:justify-center">
+          <div className="flex justify-start h-80 lg:w-auto lg:visible md:invisible md:w-0">
             <img src={pro[0].image} alt="profileImage" />
           </div>
           <div className="flex justify-start m-2">
