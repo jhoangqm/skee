@@ -120,17 +120,16 @@ const Pro = ({ pro }) => {
       </div>
       <div className="flex items-center flex-col">
         <label htmlFor="phone">Bio:</label>
-        <input
-          type="text"
+        <textarea
           name="bio"
           id="bio"
           maxLength={140}
           minLength={1}
-          pattern="^\d{3}\d{3}\d{4}"
-          placeholder="Bio"
-          className="input input-bordered w-full max-w-xs m-1"
-        />
+          placeholder="Enter your bio information here"
+          className="textarea textarea-bordered w-full max-w-xs m-1"
+        ></textarea>
       </div>
+
       <div className="flex items-center flex-col">
         <button
           type="submit"
