@@ -59,7 +59,7 @@ console.log('skills: ', skills)
     data.lastName = lastName.value
     data.email = email.value  
     data.phoneNumber = phoneNumber.value
-    console.log('Values: ', e.target.firstName.value)
+    console.log('Values: ', e.target)
     fetch(`/api/clients`, {
       method: 'PATCH',
       body: JSON.stringify(data)
@@ -72,7 +72,7 @@ console.log('skills: ', skills)
     return (
       <div className="md:w-2/3 w-full">
           <div className='py-8 px-16'>
-        <form method='patch' onSubmit={updateUserInfo}>
+        <form onSubmit={updateUserInfo}>
           <div>
             <h1>Update your infomation here:</h1>
             <div className="form-control">
@@ -176,7 +176,7 @@ console.log('skills: ', skills)
 
   return (
     <>
-      <ul className="menu bg-base-100 w-56 p-2 rounded-box">
+      <ul className="menu bg-base-100 w-56 p-2 rounded-box ">
         <li>
           <a onClick={() => { setComponent('Profile') }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" /><circle cx="12" cy="10" r="3" /><circle cx="12" cy="12" r="10" /></svg>
