@@ -21,7 +21,7 @@ const Instructors = () => {
   if (!data) return <div>loading...</div>;
 
   const pro = data;
-
+  console.log("PRO PRo", pro);
   return (
     <Layout>
       <div className="mt-20">
@@ -29,13 +29,13 @@ const Instructors = () => {
           These are all of the instructors that you selected
         </h2>
         <blockquote className=" text-3xl  text-center text-slate-900 mt-10 mb-10">
-          Your are currently looking at all instructors in&nbsp;
+          You are currently looking at all instructors in&nbsp;
           <span className=" before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-info relative inline-block">
             <span className="relative text-white">&nbsp;Canada&nbsp;</span>
           </span>
         </blockquote>
       </div>
-      {/* <Filter pros={pro}/> */}
+      
       <Instructor pros={pro} />
     </Layout>
   );

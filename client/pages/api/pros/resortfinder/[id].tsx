@@ -8,7 +8,7 @@ export default async function handler({ query: { id } }: any, res: any) {
       resortId:
         Number(id)
     },
-include: {resorts: true, ProsSkills: {skills: true}}
+    include: {resorts: true, ProsSkills: {select: {skills: true}}}
   });
   res.json(pro);
 }

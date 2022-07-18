@@ -5,27 +5,26 @@ import Checkbox from "./Checkbox";
 import CheckLevel from "./SkillCheckbox";
 
 const Filter = ({ pros, filterItem }: any) => {
-  const [showResort, setShowResort] = useState(false)
-const uniqueResort = [...new Set(pros.map((item) => item.resortId))];
-  
-    
-let uniqueSkill = (pros.map(item => item.ProsSkills.map((skill) => skill.skills.skill)))
-  
-  const array = []
-    for(let a of uniqueSkill){
-      for(let b of a){
-      array.push(b)
-      }
+  const [showResort, setShowResort] = useState(false);
+  const uniqueResort = [...new Set(pros.map((item) => item.resortId))];
+
+  let uniqueSkill = pros.map((item) =>
+    item.ProsSkills.map((skill) => skill.skills.skill)
+  );
+
+  const array = [];
+  for (let a of uniqueSkill) {
+    for (let b of a) {
+      array.push(b);
     }
-  uniqueSkill = [...new Set(array)]
-  
+  }
+  uniqueSkill = [...new Set(array)];
 
   return (
     <>
-      
       <>
         <ul className="menu bg-base-100 w-56 p-2 rounded-box ml-5">
-          <li >
+          <li>
             <div className="disabled:transform-none disabled:transition-none disabled:shadow-none disabled: bg-base-100 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,16 +37,26 @@ let uniqueSkill = (pros.map(item => item.ProsSkills.map((skill) => skill.skills.
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
-                <circle cx="12" cy="10" r="3" />
-                <circle cx="12" cy="12" r="10" />
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
               </svg>
               Filters:
             </div>
           </li>
 
           <li>
-            <button id="dropdownDefault" data-dropdown-toggle="dropdown" type="button" >
+            <button
+              id="dropdownDefault"
+              data-dropdown-toggle="dropdown"
+              type="button"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -59,51 +68,60 @@ let uniqueSkill = (pros.map(item => item.ProsSkills.map((skill) => skill.skills.
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
-                <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                <path d="M3 20h18L12 4z" />
               </svg>
               By Resort
             </button>
-          
           </li>
-          <div id="dropdown" >
+          <div id="dropdown">
             <ul aria-labelledby="dropdownDefault">
-            {uniqueResort.map((resort) => (
-            <li>
-              <a><Checkbox id={resort} pros={pros} filterItem={filterItem} /></a>
-              </li>
+              {uniqueResort.map((resort) => (
+                <li>
+                  <a>
+                    <Checkbox id={resort} pros={pros} filterItem={filterItem} />
+                  </a>
+                </li>
               ))}
-              </ul>
-              </div>
+            </ul>
+          </div>
 
           <li>
-            <button id="dropdownDefault" data-dropdown-toggle="dropdown" type="button">
+            <button
+              id="dropdownDefault"
+              data-dropdown-toggle="dropdown"
+              type="button"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
+                fill="none"
+                stroke="#000000"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
               By Specialities
             </button>
-            <div id="dropdown" >
-            <ul aria-labelledby="dropdownDefault">
-            {uniqueSkill.map((skill) => (
-            <li>
-              <a> <CheckLevel id={skill} pros={pros} filterItem={filterItem} /></a>
-              </li>
-              ))}
+            <div id="dropdown">
+              <ul aria-labelledby="dropdownDefault">
+                {uniqueSkill.map((skill) => (
+                  <li>
+                    <a>
+                      {" "}
+                      <CheckLevel
+                        id={skill}
+                        pros={pros}
+                        filterItem={filterItem}
+                      />
+                    </a>
+                  </li>
+                ))}
               </ul>
-              </div>
-            
+            </div>
           </li>
         </ul>
       </>
