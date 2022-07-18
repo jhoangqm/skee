@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import bcrypt from 'bcryptjs';
 
-const ClientSignup = (props: { salt: string }) => {
+const ClientSignup = () => {
   const [signupError, setSignupError] = useState(false);
   const clearForm = useRef(null);
   const router = useRouter();
@@ -14,7 +14,7 @@ const ClientSignup = (props: { salt: string }) => {
     for (const v of e.target.elements) {
       data[v.name] = v.value;
     }
-    data.password = bcrypt.hashSync(data.password, props.salt);
+    data.password = bcrypt.hashSync(data.password, process.env.SALT);
 
     // fetch clients
     const response = await fetch('/api/clients', {
@@ -108,7 +108,7 @@ const ClientSignup = (props: { salt: string }) => {
           data-mdb-ripple="true"
           data-mdb-ripple-color="light"
         >
-          Sign up
+          Register
         </button>
       </div>
 

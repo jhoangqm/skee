@@ -6,20 +6,18 @@ import bcrypt from 'bcryptjs';
 
 const Signup = () => {
   const [type, setType] = useState('');
-  const salt = bcrypt.genSaltSync(10);
-  console.log('THIS IS THE ENV SALT', process.env.SALT);
+
   const onChangeHandler = (e: any) => {
     setType(e.target.value);
   };
   return (
     <Layout signup={true}>
       <section className="">
-        {console.log('THIS IS THE SALT', salt)};
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <h1 className="text-4xl mt-10 mb-5">Register now</h1>
         </div>
         <div className="flex items-center flex-col ">
-          <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box">
+          <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box m-1">
             <li>
               <label htmlFor="client" className="w-40">
                 I am looking for an Instructor
@@ -54,11 +52,11 @@ const Signup = () => {
             <div className="card-body">
               {type === '' ? (
                 <div className="flex justify-center">
-                  <div>Select a signup type</div>
+                  <div>Please select an account type</div>
                 </div>
               ) : null}
-              {type === 'pro' ? <ProSignup salt={salt} /> : null}
-              {type === 'client' ? <ClientSignup salt={salt} /> : null}
+              {type === 'pro' ? <ProSignup /> : null}
+              {type === 'client' ? <ClientSignup /> : null}
             </div>
           </div>
         </div>

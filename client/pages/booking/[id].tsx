@@ -55,11 +55,11 @@ const Booking = ({ pro }) => {
             <BookingCalendar proId={pro[0].id} />
           </div>
         </div>
-        <p className="text-xl my-6 flex justify-center text-2xl bold">
+        <p className=" my-6 flex justify-center text-2xl bold">
           Instructor bio
         </p>
         <div className="flex justify-around">
-          <div className="flex rounded-md  shadow-custom p-8">
+          <div className="flex rounded-md  shadow-custom p-8 bg-white">
             <p className="justify-self-center self-center">{pro[0].bio}</p>
           </div>
         </div>
