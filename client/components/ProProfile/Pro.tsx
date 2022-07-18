@@ -16,22 +16,56 @@ const Pro = ({ pro }) => {
   const Profile = ({ pro }) => {
     return (
       <>
-        <div className="flex justify-between">
-          <div className="text-4xl ml-[16vw]">
-            {pro[0].firstName} {pro[0].lastName}{' '}
-          </div>
-        </div>
-        <div className="flex justify-around">
-          <div>
-            <Avatar proId={pro[0].id} />
-          </div>
-          <div className="flex h-80 w-80 bg-blue-200">
-            <div className="justify-self-center self-center">{pro[0].bio}</div>
-          </div>
-        </div>
+       <div className="">
+                    <div className="relative">
+                    <Avatar proId={pro[0].id} />
+                    </div>
+                  </div>
+      <div className="text-center mt-12">
+                  <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                  {pro[0].firstName} {pro[0].lastName}{' '}
+                  </h3>
+                  <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
+                    <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{" "}
+                    Vancouver, British Columbia
+                  </div>
+                  <div className="mb-2 text-gray-700 mt-10">
+                    <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
+                    Ski Instructor
+                  </div>
+                  <div className="mb-2 text-gray-700">
+                    <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
+                    University of British Columbia
+                  </div>
+                </div>
+                <div className="mt-10 py-10 border-t border-gray-300 text-center">
+                  <div className="flex flex-wrap justify-center">
+                    <div className="w-full lg:w-9/12 px-4">
+                      <p className="mb-4 text-lg leading-relaxed text-gray-800">
+                      {pro[0].bio}
+                      </p>
+                    </div>
+                  </div>
+                </div>
       </>
     );
   };
+
+        // <div className="flex justify-between">
+        //   <div className="text-4xl ml-[16vw]">
+        //   <h3 className='text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2'>
+        //     {pro[0].firstName} {pro[0].lastName}{' '}
+        //       </h3>
+        //   </div>
+        // </div>
+        // <div className="flex justify-around ">
+        //   <div>
+        //     <Avatar proId={pro[0].id} />
+        //   </div>
+        //   <div className="flex h-80 w-80 bg-blue-200">
+        //     <div className="justify-self-center self-center">{pro[0].bio}</div>
+        //   </div>
+        // </div>
 
   const updateProInfo = (e) => {
     e.preventDefault();
@@ -129,7 +163,12 @@ const Pro = ({ pro }) => {
           className="textarea textarea-bordered w-full max-w-xs m-1"
         ></textarea>
       </div>
-
+      <textarea
+            className="textarea textarea-bordered w-full"
+            id="yourQuery"
+            name="Your message content"
+            placeholder="Your Query"
+          ></textarea>
       <div className="flex items-center flex-col">
         <button
           type="submit"
