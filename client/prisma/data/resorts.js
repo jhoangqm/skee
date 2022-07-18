@@ -34,7 +34,7 @@ const resort = [
     hardRuns: chance.integer({ min: 2, max: 20 }),
     province: 'BC',
     image:
-      'https://i0.wp.com/vancouversbestplaces.com/wp-content/uploads/2020/08/Lodge-Chair-at-Mt-Seymour.jpg?resize=640%2C315&ssl=1',
+      'https://hikesnearvancouver.ca/wp-content/uploads/2018/03/Mount-Seymour-to-Brockton-Point-Winter-Route-sunset.png',
   },
   {
     name: 'Grouse Mountain',
@@ -48,7 +48,7 @@ const resort = [
     hardRuns: chance.integer({ min: 2, max: 20 }),
     province: 'BC',
     image:
-      'https://media.istockphoto.com/photos/grouse-mountain-picture-id1132052313',
+      'https://www.snowshoemag.com/wp-content/blogs.dir/5/files/DSC_2816.jpg',
   },
   {
     name: 'Whistler Blackcomb',

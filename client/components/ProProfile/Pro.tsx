@@ -147,8 +147,7 @@ const Pro = ({ pro }) => {
         </>
     )
   };
-
-
+  
   const Requests = ({ pro }) => {
     return (
       <div className="request-box flex flex-wrap w-full">
@@ -158,7 +157,7 @@ const Pro = ({ pro }) => {
       </div>
     );
   };
-  const Avalibility = () => {
+  const Availability = () => {
     return <InstructorCalendar pro={pro} />;
   };
 
@@ -240,7 +239,7 @@ const Pro = ({ pro }) => {
               <li>
                 <a
                   onClick={() => {
-                    setComponent('Avalibility');
+                    setComponent('Availability');
                   }}
                 >
                   <svg
@@ -276,7 +275,7 @@ const Pro = ({ pro }) => {
           {component === 'Profile' ? <Profile pro={pro} /> : null}
           {component === 'Edit' ? <Edit /> : null}
           {component === 'Requests' ? <Requests pro={pro} /> : null}
-          {component === 'Avalibility' ? <Avalibility /> : null}
+          {component === 'Availability' ? <Availability /> : null}
         </div>
       </div>
     </div>
