@@ -18,9 +18,8 @@ function Upload(props: {proId}) {
     setPreview(URL.createObjectURL(e.target.files[0]));//shows preview
   }
   
+  //updates image in DB
   const updateImageDB = (data) =>{
-    // Creating obj because I can't pass two values in
-    // JSON.stringify's params
     const certObj = {};
     certObj.uniqueID = props.proId
     certObj.certImg = data.url
@@ -31,6 +30,7 @@ function Upload(props: {proId}) {
     .then((res)=>res.json())
   }
 
+  // uploads image to backend server
   const uploadImage = (e) => {
     e.preventDefault()
     const formData = new FormData();

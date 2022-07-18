@@ -1,7 +1,7 @@
 const { prisma } = require('../../../db');
 
 export default async function handler({ query: { id } }: any, res: any) {
-  console.log("QUERY", id);
+  // find resorts where province id is
   const resort = await prisma.resorts.findMany({
     where: {
       province: String(id),

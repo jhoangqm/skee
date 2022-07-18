@@ -11,7 +11,6 @@ const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
   const [certUpload, setCertUpload] = useState();
   const clearForm = useRef(null);
-  // const [avatarUpload, setAvatarUpload] = useState(null)
 
   const Profile = ({ pro }) => {
     return (
@@ -67,7 +66,9 @@ const Pro = ({ pro }) => {
   //   </div>
   // </div>
 
-  const updateProInfo = e => {
+ 
+  // Function that updates the pro info
+  const updateProInfo = (e) => {
     e.preventDefault();
     const { firstName, lastName, bio, email, phoneNumber } = e.target;
     const data = {};
@@ -82,12 +83,14 @@ const Pro = ({ pro }) => {
       method: 'PATCH',
       body: JSON.stringify(data),
     })
+
       .then(res => res.json())
       .then(() => {
         e.target.reset();
       });
   };
-
+  
+  // Function that brings out the edit profile component ( Should probably make a separate component)
   const Edit = () => {
     const showCert = () => setCertUpload(true);
     const unShowCert = () => setCertUpload(false);
@@ -187,6 +190,9 @@ const Pro = ({ pro }) => {
     );
   };
 
+
+  
+  // checks requests from booking requests component
   const Requests = ({ pro }) => {
     return (
       <div className="request-box flex flex-wrap w-[86%]">
@@ -196,6 +202,8 @@ const Pro = ({ pro }) => {
       </div>
     );
   };
+
+  // instructor can setup their availability
   const Availability = () => {
     return <InstructorCalendar pro={pro} />;
   };

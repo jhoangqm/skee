@@ -23,21 +23,13 @@ interface ProProps {
 
 const Instructors = () => {
 
-  // const { data, error } = useSWR<Resorts[]>('/api/resorts', fetcher);
-  // if (error) return <div>failed to load</div>;
-  // if (!data) return <div>loading...</div>;
-
-
-  // const getSelectedCategories = (
-
-
   const { data, error } = useSWR<Pros[]>('/api/pros/fullList', fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
   const pro = data
 
-  console.log("pro",pro)
+
   
   return (
     <Layout>

@@ -16,7 +16,7 @@ interface ResortProps {
 
 
 
-
+// fetch map function gets info from resorts table  
 function Map() {
 const [showMap, setShowMap] = useState(null);
 const { data, error } = useSWR<Resorts[]>('/api/resorts', fetcher);

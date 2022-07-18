@@ -6,9 +6,9 @@ export default async function handler(
 ) {
   const parsed = JSON.parse(req.body);
   let day = new Date(parsed.date);
+  // Insert info to DB
   if (req.method === 'POST') {
     day = new Date(day.setHours(-7));
-    console.log('day', day);
     const slots = await prisma.timeSlots.findMany({
       where: {
         day: day,
@@ -21,9 +21,9 @@ export default async function handler(
         bookings: true,
       },
     });
-    console.log(slots);
     res.json(slots);
   }
+  // Select info from DB
   if (req.method === 'GET') {
     const slots = await prisma.timeSlots.findMany({
       where: {

@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 import Map from '../components/Map';
 import Carousel from '../components/Carousel';
 
-
+// NEXT MAIN PAGE
 const Home: NextPage = ({ resort }) => {
   return (
     <Layout>

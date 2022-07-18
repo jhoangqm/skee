@@ -2,6 +2,7 @@ const { prisma } = require('../../../db');
 
 export default async function handler({ query: { id } }: any, res: any) {
   console.log('id Params', id);
+  // GET all booking where proId matches and order them by ascending
   const booking = await prisma.bookings.findMany({
     where: {
       proId: Number(id),
@@ -12,5 +13,4 @@ export default async function handler({ query: { id } }: any, res: any) {
     include: { clients: true, timeSlot: true },
   });
   res.json(booking);
-  // console.log('Hello from booking: ', booking)
 }

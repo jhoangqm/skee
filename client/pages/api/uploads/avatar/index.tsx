@@ -10,15 +10,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
 
+  // SELECT FROM PROS 
   if (req.method === 'GET') {
     const pros = await prisma.pros.findMany();
     res.json(pros);
   }
-
+  // UPDATE PROS WHERE ID IS AND DATA TO UPDATE IS IMAGE
   if(req.method === 'PATCH'){
     const data = JSON.parse(req.body)
     const {uniqueID, avatar} = data
-    console.log('data is: ', data)
     const uploadedImage = await prisma.pros.update({
           where: {
             id: uniqueID // calling the ID from the upload component
@@ -27,7 +27,6 @@ export default async function handler(
             image: avatar
           },
         });
-        console.log('uploadedImage: ', uploadedImage)
         res.json(uploadedImage)
   }
 }

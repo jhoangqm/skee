@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ContactForm from '../../components/ContactForm';
 
+// Next JS to get static paths
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros');
   const data = await res.json();
@@ -23,13 +24,12 @@ export const getStaticPaths = async () => {
   };
 };
 
+// Next JS to get static props
 export const getStaticProps = async context => {
   const id = context.params.id;
-  // console.log('ID', context.params.id);
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
   const data = await res.json();
 
-  // console.log("DATA",data);
 
   return {
     props: { pro: data },

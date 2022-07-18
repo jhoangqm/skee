@@ -5,6 +5,7 @@ const User = ({ user }) => {
   const [skills, setSkills] = useState([]);
   const clearForm = useRef(null);
 
+  // display the skills of a user
   const displaySkills = () => {
     const skillsMapped = user[0].ClientsSkills.map(s => s.skills);
     const skillsArray = skillsMapped.map(s => s.skill);
@@ -47,6 +48,7 @@ const User = ({ user }) => {
     );
   };
 
+  // updates user info
   const updateUserInfo = e => {
     e.preventDefault();
     const { firstName, lastName, email, phoneNumber } = e.target;
@@ -63,6 +65,7 @@ const User = ({ user }) => {
     }).then(res => res.json());
   };
 
+  // edit component ( should probably make a separate file will prob do it in the future)
   const Edit = () => {
     return (
       <div className="self-center md:w-2/3 w-full pr-60">
@@ -134,6 +137,7 @@ const User = ({ user }) => {
   //   .toUTCString()
   //   .replace(/GMT/, ' ')}{' '}
 
+  // Shows history of booking
   const History = ({ user }) => {
     console.log(user[0].bookings[0]);
     return (
