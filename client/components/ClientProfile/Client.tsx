@@ -137,10 +137,10 @@ const User = ({ user }) => {
   const History = ({ user }) => {
     console.log(user[0].bookings[0]);
     return (
-      <div key={user[0].id} className="flex justify-center">
+      <div key={user[0].id} className="flex justify-center flex-wrap">
         <>
           {user[0].bookings.map(booking => (
-            <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-primary flex justify-center flex-col">
+            <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-primary flex  justify-center flex-col">
               <ul>
                 <li>
                   <p>
@@ -161,17 +161,24 @@ const User = ({ user }) => {
                         } ${booking.Pros.lastName}`}{' '}
                   </p>
                 </li>
-                <li>
-                  <p></p>
-                </li>
               </ul>
               <div className="flex justify-center">
-                <button className="btn btn-success ">
+                <a
+                  target="_blank"
+                  className="btn btn-success"
+                  onClick={() => {
+                    window.open(
+                      `https://mail.google.com/mail/?view=cm&fs=1&to=${booking.Pros.email}&su=Booking%20request%20change`,
+                      '_blank',
+                      'location=yes, height=570, width=520, scrollbars=yes, status=yes'
+                    );
+                  }}
+                >
                   <ul>
                     <li>Contact instructor</li>
                     <li> to make changes</li>
                   </ul>
-                </button>
+                </a>
               </div>
             </div>
           ))}
