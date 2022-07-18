@@ -11,7 +11,7 @@ const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
   const [certUpload, setCertUpload] = useState()
   const clearForm = useRef(null)
-  // const [avatarUpload, setAvatarUpload] = useState(null)
+
   
   const Profile = ({ pro }) => {
     return (
@@ -50,7 +50,7 @@ const Pro = ({ pro }) => {
       </>
     );
   };
-
+        // OLD PROFILE PAGE SAVING JUST IN CASE
         // <div className="flex justify-between">
         //   <div className="text-4xl ml-[16vw]">
         //   <h3 className='text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2'>
@@ -67,6 +67,7 @@ const Pro = ({ pro }) => {
         //   </div>
         // </div>
 
+  // Function that updates the pro info
   const updateProInfo = (e) => {
     e.preventDefault();
     const {firstName, lastName, bio, email, phoneNumber} = e.target
@@ -85,6 +86,7 @@ const Pro = ({ pro }) => {
     .then((res)=>res.json())
   }
   
+  // Function that brings out the edit profile component ( Should probably make a separate component)
   const Edit = () => {
     
     const showCert = () => setCertUpload(true)  
@@ -186,6 +188,7 @@ const Pro = ({ pro }) => {
     )
   };
   
+  // checks requests from booking requests component
   const Requests = ({ pro }) => {
     return (
       <div className="request-box flex flex-wrap w-full">
@@ -195,6 +198,8 @@ const Pro = ({ pro }) => {
       </div>
     );
   };
+
+  // instructor can setup their availability
   const Availability = () => {
     return <InstructorCalendar pro={pro} />;
   };

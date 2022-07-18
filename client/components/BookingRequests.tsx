@@ -8,14 +8,13 @@ function BookingRequests(props: { proId }) {
   const [pendingRequest, setPendingRequest] = useState([]);
   const [acceptedRequest, setAcceptedRequest] = useState([]);
   // const [error, setError] = useState(null)
+
   useEffect(() => fetchData(), []);
   useEffect(() => filterRequests(), [request]);
   const { query } = useRouter();
   query.id = props.proId;
 
-  // Get request booking table all bookings that have pending ?
-  // There's a problem in here somewhere the data is not consistent
-  // It shows up randomly
+  // get requests from DB
   const fetchData = () => {
     fetch(`/api/bookings/${props.proId}`)
       .then(res => res.json())
@@ -29,7 +28,7 @@ function BookingRequests(props: { proId }) {
     setAcceptedRequest(acceptedStatus);
   };
 
-  // This works beautifully
+  // dynamic update shows requests numbers
   const togglePending = id => {
     fetch(`/api/bookings`, {
       method: 'PATCH',
@@ -38,6 +37,8 @@ function BookingRequests(props: { proId }) {
       .then(res => res.json())
       .then(() => fetchData());
   };
+
+  // deletes booking from db
   const deleteBooking = id => {
     fetch(`/api/bookings`, {
       method: 'DELETE',

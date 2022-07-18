@@ -29,6 +29,7 @@ const Nav = (props: any) => {
       });
   };
 
+  // allows user to choose between pro/client login
   const onRadioChange = (e: any) => {
     setLoginType(e.target.value);
   };
