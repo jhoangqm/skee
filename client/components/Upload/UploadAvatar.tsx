@@ -7,6 +7,7 @@ function UploadAvatar(props: { proId }) {
   const [file, setFile] = useState();
   const [imagePreview, setPreview] = useState();
   const inputEl = useRef(null); //ref hidden input
+  const clearPreview = useRef(null)
 
   const { query } = useRouter();
   query.id = props.proId;
@@ -71,7 +72,7 @@ function UploadAvatar(props: { proId }) {
         <button className="btn" onClick={() => inputEl.current.click()}>
           select image
         </button>
-        <button className="btn" type="submit">
+        <button className="btn" type="submit" ref={clearPreview}>
           upload
         </button>
       </form>
