@@ -53,13 +53,15 @@ function UploadAvatar(props: { proId }) {
       <hr></hr>
       {/* <h4>Avatar Preview</h4> */}
       <form onSubmit={uploadAvatar}>
-        {/* <div className="imageBox">
+        <div className="imageBox">
           <div className="avatar">
-             <div className=" w-72 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src={imagePreview} width="100%" object-fit="contain"></img>
+             <div className="rounded-full">
+              <img src={imagePreview}  
+              object-fit="contain"
+              style={{ maxWidth: "150px" }}></img>
             </div> 
           </div>
-        </div> */}
+        </div>
         <input
           type="file"
           onChange={getImage}
