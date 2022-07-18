@@ -6,15 +6,15 @@ import { useEffect, useState } from 'react';
 //   resorts: Pros[];
 // }
 
+// Instructor sets a time that hes available
 const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
   const [timeData, setTimeData] = useState([{}]);
   let parsedDate = { date }.date.toISOString();
-  //send proId, time and date to DB
-  // console.log("FETCHDATA", fetchData)
   useEffect(() => {
     timeFetcher();
   }, [date]);
 
+  // fetches time..
   const timeFetcher = () => {
     fetch('/api/available', {
       method: 'POST',
@@ -26,11 +26,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
       });
   };
 
-  // const fetcher = (url: any) => fetch(url).then(res => res.json());
-  // const { data, error } = useSWR<Pros[]>('/api/resorts', fetcher);
-  // if (error) return <div>failed to load</div>;
-  // if (!data) return <div>loading...</div>;
-
+  // booking function that sends query to API
   const booking = async (e, date: any, time: string, pro: any) => {
     e.preventDefault();
 
@@ -46,7 +42,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
         fetchData();
       });
   };
-
+  // Allows instructor to create an AM or PM lesson
   const timeSetter = () => {
     if (!timeData[0])
       return (

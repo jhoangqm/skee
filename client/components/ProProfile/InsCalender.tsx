@@ -56,9 +56,9 @@ export default function InstructorCalendar({ pro }) {
   }
 
   // * * * * * * * * * * * * * * * *
-
+  
+  // modal function
   const openModal = () => {
-    // console.log('clicked to openModal');
     setShowModal(true);
   };
 

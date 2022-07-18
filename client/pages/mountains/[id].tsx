@@ -15,7 +15,6 @@ export const getStaticPaths = async () => {
       },
     };
   });
-  console.log(paths);
   return {
     paths,
     fallback: true,
@@ -23,7 +22,6 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async context => {
-  console.log('CONTEXT', context);
   const resortId = context.params.id;
   const res = await fetch(`http://localhost:3000/api/resorts/${resortId}`);
   const data = await res.json();

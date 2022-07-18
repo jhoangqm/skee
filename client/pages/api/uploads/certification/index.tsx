@@ -10,23 +10,21 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-
+  // GET
   if (req.method === 'GET') {
     const pros = await prisma.pros.findMany();
     res.json(pros);
   }
-
+  // INSERT
   if (req.method === 'POST') {
-    console.log('req.body:', req.body)
     const data = JSON.parse(req.body)
     const { certImg } = data
     res.json(data)
   }
-
+  // UPDATE
   if(req.method === 'PATCH'){
     const data = JSON.parse(req.body)
     const {uniqueID, certImg} = data
-    console.log('data is: ', data)
     const uploadedImage = await prisma.pros.update({
           where: {
             id: uniqueID // calling the ID from the upload component
@@ -35,7 +33,6 @@ export default async function handler(
             certImg: certImg
           },
         });
-        console.log('uploadedImage: ', uploadedImage)
         res.json(uploadedImage)
   }
 }

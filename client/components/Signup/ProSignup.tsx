@@ -35,6 +35,7 @@ const ProSignup = () => {
       });
   };
 
+  // fetches resorts DB via API
   const fetcher = (url: RequestInfo | URL) =>
     fetch(url).then(res => res.json());
   const { data, error } = useSWR<Resorts[]>('/api/resorts', fetcher);

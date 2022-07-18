@@ -25,7 +25,7 @@ console.log("INLIST",insList)
   };
 
   
-
+  // on click gets data of instructors
   let onclickhandler = (e, id) => {
     const instructor = id
     console.log("instructor", instructor)
