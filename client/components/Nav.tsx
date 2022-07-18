@@ -192,33 +192,7 @@ const Nav = (props: any) => {
               </Link>
             )
           ) : null}
-          <li tabIndex={0}>
-            <a className="hover:bg-info hover:rounded-lg  text-2xl">
-              Dev Links
-              <svg
-                className="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-              </svg>
-            </a>
-            <ul className="p-2">
-              <Link href="/faq">
-                <li className="bg-info">
-                  <a className="text-2xl">FAQ</a>
-                </li>
-              </Link>
 
-              <Link href="/booking/2">
-                <li className="bg-info">
-                  <a>Booking</a>
-                </li>
-              </Link>
-            </ul>
-          </li>
           <Link href="mountains/instructors/instructors/">
             <li className="hover:bg-info hover:rounded-lg">
               <a className="text-2xl">Instructors</a>
