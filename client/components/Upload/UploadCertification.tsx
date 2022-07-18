@@ -7,6 +7,7 @@ function Upload(props: { proId }) {
   const [file, setFile] = useState();
   const [imagePreview, setPreview] = useState();
   const inputEl = useRef(null); //ref hidden input
+  const clearPreview = useRef(null)
 
   const { query } = useRouter();
   query.id = props.proId;
@@ -60,6 +61,7 @@ function Upload(props: { proId }) {
           style={{ display: 'none' }} //hiding input
           ref={inputEl} //set inputEl to referring this element
         ></input>
+
         <button className="btn" onClick={() => inputEl.current.click()}>
           select image
         </button>

@@ -6,7 +6,7 @@ export default async function handler({ query: { id } }: any, res: any) {
     where: {
       id: Number(id)
     },
-   
-  });
+    include: {resorts: true, ProsSkills: {select: {skills: true}}}
+  })
   res.json(pro);
 }
