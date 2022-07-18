@@ -9,13 +9,13 @@ import Avatar from '../Avatar';
 
 const Pro = ({ pro }) => {
   const [component, setComponent] = useState('Profile');
-  const [certUpload, setCertUpload] = useState(true)
+  const [certUpload, setCertUpload] = useState(true);
   // const [avatarUpload, setAvatarUpload] = useState(null)
-  
+
   const Profile = ({ pro }) => {
     return (
       <>
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-20">
           <div className="text-4xl ml-[16vw]">
             {pro[0].firstName} {pro[0].lastName}{' '}
           </div>
@@ -33,25 +33,28 @@ const Pro = ({ pro }) => {
   };
 
   const Edit = () => {
-    
-    const showCert = () => setCertUpload(true)  
+    const showCert = () => setCertUpload(true);
     const unShowCert = () => setCertUpload(false);
-  
+
     return (
       <>
-    { certUpload ? (
-      <div>
-        <button className='btn btn-primary' onClick={showCert}>Upload Certification</button>
-        <UploadCert proId={pro[0].id} />
-      </div>
-    ) : (
-      <div>
-        <button className='btn btn-primary' onClick={unShowCert}>Upload Avatar</button>
-        <UploadAvatar proId={pro[0].id} />
-      </div>
-    )}
+        {certUpload ? (
+          <div>
+            <button className="btn btn-primary" onClick={showCert}>
+              Upload Certification
+            </button>
+            <UploadCert proId={pro[0].id} />
+          </div>
+        ) : (
+          <div>
+            <button className="btn btn-primary" onClick={unShowCert}>
+              Upload Avatar
+            </button>
+            <UploadAvatar proId={pro[0].id} />
+          </div>
+        )}
       </>
-    )
+    );
   };
 
   const Requests = ({ pro }) => {
