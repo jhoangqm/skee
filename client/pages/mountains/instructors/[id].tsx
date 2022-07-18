@@ -44,13 +44,24 @@ export const getStaticProps = async (context) => {
 }
 
 const Instructors = ({ pros }) => {
+
   
   return (
     <Layout>
-      {/* <h2 className={styles.title}>These are all of the instructors that you selected</h2>
-      <p className={styles.description}>Click on one to see their description</p> */}
-      <p > Your are currently looking at instructors based out of {pros.resorts}</p> 
-      {/* <Filter/> */}
+      
+      <p ></p> 
+      
+      <div className="mt-20">
+        <h2 className="text-7xl font-semibold text-center text-slate-900">
+          These are all of the instructors that you selected
+        </h2>
+        <blockquote className=" text-3xl  text-center text-slate-900 mt-10 mb-10">
+          You are currently looking at instructors based out of &nbsp;
+          <span className=" before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-info relative inline-block">
+            <span className="relative text-white">&nbsp;{pros[0].resorts.name}&nbsp;</span>
+          </span>
+        </blockquote>
+      </div>
       <Instructor pros={pros} />
 
 
