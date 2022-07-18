@@ -19,17 +19,13 @@ function Avatar(props: { proId }) {
   useEffect(() => fetchAvatars(), []);
 
   return (
-    <div>
-
-      <h1>Hello from Avatar</h1>
-      <img
-        src={prosAvatar}
-        object-fit="contain"
-        className="flex justify-start bg-blue-200 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
-      ></img>
-      <UploadAvatar proId={props.proId} />
-
+    <div className="imageBox">
+    <div className="avatar">
+      <div className=" w-72 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+        <img src={prosAvatar} width="100%" object-fit="contain"></img>
+      </div>
     </div>
+  </div>
   );
 }
 
