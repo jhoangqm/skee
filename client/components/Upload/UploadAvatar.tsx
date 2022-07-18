@@ -60,7 +60,7 @@ function UploadAvatar(props: { proId }) {
         </div> */}
         <input
           type="file"
-          // onChange={getImage}
+          onChange={getImage}
           style={{ display: 'none' }} //hiding input
           ref={inputEl} //set inputEl to referring this element
         ></input>

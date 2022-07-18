@@ -20,9 +20,13 @@ function Avatar(props: { proId }) {
 
   return (
     <div className="imageBox">
-    <div className="avatar">
-      <div className=" w-72 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-        <img src={prosAvatar} width="100%" object-fit="contain"></img>
+    <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+      <div className="relative">
+        <img 
+        alt='...'
+        src={prosAvatar} 
+        className="shadow-xl rounded-full h-auto align-middle border-none"
+        style={{ maxWidth: "150px" }}></img>
       </div>
     </div>
   </div>
