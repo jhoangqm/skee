@@ -51,7 +51,7 @@ const Instructors = ({ pros }) => {
       
       <p ></p> 
       
-      <div className="mt-20">
+      <div className="mt-40">
         <h2 className="text-7xl font-semibold text-center text-slate-900">
           These are all of the instructors that you selected
         </h2>
