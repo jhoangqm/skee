@@ -31,7 +31,7 @@ const Instructors = () => {
   // const getSelectedCategories = (
 
 
-  const { data, error } = useSWR<Pros[]>('/api/pros/fullList', fetcher);
+  const { data, error } = useSWR<Pros[]>('/api/pros/', fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
