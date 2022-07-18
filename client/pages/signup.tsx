@@ -2,7 +2,6 @@ import Layout from '../components/Layout';
 import { useState } from 'react';
 import ProSignup from '../components/Signup/ProSignup';
 import ClientSignup from '../components/Signup/ClientSignup';
-import bcrypt from 'bcryptjs';
 
 const Signup = () => {
   const [type, setType] = useState('');
@@ -16,8 +15,8 @@ const Signup = () => {
         <div className="flex justify-center ">
           <h1 className="text-4xl mt-10 mb-5">Register now</h1>
         </div>
-        <div className="flex items-center flex-col ">
-          <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box m-1">
+        <div className="flex items-center flex-col m-1">
+          <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box bg-transparent">
             <li>
               <label htmlFor="client" className="w-40">
                 I am looking for an Instructor
