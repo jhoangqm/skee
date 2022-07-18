@@ -29,9 +29,9 @@ const Instructor = ({ pros }) => {
       
     })
   console.log("filter", filter)
-  console.log("filteredPros", filteredPros)
+ 
 }, [filter])
-
+ console.log("filteredPros", filteredPros)
 const filterItem = (item) => {
   if (filter.includes(item)) {
     setFilter(filter.filter(i => i !== item))
