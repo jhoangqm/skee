@@ -19,6 +19,7 @@ model Clients {
   phoneNumber   String?         @unique
   createdAt     DateTime        @default(now())
   firebaseToken String?
+  image         String          @default("https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg")
   chats         Chat[]
   bookings      Bookings[]
   reviews       Reviews[]
@@ -41,7 +42,7 @@ model Resorts {
   hardRuns       Int
   province       String
   image          String?
-  description    String     @default("this is a mountain description")
+  description    String     @default("A mountain is an elevated portion of the Earth's crust, generally with steep sides that show significant exposed bedrock. A mountain differs from a plateau in having a limited summit area, and is larger than a hill, typically rising at least 300 metres (1000 feet) above the surrounding land. A few mountains are isolated summits, but most occur in mountain ranges.")
   pro            Pros[]
   bookings       Bookings[]
 }
@@ -55,12 +56,12 @@ model Pros {
   bio         String?
   phoneNumber String       @unique
   certBody    String
-  certImg     String? 
+  certImg     String?
   level       Int
   createdAt   DateTime     @default(now())
   resorts     Resorts?     @relation(fields: [resortId], references: [id])
   resortId    Int?
-  image       String       @default("")
+  image       String       @default("https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg")
   reviews     Reviews[]
   ProsSkills  ProsSkills[]
   Chat        Chat[]
