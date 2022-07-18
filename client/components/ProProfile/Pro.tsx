@@ -81,7 +81,11 @@ const Pro = ({ pro }) => {
     fetch(`/api/pros`, {
       method: 'PATCH',
       body: JSON.stringify(data),
-    }).then(res => res.json());
+    })
+      .then(res => res.json())
+      .then(() => {
+        e.target.reset();
+      });
   };
 
   const Edit = () => {
@@ -89,23 +93,23 @@ const Pro = ({ pro }) => {
     const unShowCert = () => setCertUpload(false);
 
     return (
-      <>
+      <div className="w-[86%] flex flex-col justify-center my-5">
         {certUpload ? (
-          <div className="self-center pr-60">
+          <div className="self-center ">
             <button className="btn btn-primary" onClick={unShowCert}>
               Click to Upload Avatar
             </button>
             <UploadCert proId={pro[0].id} />
           </div>
         ) : (
-          <div className="self-center pr-60">
+          <div className="self-center ">
             <button className="btn btn-primary" onClick={showCert}>
               Click to Upload Certification
             </button>
             <UploadAvatar proId={pro[0].id} />
           </div>
         )}
-        <div className="self-center md:w-2/3 w-full pr-60">
+        <div className="self-center w-full ">
           <div className="py-8 px-16">
             <form method="patch" onSubmit={updateProInfo} ref={clearForm}>
               <div className="flex items-center flex-col">
@@ -162,15 +166,10 @@ const Pro = ({ pro }) => {
                   maxLength={140}
                   minLength={1}
                   placeholder="Enter your bio information here"
-                  className="textarea textarea-bordered w-full max-w-xs m-1"
+                  className="textarea textarea-bordered w-full max-w-xs m-1 mb-5"
                 ></textarea>
               </div>
-              <textarea
-                className="textarea textarea-bordered w-full"
-                id="yourQuery"
-                name="Your message content"
-                placeholder="Your Query"
-              ></textarea>
+
               <div className="flex items-center flex-col">
                 <button
                   type="submit"
@@ -184,7 +183,7 @@ const Pro = ({ pro }) => {
             </form>
           </div>
         </div>
-      </>
+      </div>
     );
   };
 
