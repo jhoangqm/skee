@@ -6,15 +6,13 @@ import bcrypt from 'bcryptjs';
 
 const Signup = () => {
   const [type, setType] = useState('');
-  const salt = bcrypt.genSaltSync(10);
-  console.log('THIS IS THE ENV SALT', process.env.SALT);
+
   const onChangeHandler = (e: any) => {
     setType(e.target.value);
   };
   return (
     <Layout signup={true}>
       <section className="">
-        {console.log('THIS IS THE SALT', salt)};
         <div className="flex justify-center">
           <h1 className="text-4xl mt-10 mb-5">Register now</h1>
         </div>
