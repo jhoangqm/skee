@@ -1,6 +1,5 @@
 import { useState } from 'react';
 const ContactForm = (props: { pro }) => {
-  const [body, setBody] = useState('');
   const openEmail = e => {
     e.preventDefault();
     const query = document.getElementById('yourQuery');
@@ -13,7 +12,6 @@ const ContactForm = (props: { pro }) => {
   };
   return (
     <div className="flex items-center min-w-full flex-col">
-      <p className="text-xl">Contact:</p>
       <form
         onSubmit={openEmail}
         target="_blank"
@@ -28,15 +26,15 @@ const ContactForm = (props: { pro }) => {
             <input
               type="text"
               id="subject"
-              placeholder="Your Name"
+              placeholder="Subject"
               className="input input-bordered"
             />
           </label>
         </div>
 
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center md:w-full lg:w-1/2">
           <label htmlFor="yourQuery" className="label">
-            <span className="label-text text-xl">Your Query: </span>
+            <span className="label-text text-xl mt-7 mb-2">Your Query: </span>
           </label>
           <textarea
             className="textarea textarea-bordered w-full"
@@ -45,7 +43,7 @@ const ContactForm = (props: { pro }) => {
             placeholder="Your Query"
           ></textarea>
         </div>
-        <div className="flex justify-center mt-2">
+        <div className="flex justify-center mt-7">
           <input type="submit" value="Submit" className="btn btn-primary" />
         </div>
       </form>

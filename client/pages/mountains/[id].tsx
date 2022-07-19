@@ -1,8 +1,8 @@
-import Layout from "../../components/Layout";
-import Link from "next/link";
+import Layout from '../../components/Layout';
+import Link from 'next/link';
+import NotFound from '../../components/NotFound';
 
-import Calendar from "../../components/Calendar";
-import styles from "../../styles/Home.module.css";
+import styles from '../../styles/Home.module.css';
 
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:3000/api/resorts/");
@@ -92,7 +92,10 @@ function BackOfCard({ resort }) {
 }
 
 const Mountains = ({ resort }) => {
+  if (!resort[0]) return <NotFound />;
+else
   return (
+
     <Layout>
       <div className="mt-40">
         <blockquote className=" text-7xl font-semibold text-center text-slate-900 mt-10 mb-10">
@@ -116,11 +119,12 @@ const Mountains = ({ resort }) => {
                 <BackOfCard resort={resort} />
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </Layout>
-  );
+            </div>
+          ))}
+        </div>
+      </Layout>
+     
+    );
 };
 
 export default Mountains;

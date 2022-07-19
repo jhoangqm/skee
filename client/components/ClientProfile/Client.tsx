@@ -14,37 +14,60 @@ const User = ({ user }) => {
 
   useEffect(() => displaySkills(), []);
 
+  {
+    skills.length === 0 ? (
+      <div className="text-xl">No skills selected</div>
+    ) : (
+      skills.map(s => (
+        <li>
+          <div className="text-xl">{s}</div>
+        </li>
+      ))
+    );
+  }
   const Profile = () => {
     return (
-      <>
-        <div className="flex justify-center my-10">
-          <div className="text-4xl">
-            {user[0].firstName} {user[0].lastName}
+      <div className="flex flex-col  w-[86%]">
+        <div className="flex justify-center ">
+          <div className="imageBox mt-10">
+            <img
+              src={user[0].image}
+              alt="Profile picture"
+              className="shadow-xl rounded-full h-auto align-middle border-none "
+              style={{ maxWidth: '150px' }}
+            />
           </div>
         </div>
-        <div className="flex justify-around">
-          <div className="flex justify-start h-80 w-80 ">
-            <img src={user[0].image} alt="Profile picture" />
+        <div className="text-center mt-12">
+          <h3 className="text-4xl font-semibold leading-normal  text-gray-800 mb-2">
+            {user[0].firstName} {user[0].lastName}{' '}
+          </h3>
+          <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
+            <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{' '}
+            Vancouver, British Columbia
           </div>
-          <div className="flex flex-col h-80 w-80 shadow-custom bg-white">
-            {' '}
-            <p className="flex justify-center text-2xl my-5">Skills:</p>
-            <div className="justify-self-center  self-center grid-rows-none">
-              <ol className="list-disc">
-                {skills.length === 0 ? (
-                  <div className="text-xl">No skills selected</div>
-                ) : (
-                  skills.map(s => (
-                    <li>
-                      <div className="text-xl">{s}</div>
-                    </li>
-                  ))
-                )}
-              </ol>
+        </div>
+        <div className="mt-10 py-10 border-t border-gray-300 ">
+          <p className="flex justify-center text-2xl mb-5 font-bold">Skills</p>
+          <div className="flex justify-center">
+            <div className="flex w-1/4 rounded-2xl justify-center items-center  shadow-custom ">
+              <p className=" text-lg  text-gray-800 p-10">
+                <ol className="list-disc">
+                  {skills.length === 0 ? (
+                    <div className="text-xl">No skills selected</div>
+                  ) : (
+                    skills.map(s => (
+                      <li>
+                        <div className="text-xl">{s}</div>{' '}
+                      </li>
+                    ))
+                  )}
+                </ol>
+              </p>
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   };
 
@@ -68,7 +91,7 @@ const User = ({ user }) => {
   // edit component ( should probably make a separate file will prob do it in the future)
   const Edit = () => {
     return (
-      <div className="self-center md:w-2/3 w-full pr-60">
+      <div className="self-center w-full ">
         <div className="py-8 px-16">
           <form method="patch" onSubmit={updateUserInfo} ref={clearForm}>
             <div className="flex items-center flex-col">
@@ -117,7 +140,7 @@ const User = ({ user }) => {
                 className="input input-bordered w-full max-w-xs m-1"
               />
             </div>
-            <div className="flex items-center flex-col">
+            <div className="flex items-center flex-col m-3">
               <button
                 type="submit"
                 className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-1/3"
@@ -141,52 +164,82 @@ const User = ({ user }) => {
   const History = ({ user }) => {
     console.log(user[0].bookings[0]);
     return (
-      <div key={user[0].id} className="flex justify-center flex-wrap">
-        <>
-          {user[0].bookings.map(booking => (
-            <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-primary flex  justify-center flex-col">
-              <ul>
-                <li>
-                  <p>
-                    {booking.accepted === true && !booking.pending
-                      ? `${booking.Pros.firstName} ${
-                          booking.Pros.lastName
-                        } is looking forward to seeing you on  ${'  '}${new Date(
-                          booking.timeSlot.startTime
-                        )
-                          .toUTCString()
-                          .replace(/GMT/, ' ')}${' '} `
-                      : `Your booking has not been accepted yet for ${'  '}${new Date(
-                          booking.dateFrom
-                        )
-                          .toDateString()
-                          .replace(/GMT/, ' ')}${' '} with ${
-                          booking.Pros.firstName
-                        } ${booking.Pros.lastName}`}{' '}
-                  </p>
-                </li>
-              </ul>
-              <div className="flex justify-center">
-                <a
-                  target="_blank"
-                  className="btn btn-success"
-                  onClick={() => {
-                    window.open(
-                      `https://mail.google.com/mail/?view=cm&fs=1&to=${booking.Pros.email}&su=Booking%20request%20change`,
-                      '_blank',
-                      'location=yes, height=570, width=520, scrollbars=yes, status=yes'
-                    );
-                  }}
-                >
+      <div className="flex justify-center flex-wrap mt-16">
+        {user[0].bookings.map(booking => (
+          <div key={user[0].id}>
+            {booking.accepted === true && !booking.pending ? (
+              <>
+                <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-success flex  justify-center flex-col">
                   <ul>
-                    <li>Contact instructor</li>
-                    <li> to make changes</li>
+                    <li>
+                      <p className="mb-2">
+                        {booking.Pros.firstName} {booking.Pros.lastName} is
+                        looking forward to seeing you on {'  '}
+                        {new Date(booking.timeSlot.startTime)
+                          .toUTCString()
+                          .replace(/GMT/, ' ')}
+                      </p>
+                    </li>
                   </ul>
-                </a>
-              </div>
-            </div>
-          ))}
-        </>
+
+                  <div className="flex justify-center">
+                    <a
+                      target="_blank"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        window.open(
+                          `https://mail.google.com/mail/?view=cm&fs=1&to=${booking.Pros.email}&su=Booking%20request%20change`,
+                          '_blank',
+                          'location=yes, height=570, width=520, scrollbars=yes, status=yes'
+                        );
+                      }}
+                    >
+                      <ul>
+                        <li>Contact instructor</li>
+                        <li> to make changes</li>
+                      </ul>
+                    </a>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-error flex  justify-center flex-col">
+                  <ul>
+                    <li>
+                      <p className="mb-2">
+                        Your booking has not been accepted yet for {'  '}
+                        {new Date(booking.dateFrom)
+                          .toDateString()
+                          .replace(/GMT/, ' ')}{' '}
+                        with {booking.Pros.firstName} {booking.Pros.lastName}
+                      </p>
+                    </li>
+                  </ul>
+
+                  <div className="flex justify-center">
+                    <a
+                      target="_blank"
+                      className="btn btn-info"
+                      onClick={() => {
+                        window.open(
+                          `https://mail.google.com/mail/?view=cm&fs=1&to=${booking.Pros.email}&su=Booking%20request%20change`,
+                          '_blank',
+                          'location=yes, height=570, width=520, scrollbars=yes, status=yes'
+                        );
+                      }}
+                    >
+                      <ul>
+                        <li>Contact instructor</li>
+                        <li> to make changes</li>
+                      </ul>
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}{' '}
+          </div>
+        ))}
       </div>
     );
   };
