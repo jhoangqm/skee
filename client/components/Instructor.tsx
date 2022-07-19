@@ -66,7 +66,7 @@ const Instructor = ({ pros }) => {
 
   return (
     <>
-    <div className="flex flex-row w-auto justify-between">
+    <div className="flex flex-row w-auto ">
       <Filter className="sticky" pros={pros} setFilter={setFilter} filterItem={filterItem} />
       
       <div className="modal-instructor">
