@@ -98,39 +98,6 @@ a {
 }
 
 
-/* .flip { */
-  /* width: 200px; */
-  /* height: 200px;    */
-  /* text-align: center; */
-  /* perspective: 1200px;   */
-/* } */
-/* .flip-content { */
-  /* width: 100%; */
-  /* height: 100%; */
-  /* transition: transform .8s; */
-  /* transform-style: preserve-3d; */
-/* } */
-/* .flip:hover .flip-content { */
-  /* transform: rotateY(180deg); */
-  /* transition: transform 0.6s; */
-/* } */
-/* .flip-front, .flip-back { */
-  /* position: absolute; */
-  /* height: 100%; */
-  /* width: 100%; */
-  /* line-height: 150px; */
-  /* backface-visibility: hidden;   */
-  /* color: #fff;   */
-  /* background-color: lightseagreen;
-  border: 6px solid lightcoral;
-  box-shadow: 6px 6px lightseagreen; */
-/* } */
-/* .flip-back { */
-  /* transform: rotateY(180deg); */
-  /* border: 6px solid lightseagreen;
-  box-shadow: 6px 6px lightcoral; */
-/* } */
-
 .flip-card {
   background-color: transparent;
   width: 426px;

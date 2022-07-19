@@ -93,7 +93,7 @@ const Mountains = () => {
         </blockquote>
       </div>
 
-      <div className=" flex flex-wrap">
+      <div className=" flex flex-wrap justify-center">
         {resorts.map((resort) => (
           <div className="flip-card">
             <div className="flip-card-inner">
