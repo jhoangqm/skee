@@ -1,13 +1,11 @@
-import Layout from '../../components/Layout';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import styles from '../../styles/Home.module.css';
-
-
+import Layout from "../../components/Layout";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import styles from "../../styles/Home.module.css";
 
 function FrontOfCard({ resort }) {
   return (
-    <div className="modal-mountains mx-15">
+    <div className="modal-mountains ">
       <div key={resort.id} className="flex flex-wrap justify-center m-3  ">
         <div className="card w-96 bg-base-100 shadow-xl m-5 cursor-pointer">
           <figure>
@@ -26,7 +24,7 @@ function FrontOfCard({ resort }) {
             </p>
             <div className="card-actions justify-center">
               <Link href={`/mountains/instructors/${resort.id}`}>
-                <button className="btn btn-primary w-3/4">
+                <button className="btn btn-primary w-3/4 mt-5">
                   Book an instructor at {resort.name}
                 </button>
               </Link>
@@ -40,7 +38,7 @@ function FrontOfCard({ resort }) {
 // hover:scale-110 transition duration-500
 function BackOfCard({ resort }) {
   return (
-    <div className="modal-mountains mx-15">
+    <div className="modal-mountains ">
       <div key={resort.id} className="flex flex-wrap justify-center m-3">
         <div className="card w-96 bg-base-100 shadow-xl m-5 cursor-pointer">
           <figure>
@@ -48,12 +46,10 @@ function BackOfCard({ resort }) {
           </figure>
           <div className="card-body">
             <h2 className="card-title">{resort.name}</h2>
-            <p>
-              <li>About the resort {resort.description}</li>
-            </p>
+            <p>About the resort {resort.description}</p>
             <div className="card-actions justify-center">
               <Link href={`/mountains/instructors/${resort.id}`}>
-                <button className="btn btn-primary w-3/4">
+                <button className="btn btn-primary w-3/4 mt-5">
                   Book an instructor at {resort.name}
                 </button>
               </Link>
@@ -65,49 +61,46 @@ function BackOfCard({ resort }) {
   );
 }
 
-
-
 const Mountains = () => {
   const [resorts, setResorts] = useState([]);
   const fetchResorts = () => {
-    fetch('/api/resorts', {
-      method: 'GET',
+    fetch("/api/resorts", {
+      method: "GET",
     })
-      .then(res => res.json())
-      .then(data => setResorts(data));
+      .then((res) => res.json())
+      .then((data) => setResorts(data));
   };
   useEffect(() => fetchResorts(), []);
   console.log(resorts);
 
+  //  let  window.addEventListener('load', function() {
+  //     var div = document.querySelector('flip');
+  //     var img = document.querySelector('footer');
+  //     var rect = img.getBoundingClientRect();
 
+  //     div.style.height = rect.height + 'px';
+  //     div.style.width = rect.width + 'px';
+  //   });
 
-
-
-
-  
   return (
     <Layout>
       <div className="mt-40">
         <blockquote className=" text-7xl font-semibold text-center text-slate-900 mt-10 mb-10">
           Your are looking at all the mountains in&nbsp;
           <span className=" before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-info relative inline-block">
-            <span className="relative text-white">
-              &nbsp;Canada&nbsp;
-            </span>
+            <span className="relative text-white">&nbsp;Canada&nbsp;</span>
           </span>
         </blockquote>
       </div>
 
-
-
-      <div className=" flex flex-wrap justify-around">
+      <div className=" flex flex-wrap">
         {resorts.map((resort) => (
-          <div className="flip flex flex-wrap justify-center m-3">
-            <div className="flip-content">
-              <div className="flip-front">
+          <div className="flip-card">
+            <div className="flip-card-inner">
+              <div className="flip-card-front">
                 <FrontOfCard resort={resort} />
               </div>
-              <div className="flip-back">
+              <div className="flip-card-back">
                 <BackOfCard resort={resort} />
               </div>
             </div>

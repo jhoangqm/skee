@@ -98,35 +98,75 @@ a {
 }
 
 
-.flip {
-  width: 150px;
-  height: 150px;   
+/* .flip { */
+  /* width: 200px; */
+  /* height: 200px;    */
   /* text-align: center; */
-  perspective: 1200px;  
-}
-.flip-content {
-  width: 100%;
-  height: 100%;
-  transition: transform .8s;
-  transform-style: preserve-3d;
-}
-.flip:hover .flip-content {
-  transform: rotateY(180deg);
-  transition: transform 0.6s;
-}
-.flip-front, .flip-back {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  /* perspective: 1200px;   */
+/* } */
+/* .flip-content { */
+  /* width: 100%; */
+  /* height: 100%; */
+  /* transition: transform .8s; */
+  /* transform-style: preserve-3d; */
+/* } */
+/* .flip:hover .flip-content { */
+  /* transform: rotateY(180deg); */
+  /* transition: transform 0.6s; */
+/* } */
+/* .flip-front, .flip-back { */
+  /* position: absolute; */
+  /* height: 100%; */
+  /* width: 100%; */
   /* line-height: 150px; */
-  backface-visibility: hidden;  
+  /* backface-visibility: hidden;   */
   /* color: #fff;   */
   /* background-color: lightseagreen;
   border: 6px solid lightcoral;
   box-shadow: 6px 6px lightseagreen; */
-}
-.flip-back {
-  transform: rotateY(180deg);
+/* } */
+/* .flip-back { */
+  /* transform: rotateY(180deg); */
   /* border: 6px solid lightseagreen;
   box-shadow: 6px 6px lightcoral; */
+/* } */
+
+.flip-card {
+  background-color: transparent;
+  width: 426px;
+  height: 750px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* text-align: center; */
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  /* background-color: #bbb; */
+  /* color: black; */
+}
+
+.flip-card-back {
+  /* background-color: #2980b9; */
+  /* color: white; */
+  transform: rotateY(180deg);
 }
