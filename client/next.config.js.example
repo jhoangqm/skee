@@ -1,0 +1,14 @@
+/** @type {import('next').NextConfig} */
+const bcrypt = require('bcryptjs');
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+};
+
+module.exports = {
+  env: {
+    SALT: bcrypt.genSaltSync(10),
+    COOKIE_PASS: {YOUR COOKIE_PASSWORD HERE} - must be over 32 characters long,
+  },
+  nextConfig,
+};
