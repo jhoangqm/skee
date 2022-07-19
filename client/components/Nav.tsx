@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 
 // * * * * * * * * * * * * * * * * * * * *
 // TODO: Refactor, cleanup, move to components, user cookies in separate function
@@ -13,6 +14,7 @@ const Nav = (props: any) => {
   const [error, setError] = useState(false);
   const [typeError, setTypeError] = useState(false);
   const clearForm = useRef(null);
+  const router = useRouter();
 
   const fetchUser = async (type: string) => {
     await fetch('/api/user', {
@@ -46,6 +48,7 @@ const Nav = (props: any) => {
         setLoginType('');
         setError(false);
         setTypeError(false);
+        router.push('/');
       });
   };
 
