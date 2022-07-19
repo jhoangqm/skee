@@ -76,7 +76,7 @@ export default function BookingCalendar(props: { proId; isDisabled }) {
         </div>
       </div>
       <p className="text-center pt-5">
-        <span className="bold">date selected</span> {date.toDateString()}
+        <span className="bold">Date selected</span> {date.toDateString()}
       </p>
       <p className="flex justify-center text-sm">* All lessons are 3hrs long</p>
       <div className="flex justify-center">

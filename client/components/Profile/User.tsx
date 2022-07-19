@@ -65,7 +65,7 @@ const User = ({ user }) => {
     }).then(res => res.json());
   };
 
-  const Edit = () => {
+  const Edit = ({user}) => {
     return (
       <div className="self-center  w-full pr-60">
         <div className="py-8 px-16">
@@ -183,10 +183,10 @@ const User = ({ user }) => {
   };
 
   return (
-    <div className="">
-      <div className="flex flex-row w-auto justify-between">
-        <div>
-          <ul className="menu bg-base-100 w-56 p-2 rounded-box">
+    <div>
+      <div className="flex flex-row w-auto justify-between ml-5 mt-40 ">
+        <div className="ml-5 mt-40">
+          <ul className="menu bg-base-100 w-56 p-2 rounded-box ml-5 mt-40">
             <li>
               <a
                 onClick={() => {
@@ -264,7 +264,7 @@ const User = ({ user }) => {
           {component === 'History' ? <History user={user} /> : null}
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 

@@ -40,9 +40,14 @@ const Booking = ({ pro }) => {
     <Layout signup={false}>
       <div className="p-10 px-32">
         <div className="flex justify-center">
-          <p className="text-4xl mb-6 font-bold">
-            {pro[0].firstName} {pro[0].lastName}{' '}
-          </p>
+          <blockquote className="text-4xl mb-20 mt-10 font-semibold text-center text-slate-900">
+          You are booking with&nbsp;
+          <span className=" before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-info relative inline-block">
+            <span className="relative text-white">&nbsp;{pro[0].firstName}&nbsp;</span>
+            
+            </span>
+            &nbsp;{pro[0].lastName}
+          </blockquote>
         </div>
         <div className="flex lg:justify-around md:justify-center">
           <div className="flex justify-start h-80 lg:w-auto lg:visible md:invisible md:w-0">
