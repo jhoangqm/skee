@@ -22,7 +22,7 @@ const Modal = ({ setShowModal, pro }) => {
             >
               ✕
             </label>
-            <h3 className="font-bold text-2xl flex justify-center underline mb-6">
+            <h3 className="font-bold text-2xl text-slate flex justify-center underline mb-6">
               {pro[0].firstName} {pro[0].lastName}'s availability:
             </h3>
 
@@ -36,6 +36,7 @@ const Modal = ({ setShowModal, pro }) => {
                 </label>
               </Link>
             </div>
+            
           </div>
         </div>
       </div>

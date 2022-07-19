@@ -1,14 +1,15 @@
-import BookingRequests from '../BookingRequests';
+import BookingRequests from "../BookingRequests";
 
-import { useState, useRef } from 'react';
-import InstructorCalendar from './InsCalender';
-import UploadCert from '../Upload/UploadCertification';
-import UploadAvatar from '../Upload/UploadAvatar';
-import Avatar from '../Avatar';
-import { useRouter } from 'next/router';
+import { useState, useRef, useEffect } from "react";
+import InstructorCalendar from "./InsCalender";
+import UploadCert from "../Upload/UploadCertification";
+import UploadAvatar from "../Upload/UploadAvatar";
+import Avatar from "../Avatar";
+import { useRouter } from "next/router";
+import { filter } from "cypress/types/bluebird";
 
 const Pro = ({ pro }) => {
-  const [component, setComponent] = useState('Profile');
+  const [component, setComponent] = useState("Profile");
   const [certUpload, setCertUpload] = useState();
   const clearForm = useRef(null);
   const router = useRouter();
@@ -23,10 +24,10 @@ const Pro = ({ pro }) => {
         </div>
         <div className="text-center mt-12">
           <h3 className="text-4xl font-semibold leading-normal  text-gray-800 mb-2">
-            {pro[0].firstName} {pro[0].lastName}{' '}
+            {pro[0].firstName} {pro[0].lastName}{" "}
           </h3>
           <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
-            <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{' '}
+            <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{" "}
             Vancouver, British Columbia
           </div>
           <div className="mb-2 text-gray-700 mt-10">
@@ -68,7 +69,7 @@ const Pro = ({ pro }) => {
   // </div>
 
   // Function that updates the pro info
-  const updateProInfo = e => {
+  const updateProInfo = (e) => {
     e.preventDefault();
     const { firstName, lastName, bio, email, phoneNumber } = e.target;
     const data = {};
@@ -78,16 +79,16 @@ const Pro = ({ pro }) => {
     data.bio = bio.value;
     data.email = email.value;
     data.phoneNumber = phoneNumber.value;
-    console.log('Values: ', email.value);
+    console.log("Values: ", email.value);
     fetch(`/api/pros`, {
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify(data),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(() => {
         e.target.reset();
         router.push(`/profile/pro/${pro[0].id}`);
-        setComponent('Profile');
+        setComponent("Profile");
       });
   };
 
@@ -193,6 +194,7 @@ const Pro = ({ pro }) => {
 
   // checks requests from booking requests component
   const Requests = ({ pro }) => {
+    
     return (
       <div className="request-box flex flex-wrap w-[86%]">
         <div className="justify-self-center self-center">
@@ -207,6 +209,31 @@ const Pro = ({ pro }) => {
     return <InstructorCalendar pro={pro} />;
   };
 
+  console.log("PRRORORORORORROROAFSDFSD", pro);
+  const [notification, setNotification] = useState([]);
+  const [bubble, setBubble] = useState([]);
+
+  const fetchData = () => {
+    fetch(`/api/bookings/${pro[0].id}`)
+      .then((res) => res.json())
+      .then((data) => setNotification(data));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  useEffect(() => {
+    filterRequests();
+  }, [notification]);
+
+  const filterRequests = () => {
+    const pendingStatus = notification.filter((p) => p.pending);
+    console.log("PENDING STATUS", pendingStatus);
+    if (pendingStatus.length > 0) {
+      setBubble(pendingStatus);
+    }
+  };
+  console.log("Bubbles Darling", bubble)
   return (
     <div className="">
       <div className="flex flex-row w-auto justify-between">
@@ -215,7 +242,7 @@ const Pro = ({ pro }) => {
             <li>
               <a
                 onClick={() => {
-                  setComponent('Profile');
+                  setComponent("Profile");
                 }}
               >
                 <svg
@@ -239,7 +266,7 @@ const Pro = ({ pro }) => {
             <li>
               <a
                 onClick={() => {
-                  setComponent('Edit');
+                  setComponent("Edit");
                 }}
               >
                 <svg
@@ -259,33 +286,66 @@ const Pro = ({ pro }) => {
                 Edit Profile
               </a>
             </li>
-            <li>
-              <a
-                onClick={() => {
-                  setComponent('Requests');
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#000000"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+
+            {bubble.length === 0 ? (
+              <li>
+                <a
+                  onClick={() => {
+                    setComponent("Requests");
+                  }}
                 >
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Booking Requests
-              </a>
-            </li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#000000"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Booking Requests
+                </a>
+              </li>
+            ) : (
+              <div className="indicator">
+                <li>
+                  <span className="indicator-item badge badge-primary">
+                    {bubble.length}
+                  </span>
+
+                  <a
+                    onClick={() => {
+                      setComponent("Requests");
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#000000"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Booking Requests
+                  </a>
+                </li>{" "}
+              </div>
+            )}
+
             <div className="indicator">
               <li>
                 <a
                   onClick={() => {
-                    setComponent('Availability');
+                    setComponent("Availability");
                   }}
                 >
                   <svg
@@ -318,10 +378,10 @@ const Pro = ({ pro }) => {
           </ul>
         </div>
         <div className="flex justify-between flex-col w-full">
-          {component === 'Profile' ? <Profile pro={pro} /> : null}
-          {component === 'Edit' ? <Edit /> : null}
-          {component === 'Requests' ? <Requests pro={pro} /> : null}
-          {component === 'Availability' ? <Availability /> : null}
+          {component === "Profile" ? <Profile pro={pro} /> : null}
+          {component === "Edit" ? <Edit /> : null}
+          {component === "Requests" ? <Requests pro={pro} /> : null}
+          {component === "Availability" ? <Availability /> : null}
         </div>
       </div>
     </div>
