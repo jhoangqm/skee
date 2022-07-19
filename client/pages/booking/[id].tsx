@@ -50,7 +50,7 @@ const Booking = ({ pro }) => {
           </blockquote>
         </div>
         <div className="flex lg:justify-around md:justify-center">
-          <div className="flex justify-start h-80 lg:w-auto lg:visible md:invisible md:w-0">
+          <div className="flex justify-start h-80 lg:w-auto lg:visible md:invisible mt-12 md:w-0">
             <img
               src={pro[0].image}
               alt="profileImage"

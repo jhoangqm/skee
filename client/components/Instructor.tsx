@@ -70,7 +70,7 @@ const Instructor = ({ pros }) => {
       <Filter className="sticky" pros={pros} setFilter={setFilter} filterItem={filterItem} />
       
       <div className="modal-instructor">
-        {/* {filteredPros.length === 0
+        {filteredPros.length === 0
           ? pros.map(p => (
             <div>
               <div
@@ -102,8 +102,8 @@ const Instructor = ({ pros }) => {
                 </div>
               </div>
             </div>
-          )):  */}
-        {filteredPros.map((p) => (
+          )): 
+        filteredPros.map((p) => (
           <div>
             <div
               key={p.id}
@@ -123,7 +123,7 @@ const Instructor = ({ pros }) => {
                     <div className="badge badge-outline">
                       {p.certBody} {p.level}
                     </div>
-                    {/* <div className="badge badge-outline">{p.resorts.name}</div> */}
+                    <div className="badge badge-outline">{p.resorts.name}</div>
                   </div>
                 </div>
               </div>
