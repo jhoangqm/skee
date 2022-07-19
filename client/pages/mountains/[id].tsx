@@ -108,20 +108,20 @@ else
         </blockquote>
       </div>
 
-      <div className=" flex flex-wrap ">
+      <div className=" flex flex-wrap justify-center">
         {resort.map((resort) => (
-          <div className="flip flex flex-wrap justify-center m-3">
-            <div className="flip-content">
-              <div className="flip-front">
+          <div className="flip-card">
+            <div className="flip-card-inner">
+              <div className="flip-card-front">
                 <FrontOfCard resort={resort} />
               </div>
-              <div className="flip-back">
+              <div className="flip-card-back">
                 <BackOfCard resort={resort} />
               </div>
             </div>
-            </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
       </Layout>
      
     );
