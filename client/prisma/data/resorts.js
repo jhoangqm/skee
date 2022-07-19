@@ -48,7 +48,7 @@ const resort = [
     hardRuns: chance.integer({ min: 2, max: 20 }),
     province: 'BC',
     image:
-      'https://www.snowshoemag.com/wp-content/blogs.dir/5/files/DSC_2816.jpg',
+      'https://i0.wp.com/www.awalkandalark.com/wp-content/uploads/2019/02/23-My-favourite-run-the-Paper-trail.jpg?fit=1024%2C768&ssl=1',
   },
   {
     name: 'Whistler Blackcomb',
