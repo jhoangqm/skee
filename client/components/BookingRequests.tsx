@@ -51,8 +51,8 @@ function BookingRequests(props: { proId }) {
   return (
     <>
       <div className="container">
-        <div className="m-20 shadow-custom rounded-lg">
-          <div className="flex justify-center text text-xl font-bold m-5 pt-10">
+        <div className="m-20 shadow-custom rounded-lg bg-white">
+          <div className="flex justify-center text text-xl font-bold m-5 pt-10 ">
             Total Pending requests: {pendingRequest.length}
           </div>
           <div className="flex flex-wrap justify-center m-5 py-5">
@@ -94,7 +94,7 @@ function BookingRequests(props: { proId }) {
               ))}
           </div>
         </div>
-        <div className="m-20 shadow-custom rounded-lg">
+        <div className="m-20 shadow-custom rounded-lg bg-white">
           <div className="flex justify-center text text-xl font-bold m-5 pt-10">
             Accepted requests: {acceptedRequest.length}
           </div>

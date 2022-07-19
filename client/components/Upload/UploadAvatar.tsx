@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 function UploadAvatar(props: { proId }) {
   // const [image, setImage] = useState("");
   const [file, setFile] = useState();
+  const [success, setSuccess] = useState(false);
   const [imagePreview, setPreview] = useState();
   const inputEl = useRef(null); //ref hidden input
-  const clearPreview = useRef(null)
+  const clearPreview = useRef(null);
 
   const { query } = useRouter();
   query.id = props.proId;
@@ -42,6 +43,9 @@ function UploadAvatar(props: { proId }) {
     })
       .then(response => {
         const { data } = response;
+        setSuccess(true);
+        console.log('hello');
+        e.target.reset();
         updateAvatarDB(data);
       })
       .catch(err => {
@@ -54,9 +58,9 @@ function UploadAvatar(props: { proId }) {
       <hr></hr>
       {/* <h4>Avatar Preview</h4> */}
       <form onSubmit={uploadAvatar}>
-        <div className="imageBox">
+        <div className="imageBox flex justify-center my-2">
           <div className="avatar">
-            <div className="rounded-full">
+            <div className="rounded-full ">
               <img
                 src={imagePreview}
                 object-fit="contain"
@@ -65,18 +69,25 @@ function UploadAvatar(props: { proId }) {
             </div>
           </div>
         </div>
-        <input
-          type="file"
-          onChange={getImage}
-          style={{ display: 'none' }} //hiding input
-          ref={inputEl} //set inputEl to referring this element
-        ></input>
-        <button className="btn" onClick={() => inputEl.current.click()}>
-          select image
-        </button>
-        <button className="btn" type="submit" ref={clearPreview}>
-          upload
-        </button>
+
+        {success ? (
+          <p className="flex justify-center font-bold text-success">Success!</p>
+        ) : (
+          <div className="flex flex-col">
+            <input
+              type="file"
+              onChange={getImage}
+              className="" //hiding input
+              ref={inputEl} //set inputEl to referring this element
+            />
+            <button
+              className="btn btn-primary hover:btn-success my-3"
+              type="submit"
+            >
+              upload
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

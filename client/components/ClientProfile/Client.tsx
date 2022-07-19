@@ -48,7 +48,9 @@ const User = ({ user }) => {
           </div>
         </div>
         <div className="mt-10 py-10 border-t border-gray-300 ">
-          <div className="flex justify-center text-2xl mb-5 font-bold">Skills</div>
+          <div className="flex justify-center text-2xl mb-5 font-bold">
+            Skills
+          </div>
           <div className="flex justify-center">
             <div className="flex w-1/4 rounded-2xl justify-center items-center  shadow-custom ">
               <div className=" text-lg  text-gray-800 p-10">
@@ -245,7 +247,7 @@ const User = ({ user }) => {
   };
 
   return (
-    <div className="">
+    <div className="mt-28 ml-5">
       <div className="flex flex-row w-auto justify-between">
         <div>
           <ul className="menu bg-base-100 w-56 p-2 rounded-box">
