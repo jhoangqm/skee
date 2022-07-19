@@ -46,7 +46,12 @@ const Booking = ({ pro }) => {
         </div>
         <div className="flex lg:justify-around md:justify-center">
           <div className="flex justify-start h-80 lg:w-auto lg:visible md:invisible md:w-0">
-            <img src={pro[0].image} alt="profileImage" />
+            <img
+              src={pro[0].image}
+              alt="profileImage"
+              className="shadow-xl rounded-full h-auto align-middle border-none"
+              style={{ maxWidth: '350px' }}
+            />
           </div>
           <div className="flex justify-start m-2">
             <BookingCalendar proId={pro[0].id} />
