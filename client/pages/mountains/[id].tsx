@@ -33,7 +33,7 @@ export const getStaticProps = async (context) => {
 
 function FrontOfCard({ resort }) {
   return (
-    <div className="modal-mountains mx-15">
+    <div className="modal-mountains ">
       <div key={resort.id} className="flex flex-wrap justify-center m-3  ">
         <div className="card w-96 bg-base-100 shadow-xl m-5 cursor-pointer">
           <figure>
@@ -52,7 +52,7 @@ function FrontOfCard({ resort }) {
             </p>
             <div className="card-actions justify-center">
               <Link href={`/mountains/instructors/${resort.id}`}>
-                <button className="btn btn-primary w-3/4">
+                <button className="btn btn-primary w-3/4 mt-5">
                   Book an instructor at {resort.name}
                 </button>
               </Link>
@@ -66,7 +66,7 @@ function FrontOfCard({ resort }) {
 // hover:scale-110 transition duration-500
 function BackOfCard({ resort }) {
   return (
-    <div className="modal-mountains mx-15">
+    <div className="modal-mountains ">
       <div key={resort.id} className="flex flex-wrap justify-center m-3">
         <div className="card w-96 bg-base-100 shadow-xl m-5 cursor-pointer">
           <figure>
@@ -75,11 +75,11 @@ function BackOfCard({ resort }) {
           <div className="card-body">
             <h2 className="card-title">{resort.name}</h2>
             <p>
-              <li>About the resort {resort.description}</li>
+              About the resort {resort.description}
             </p>
             <div className="card-actions justify-center">
               <Link href={`/mountains/instructors/${resort.id}`}>
-                <button className="btn btn-primary w-3/4">
+                <button className="btn btn-primary w-3/4 mt-5">
                   Book an instructor at {resort.name}
                 </button>
               </Link>
@@ -108,7 +108,7 @@ else
         </blockquote>
       </div>
 
-      <div className=" flex flex-wrap justify-around">
+      <div className=" flex flex-wrap ">
         {resort.map((resort) => (
           <div className="flip flex flex-wrap justify-center m-3">
             <div className="flip-content">
