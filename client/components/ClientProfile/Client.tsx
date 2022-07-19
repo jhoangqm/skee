@@ -48,10 +48,10 @@ const User = ({ user }) => {
           </div>
         </div>
         <div className="mt-10 py-10 border-t border-gray-300 ">
-          <p className="flex justify-center text-2xl mb-5 font-bold">Skills</p>
+          <div className="flex justify-center text-2xl mb-5 font-bold">Skills</div>
           <div className="flex justify-center">
             <div className="flex w-1/4 rounded-2xl justify-center items-center  shadow-custom ">
-              <p className=" text-lg  text-gray-800 p-10">
+              <div className=" text-lg  text-gray-800 p-10">
                 <ol className="list-disc">
                   {skills.length === 0 ? (
                     <div className="text-xl">No skills selected</div>
@@ -63,7 +63,7 @@ const User = ({ user }) => {
                     ))
                   )}
                 </ol>
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -172,13 +172,13 @@ const User = ({ user }) => {
                 <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-success flex  justify-center flex-col">
                   <ul>
                     <li>
-                      <p className="mb-2">
+                      <div className="mb-2">
                         {booking.Pros.firstName} {booking.Pros.lastName} is
                         looking forward to seeing you on {'  '}
                         {new Date(booking.timeSlot.startTime)
                           .toUTCString()
                           .replace(/GMT/, ' ')}
-                      </p>
+                      </div>
                     </li>
                   </ul>
 
@@ -207,13 +207,13 @@ const User = ({ user }) => {
                 <div className="m-1 w-64 border border-transparent drop-shadow-md rounded-lg p-2 bg-error flex  justify-center flex-col">
                   <ul>
                     <li>
-                      <p className="mb-2">
+                      <div className="mb-2">
                         Your booking has not been accepted yet for {'  '}
                         {new Date(booking.dateFrom)
                           .toDateString()
                           .replace(/GMT/, ' ')}{' '}
                         with {booking.Pros.firstName} {booking.Pros.lastName}
-                      </p>
+                      </div>
                     </li>
                   </ul>
 
