@@ -16,7 +16,7 @@ const Signup = () => {
           <h1 className="text-4xl mt-10 mb-5">Register now</h1>
         </div>
         <div className="flex items-center flex-col m-1">
-          <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box bg-transparent items-center">
+          <ul className="menu menu-vertical lg:menu-horizontal bg-base-100 rounded-box bg-transparent ">
             <li>
               <label htmlFor="client" className="w-40">
                 I am looking for an Instructor
