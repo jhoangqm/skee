@@ -110,7 +110,7 @@ const Instructor = ({ pros }) => {
               className="flex flex-wrap justify-center m-3 hover:scale-110 transition duration-500"
               onClick={(e) => onclickhandler(e, p.id)}
             >
-              <div className="card w-96 bg-base-100 shadow-xl m-6">
+              <div className="card w-96 bg-base-100 shadow-xl m-6 cursor-pointer">
                 <figure>
                   <img src={p.image} alt="Shoes" />
                 </figure>
