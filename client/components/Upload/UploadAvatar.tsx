@@ -6,7 +6,9 @@ function UploadAvatar(props: { proId }) {
   // const [image, setImage] = useState("");
   const [file, setFile] = useState();
   const [success, setSuccess] = useState(false);
-  const [imagePreview, setPreview] = useState();
+  const [imagePreview, setPreview] = useState(
+    'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'
+  );
   const inputEl = useRef(null); //ref hidden input
   const clearPreview = useRef(null);
 
