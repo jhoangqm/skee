@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 // * * * * * * * * * * * * * * * * * * * *
 // TODO: Refactor, cleanup, move to components, user cookies in separate function
@@ -79,6 +79,7 @@ const Nav = (props: any) => {
           setLoggedIn(true);
           setTypeError(false);
           setError(false), e.target.reset();
+          router.push('/')
         }
       });
   };
