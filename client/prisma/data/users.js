@@ -253,28 +253,28 @@ const pro = [
 ];
 const skill = [
   {
-    skill: 'beginner',
+    skill: 'Beginner',
   },
   {
-    skill: 'intermediate',
+    skill: 'Intermediate',
   },
   {
-    skill: 'advanced',
+    skill: 'Advanced',
   },
   {
-    skill: 'bumps',
+    skill: 'Bumps',
   },
   {
-    skill: 'freestyle',
+    skill: 'Freestyle',
   },
   {
-    skill: 'off-piste',
+    skill: 'Off-piste',
   },
   {
-    skill: 'carving',
+    skill: 'Carving',
   },
   {
-    skill: 'trees',
+    skill: 'Trees',
   },
 ];
 
