@@ -25,7 +25,7 @@ export default function InstructorCalendar({ pro }) {
   const enabled = 'react-calendar__tile__enabled';
   // fetches booking dates using proId from the database
   const fetchData = () => {
-    // console.log('Fetching booking');
+    
     fetch(`/api/available/${pro[0].id}`, {
       method: 'POST',
       body: JSON.stringify({ date, proId: pro[0].id }),

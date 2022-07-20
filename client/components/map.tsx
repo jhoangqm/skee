@@ -25,7 +25,7 @@ if (!data) return <div>loading...</div>;
 
 let onclickhandler = (e) => {
  const province = e.target.attributes.value.value
- console.log(province)
+ 
  
   Router.push(`/mountains/${province}`)
  

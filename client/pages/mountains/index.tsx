@@ -2,7 +2,6 @@ import Layout from "../../components/Layout";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-
 function FrontOfCard({ resort }) {
   return (
     <div className="modal-mountains ">
@@ -71,8 +70,6 @@ const Mountains = () => {
       .then((data) => setResorts(data));
   };
   useEffect(() => fetchResorts(), []);
-  console.log(resorts);
-
 
   return (
     <Layout>

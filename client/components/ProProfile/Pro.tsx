@@ -78,7 +78,7 @@ const Pro = ({ pro }) => {
     data.bio = bio.value;
     data.email = email.value;
     data.phoneNumber = phoneNumber.value;
-    console.log('Values: ', email.value);
+    
     fetch(`/api/pros`, {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -209,7 +209,7 @@ const Pro = ({ pro }) => {
     return <InstructorCalendar pro={pro} />;
   };
 
-  console.log('PRRORORORORORROROAFSDFSD', pro);
+  
   const [notification, setNotification] = useState([]);
   const [bubble, setBubble] = useState([]);
 
@@ -228,12 +228,12 @@ const Pro = ({ pro }) => {
 
   const filterRequests = () => {
     const pendingStatus = notification.filter(p => p.pending);
-    console.log('PENDING STATUS', pendingStatus);
+    
     if (pendingStatus.length > 0) {
       setBubble(pendingStatus);
     }
   };
-  console.log('Bubbles Darling', bubble);
+  
   return (
     <div className="mt-28 ml-5">
       <div className="flex flex-row w-auto justify-between">

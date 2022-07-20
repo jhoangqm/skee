@@ -18,7 +18,7 @@ function Sockets() {
   useEffect(() => {
     socket.on('greeting', data => {
       // Says hello to a new user
-      console.log('Hello received from server');
+      
       setUser(prev => data.username);
       setUsers(prev => data.users);
     });

@@ -1,14 +1,14 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from "react";
 
 const User = ({ user }) => {
-  const [component, setComponent] = useState('Profile');
+  const [component, setComponent] = useState("Profile");
   const [skills, setSkills] = useState([]);
   const clearForm = useRef(null);
 
   // display the skills of a user
   const displaySkills = () => {
-    const skillsMapped = user[0].ClientsSkills.map(s => s.skills);
-    const skillsArray = skillsMapped.map(s => s.skill);
+    const skillsMapped = user[0].ClientsSkills.map((s) => s.skills);
+    const skillsArray = skillsMapped.map((s) => s.skill);
     setSkills(skillsArray);
   };
 
@@ -18,7 +18,7 @@ const User = ({ user }) => {
     skills.length === 0 ? (
       <div className="text-xl">No skills selected</div>
     ) : (
-      skills.map(s => (
+      skills.map((s) => (
         <li>
           <div className="text-xl">{s}</div>
         </li>
@@ -34,16 +34,16 @@ const User = ({ user }) => {
               src={user[0].image}
               alt="Profile picture"
               className="shadow-xl rounded-full h-auto align-middle border-none "
-              style={{ maxWidth: '150px' }}
+              style={{ maxWidth: "150px" }}
             />
           </div>
         </div>
         <div className="text-center mt-12">
           <h3 className="text-4xl font-semibold leading-normal  text-gray-800 mb-2">
-            {user[0].firstName} {user[0].lastName}{' '}
+            {user[0].firstName} {user[0].lastName}{" "}
           </h3>
           <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
-            <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{' '}
+            <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{" "}
             Vancouver, British Columbia
           </div>
         </div>
@@ -58,9 +58,9 @@ const User = ({ user }) => {
                   {skills.length === 0 ? (
                     <div className="text-xl">No skills selected</div>
                   ) : (
-                    skills.map(s => (
+                    skills.map((s) => (
                       <li>
-                        <div className="text-xl">{s}</div>{' '}
+                        <div className="text-xl">{s}</div>{" "}
                       </li>
                     ))
                   )}
@@ -74,7 +74,7 @@ const User = ({ user }) => {
   };
 
   // updates user info
-  const updateUserInfo = e => {
+  const updateUserInfo = (e) => {
     e.preventDefault();
     const { firstName, lastName, email, phoneNumber } = e.target;
     const data = {};
@@ -83,11 +83,11 @@ const User = ({ user }) => {
     data.lastName = lastName.value;
     data.email = email.value;
     data.phoneNumber = phoneNumber.value;
-    console.log('Values: ', e.target);
+
     fetch(`/api/clients`, {
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify(data),
-    }).then(res => res.json());
+    }).then((res) => res.json());
   };
 
   // edit component ( should probably make a separate file will prob do it in the future)
@@ -164,10 +164,9 @@ const User = ({ user }) => {
 
   // Shows history of booking
   const History = ({ user }) => {
-    console.log(user[0].bookings[0]);
     return (
       <div className="flex justify-center flex-wrap mt-16">
-        {user[0].bookings.map(booking => (
+        {user[0].bookings.map((booking) => (
           <div key={user[0].id}>
             {booking.accepted === true && !booking.pending ? (
               <>
@@ -176,10 +175,10 @@ const User = ({ user }) => {
                     <li>
                       <div className="mb-2">
                         {booking.Pros.firstName} {booking.Pros.lastName} is
-                        looking forward to seeing you on {'  '}
+                        looking forward to seeing you on {"  "}
                         {new Date(booking.timeSlot.startTime)
                           .toUTCString()
-                          .replace(/GMT/, ' ')}
+                          .replace(/GMT/, " ")}
                       </div>
                     </li>
                   </ul>
@@ -191,8 +190,8 @@ const User = ({ user }) => {
                       onClick={() => {
                         window.open(
                           `https://mail.google.com/mail/?view=cm&fs=1&to=${booking.Pros.email}&su=Booking%20request%20change`,
-                          '_blank',
-                          'location=yes, height=570, width=520, scrollbars=yes, status=yes'
+                          "_blank",
+                          "location=yes, height=570, width=520, scrollbars=yes, status=yes"
                         );
                       }}
                     >
@@ -210,10 +209,10 @@ const User = ({ user }) => {
                   <ul>
                     <li>
                       <div className="mb-2">
-                        Your booking has not been accepted yet for {'  '}
+                        Your booking has not been accepted yet for {"  "}
                         {new Date(booking.dateFrom)
                           .toDateString()
-                          .replace(/GMT/, ' ')}{' '}
+                          .replace(/GMT/, " ")}{" "}
                         with {booking.Pros.firstName} {booking.Pros.lastName}
                       </div>
                     </li>
@@ -226,8 +225,8 @@ const User = ({ user }) => {
                       onClick={() => {
                         window.open(
                           `https://mail.google.com/mail/?view=cm&fs=1&to=${booking.Pros.email}&su=Booking%20request%20change`,
-                          '_blank',
-                          'location=yes, height=570, width=520, scrollbars=yes, status=yes'
+                          "_blank",
+                          "location=yes, height=570, width=520, scrollbars=yes, status=yes"
                         );
                       }}
                     >
@@ -239,7 +238,7 @@ const User = ({ user }) => {
                   </div>
                 </div>
               </>
-            )}{' '}
+            )}{" "}
           </div>
         ))}
       </div>
@@ -254,7 +253,7 @@ const User = ({ user }) => {
             <li>
               <a
                 onClick={() => {
-                  setComponent('Profile');
+                  setComponent("Profile");
                 }}
               >
                 <svg
@@ -278,7 +277,7 @@ const User = ({ user }) => {
             <li>
               <a
                 onClick={() => {
-                  setComponent('Edit');
+                  setComponent("Edit");
                 }}
               >
                 <svg
@@ -301,7 +300,7 @@ const User = ({ user }) => {
             <li>
               <a
                 onClick={() => {
-                  setComponent('History');
+                  setComponent("History");
                 }}
               >
                 <svg
@@ -323,9 +322,9 @@ const User = ({ user }) => {
           </ul>
         </div>
         <div className="flex justify-between flex-col w-full">
-          {component === 'Profile' ? <Profile /> : null}
-          {component === 'Edit' ? <Edit user={user} /> : null}
-          {component === 'History' ? <History user={user} /> : null}
+          {component === "Profile" ? <Profile /> : null}
+          {component === "Edit" ? <Edit user={user} /> : null}
+          {component === "History" ? <History user={user} /> : null}
         </div>
       </div>
     </div>
