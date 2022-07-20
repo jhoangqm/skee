@@ -111,7 +111,6 @@ const Filter = ({ pros, filterItem }: any) => {
                 {uniqueSkill.map((skill) => (
                   <li>
                     <a>
-                      {" "}
                       <CheckLevel
                         id={skill}
                         pros={pros}

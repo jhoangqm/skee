@@ -14,8 +14,8 @@ const CheckLevel = ({ id, pros, filterItem }) => {
   bob = [...new Set(bob.map((pro) => pro))];
   // console.log("BOB", bob)
   return (
-    <div className="form-control">
-      <label className="label cursor-pointer">
+    <div className="form-control justify-between w-full">
+      <label className="label cursor-pointer w-full">
         <span className="label-text">{bob}&nbsp;</span>
 
         <input
