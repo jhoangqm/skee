@@ -39,7 +39,7 @@ function FrontOfCard({ resort }) {
           </figure>
           <div className="card-body">
             <h2 className="card-title">{resort.name}</h2>
-            <p>
+            <div>
               <li>Vertical Meters {resort.vert}</li>
               <li>Skiable Terrain {resort.skiableTerrain}</li>
               <li>Number of Runs {resort.runs}</li>
@@ -47,7 +47,7 @@ function FrontOfCard({ resort }) {
               <li>Green runs {resort.easyRuns}</li>
               <li>Blue Runs {resort.mediumRuns}</li>
               <li>Black/Double Black Runs {resort.hardRuns}</li>
-            </p>
+            </div>
             <div className="card-actions justify-center">
               <Link href={`/mountains/instructors/${resort.id}`}>
                 <button className="btn btn-primary w-3/4 mt-5">
@@ -72,7 +72,7 @@ function BackOfCard({ resort }) {
           </figure>
           <div className="card-body">
             <h2 className="card-title">{resort.name}</h2>
-            <p>About the resort {resort.description}</p>
+            <div>About the resort {resort.description}</div>
             <div className="card-actions justify-center">
               <Link href={`/mountains/instructors/${resort.id}`}>
                 <button className="btn btn-primary w-3/4 mt-5">
@@ -105,7 +105,7 @@ const Mountains = ({ resort }) => {
 
         <div className=" flex flex-wrap justify-center">
           {resort.map((resort) => (
-            <div className="flip-card">
+            <div key={resort.id} className="flip-card">
               <div className="flip-card-inner">
                 <div className="flip-card-front">
                   <FrontOfCard resort={resort} />
