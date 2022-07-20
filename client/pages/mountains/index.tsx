@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import styles from "../../styles/Home.module.css";
+
 
 function FrontOfCard({ resort }) {
   return (
@@ -35,7 +35,7 @@ function FrontOfCard({ resort }) {
     </div>
   );
 }
-// hover:scale-110 transition duration-500
+
 function BackOfCard({ resort }) {
   return (
     <div className="modal-mountains ">
@@ -73,14 +73,6 @@ const Mountains = () => {
   useEffect(() => fetchResorts(), []);
   console.log(resorts);
 
-  //  let  window.addEventListener('load', function() {
-  //     var div = document.querySelector('flip');
-  //     var img = document.querySelector('footer');
-  //     var rect = img.getBoundingClientRect();
-
-  //     div.style.height = rect.height + 'px';
-  //     div.style.width = rect.width + 'px';
-  //   });
 
   return (
     <Layout>

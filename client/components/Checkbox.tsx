@@ -1,4 +1,4 @@
-import { pro } from "../prisma/data/users";
+
 
 const Checkbox = ({ id, pros, filterItem }: any) => {
   let bob = pros.filter((pro) => pro.resorts.id === id);

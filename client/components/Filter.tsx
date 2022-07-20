@@ -1,11 +1,8 @@
-import { get } from "https";
-import { useState } from "react";
-import { resourceLimits } from "worker_threads";
+
 import Checkbox from "./Checkbox";
 import CheckLevel from "./SkillCheckbox";
 
 const Filter = ({ pros, filterItem }: any) => {
-  const [showResort, setShowResort] = useState(false);
   const uniqueResort = [...new Set(pros.map((item) => item.resortId))];
 
   let uniqueSkill = pros.map((item) =>

@@ -1,16 +1,11 @@
-import BookingCalendar from '../../../components/Calendar';
-import { useRouter } from 'next/router';
-import Layout from '../../../components/Layout';
-import BookingRequests from '../../../components/BookingRequests';
-// import Upload from '../../components/uploads';
-import Pro from '../../../components/ProProfile/Pro';
-import User from '../../../components/ClientProfile/Client';
+import Layout from "../../../components/Layout";
+import User from "../../../components/ClientProfile/Client";
 
 export const getStaticPaths = async () => {
-  const res = await fetch('http://localhost:3000/api/clients');
+  const res = await fetch("http://localhost:3000/api/clients");
   const data = await res.json();
 
-  const paths = data.map(client => {
+  const paths = data.map((client) => {
     return {
       params: {
         id: client.id.toString(),
@@ -24,13 +19,11 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async context => {
+export const getStaticProps = async (context) => {
   const id = context.params.id;
-  // console.log('ID', context.params.id);
+
   const res = await fetch(`http://localhost:3000/api/clients/${id}`);
   const data = await res.json();
-
-  // console.log("DATA",data);
 
   return {
     props: { user: data },
@@ -38,8 +31,6 @@ export const getStaticProps = async context => {
 };
 
 const Profile = ({ user }) => {
-  console.log('user id: ', user);
-
   return (
     <Layout signup={true}>
       <User user={user} />

@@ -1,11 +1,9 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-// import Sockets from '../components/sockets'
-import styles from '../styles/Home.module.css';
-import Layout from '../components/Layout';
-import Map from '../components/Map';
-import Carousel from '../components/Carousel';
+import type { NextPage } from "next";
+import Head from "next/head";
+
+import styles from "../styles/Home.module.css";
+import Layout from "../components/Layout";
+import Map from "../components/Map";
 
 // NEXT MAIN PAGE
 const Home: NextPage = ({ resort }) => {
@@ -31,10 +29,6 @@ const Home: NextPage = ({ resort }) => {
             Click on the map below to direct you to your favorite mountain:
           </p>
           <Map resort={resort} />
-          {/* <p className={styles.description}>
-            Search resorts in your area below:
-          </p> */}
-          {/* <Carousel /> */}
         </main>
       </div>
     </Layout>

@@ -1,7 +1,5 @@
 import Layout from "../../../components/Layout";
 import Instructor from "../../../components/Instructor";
-import styles from "../../../styles/Home.module.css";
-import Filter from "../../../components/Filter";
 import useSWR from "swr";
 import { Pros, Resorts } from "@prisma/client";
 
@@ -16,7 +14,6 @@ interface ProProps {
 }
 
 const Instructors = () => {
-
   const { data, error } = useSWR<Pros[]>("/api/pros/", fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
@@ -36,7 +33,7 @@ const Instructors = () => {
           </span>
         </blockquote>
       </div>
-      
+
       <Instructor pros={pro} />
     </Layout>
   );

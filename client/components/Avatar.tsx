@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import UploadAvatar from './Upload/UploadAvatar';
+
 
 function Avatar(props: { proId }) {
   const [avatars, setAvatars] = useState([]);

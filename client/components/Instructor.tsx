@@ -2,9 +2,7 @@ import Modal from "../components/Modal";
 import { useState, useEffect } from "react";
 
 import Filter from "./Filter";
-import { fil } from "date-fns/locale";
-import { props } from "cypress/types/bluebird";
-import SkillFilter from "./SkillFilter";
+
 
 const Instructor = ({ pros }) => {
   const [showModal, setShowModal] = useState(false);
@@ -18,13 +16,7 @@ const Instructor = ({ pros }) => {
   // --------- Sets matches the unique filter key to the pros api --------------- //
   useEffect(() => {
     const temp = [];
-    pros.map((pro) => {
-    //   const array = pro.ProsSkills.map((skill) => skill.skills.skill)
-    //     .join(" ")
-    //     .split(" ")
-    //     .pop();
-    //   console.log("filter includes", array);
-     
+    pros.map((pro) => {    
       if (
         filter.includes(pro.resortId.toString()) ||
         filter.includes(

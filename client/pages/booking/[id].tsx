@@ -1,16 +1,13 @@
-import Layout from '../../components/Layout';
-import BookingCalendar from '../../components/BookingCalendar';
-import useSWR from 'swr';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import ContactForm from '../../components/ContactForm';
+import Layout from "../../components/Layout";
+import BookingCalendar from "../../components/BookingCalendar";
+import ContactForm from "../../components/ContactForm";
 
 // Next JS to get static paths
 export const getStaticPaths = async () => {
-  const res = await fetch('http://localhost:3000/api/pros');
+  const res = await fetch("http://localhost:3000/api/pros");
   const data = await res.json();
 
-  const paths = data.map(pro => {
+  const paths = data.map((pro) => {
     return {
       params: {
         id: pro.id.toString(),
@@ -25,7 +22,7 @@ export const getStaticPaths = async () => {
 };
 
 // Next JS to get static props
-export const getStaticProps = async context => {
+export const getStaticProps = async (context) => {
   const id = context.params.id;
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
   const data = await res.json();
@@ -41,10 +38,11 @@ const Booking = ({ pro }) => {
       <div className="p-10 px-32">
         <div className="flex justify-center">
           <blockquote className="text-4xl mb-20 mt-10 font-semibold text-center text-slate-900">
-          You are booking with&nbsp;
-          <span className=" before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-info relative inline-block">
-            <span className="relative text-white">&nbsp;{pro[0].firstName}&nbsp;</span>
-            
+            You are booking with&nbsp;
+            <span className=" before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-info relative inline-block">
+              <span className="relative text-white">
+                &nbsp;{pro[0].firstName}&nbsp;
+              </span>
             </span>
             &nbsp;{pro[0].lastName}
           </blockquote>
@@ -55,7 +53,7 @@ const Booking = ({ pro }) => {
               src={pro[0].image}
               alt="profileImage"
               className="shadow-xl rounded-full h-auto align-middle border-none"
-              style={{ maxWidth: '350px' }}
+              style={{ maxWidth: "350px" }}
             />
           </div>
           <div className="flex justify-start m-2">
