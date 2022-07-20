@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
-import Router, { useRouter } from 'next/router';
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import Router, { useRouter } from "next/router";
 
 // * * * * * * * * * * * * * * * * * * * *
 // TODO: Refactor, cleanup, move to components, user cookies in separate function
@@ -8,8 +8,8 @@ import Router, { useRouter } from 'next/router';
 
 const Nav = (props: any) => {
   const [user, setUser] = useState(null);
-  const [userType, setUserType] = useState('');
-  const [loginType, setLoginType] = useState('');
+  const [userType, setUserType] = useState("");
+  const [loginType, setLoginType] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState(false);
   const [typeError, setTypeError] = useState(false);
@@ -17,13 +17,13 @@ const Nav = (props: any) => {
   const router = useRouter();
 
   const fetchUser = async (type: string) => {
-    await fetch('/api/user', {
-      method: 'POST',
+    await fetch("/api/user", {
+      method: "POST",
       body: JSON.stringify(type),
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data === 'No such session') {
+      .then((res) => res.json())
+      .then((data) => {
+        if (data === "No such session") {
         } else {
           setUserType(data.type);
           setUser(data.userSession[0]);
@@ -37,22 +37,22 @@ const Nav = (props: any) => {
   };
 
   const logout = async () => {
-    await fetch('/api/logout', {
-      method: 'POST',
+    await fetch("/api/logout", {
+      method: "POST",
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setUser(null);
         setLoggedIn(false);
-        setUserType('');
-        setLoginType('');
+        setUserType("");
+        setLoginType("");
         setError(false);
         setTypeError(false);
-        router.push('/');
+        router.push("/");
       });
   };
 
-  const loginHandler = async e => {
+  const loginHandler = async (e) => {
     e.preventDefault();
     const loginData: any = {};
     for (const v of e.target.elements) {
@@ -60,38 +60,36 @@ const Nav = (props: any) => {
       loginData[v.name] = v.value;
     }
     loginData.userType = loginType;
-    if (loginData.userType === '') {
+    if (loginData.userType === "") {
       setTypeError(true);
       return;
     }
 
-    await fetch('/api/login', {
-      method: 'POST',
+    await fetch("/api/login", {
+      method: "POST",
       body: JSON.stringify(loginData),
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data === 'login Error') {
+      .then((res) => res.json())
+      .then((data) => {
+        if (data === "login Error") {
           setError(true);
         } else {
-          console.log(data);
           setUser(data);
           setLoggedIn(true);
           setTypeError(false);
           setError(false), e.target.reset();
-          router.push('/')
+          router.push("/");
         }
       });
   };
 
   useEffect(() => {
-    fetchUser('pro');
+    fetchUser("pro");
   }, [loggedIn]);
   useEffect(() => {
-    fetchUser('client');
+    fetchUser("client");
   }, [loggedIn]);
 
-  // console.log(query.id);
   return (
     <div className="navbar bg-secondary hover:bg-secondary rounded-b-lg h-22 fixed top-0 z-50 bg-opacity-75">
       <div className="navbar-start">
@@ -124,7 +122,7 @@ const Nav = (props: any) => {
               </li>
             </Link>
             {user ? (
-              userType === 'client' ? (
+              userType === "client" ? (
                 <Link href={`/profile/client/${user?.id}`}>
                   <li className="hover:bg-info hover:rounded-lg">
                     <a className="text-2xl">Profile</a>
@@ -162,7 +160,7 @@ const Nav = (props: any) => {
             </li>
           </Link>
           {user ? (
-            userType === 'client' ? (
+            userType === "client" ? (
               <Link href={`/profile/client/${user?.id}`}>
                 <li className="hover:bg-info hover:rounded-lg">
                   <a className="text-2xl">Profile</a>

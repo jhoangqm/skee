@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
-import { useRouter } from 'next/router';
-import bcrypt from 'bcryptjs';
+import { useState, useRef } from "react";
+import { useRouter } from "next/router";
+import bcrypt from "bcryptjs";
 
 const ClientSignup = () => {
   const [signupError, setSignupError] = useState(false);
@@ -17,17 +17,16 @@ const ClientSignup = () => {
     data.password = bcrypt.hashSync(data.password, process.env.SALT);
 
     // fetch clients
-    const response = await fetch('/api/clients', {
-      method: 'POST',
+    const response = await fetch("/api/clients", {
+      method: "POST",
       body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if (data === 'signup Error') {
+      .then((res) => res.json())
+      .then((data) => {
+        if (data === "signup Error") {
           setSignupError(true);
         } else {
-          setSignupError(false), e.target.reset(), router.push('/');
+          setSignupError(false), e.target.reset(), router.push("/");
         }
       });
   };

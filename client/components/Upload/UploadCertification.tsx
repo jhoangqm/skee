@@ -43,7 +43,7 @@ function Upload(props: { proId }) {
         updateImageDB(data);
       })
       .catch(err => {
-        console.log(err);
+        
       });
   };
 

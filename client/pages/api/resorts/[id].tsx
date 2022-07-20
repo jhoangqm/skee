@@ -1,4 +1,4 @@
-const { prisma } = require('../../../db');
+const { prisma } = require("../../../db");
 
 export default async function handler({ query: { id } }: any, res: any) {
   // find resorts where province id is
@@ -7,7 +7,6 @@ export default async function handler({ query: { id } }: any, res: any) {
       province: String(id),
     },
   });
-  console.log("SUCCESSFUL", resort);
+
   res.json(resort);
-  
 }

@@ -11,7 +11,7 @@ const Carousel = () => {
   const { data, error } = useSWR<Resorts[]>("/api/resorts", fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
-  // console.log(data);
+  
 
   return (
     <>

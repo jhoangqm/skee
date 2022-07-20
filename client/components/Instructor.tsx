@@ -11,7 +11,7 @@ const Instructor = ({ pros }) => {
   const [filteredPros, setfilteredpros] = useState([]);
 
     
-  console.log("filter", filteredPros);
+  
 
   // --------- Sets matches the unique filter key to the pros api --------------- //
   useEffect(() => {
@@ -28,13 +28,13 @@ const Instructor = ({ pros }) => {
       ) 
       {
         temp.push(pro);
-        console.log(pro);
+        
       }
       setfilteredpros(temp);
     });
-    // console.log("TEMP", temp);
+    
   }, [filter]);
-  console.log("filteredPros", filteredPros);
+  
 
   // --------- Sets the filter to the selects checkbox, also matches the filter against the array  --------------- //
   const filterItem = (item) => {

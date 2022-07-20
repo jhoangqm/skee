@@ -46,12 +46,12 @@ function UploadAvatar(props: { proId }) {
       .then(response => {
         const { data } = response;
         setSuccess(true);
-        console.log('hello');
+        
         e.target.reset();
         updateAvatarDB(data);
       })
       .catch(err => {
-        console.log(err);
+        
       });
   };
 
