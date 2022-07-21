@@ -29,28 +29,28 @@ Backend Server:
 
 # Dependencies
 
--@prisma/client: 4.0.0
--axios: ^0.27.2
--bcryptjs: ^2.4.3
--chance: ^1.1.8
--daisyui: ^2.18.1
--date-fns: 2.28.0,
--date-fns-tz: ^1.3.6
--iron-session: 6.1.3
+@prisma/client: 4.0.0
+axios: ^0.27.2
+bcryptjs: ^2.4.3
+chance: ^1.1.8
+daisyui: ^2.18.1
+date-fns: 2.28.0,
+date-fns-tz: ^1.3.6
+iron-session: 6.1.3
 
--next: 12.2.1
--react: 18.2.0
--react-calendar: 3.7.0
--react-dom: 18.2.0
+next: 12.2.1
+react: 18.2.0
+react-calendar: 3.7.0
+react-dom: 18.2.0
     
--swr: 1.3.0
--tw-elements: *
--postcss: 8.4.14
--prisma: 4.0.0
--tailwindcss: 3.1.5
--typescript: 4.7.4
--ts-node: 10.8.2
--nodemon: 2.0.19
--morgan: 1.10.0
--multer: 1.4.5-lts.1
+swr: 1.3.0
+tw-elements: *
+postcss: 8.4.14
+prisma: 4.0.0
+tailwindcss: 3.1.5
+typescript: 4.7.4
+ts-node: 10.8.2
+nodemon: 2.0.19
+morgan: 1.10.0
+multer: 1.4.5-lts.1
 
