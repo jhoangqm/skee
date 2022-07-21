@@ -29,7 +29,7 @@ Backend Server:
 
 # Dependencies
 
-    prisma/client: "^4.0.0",
+     @prisma/client: 4.0.0
     axios: ^0.27.2
     bcryptjs: ^2.4.3
     chance: ^1.1.8
