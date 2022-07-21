@@ -7,7 +7,7 @@ const Checkbox = ({ id, pros, filterItem }: any) => {
     
   
     return (
-      <div className="form-control w-full">
+      <div key={id} className="form-control w-full">
         <label className="label cursor-pointer w-full">
           <span className="label-text">{bob}&nbsp;</span>
 

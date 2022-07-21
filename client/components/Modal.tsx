@@ -12,7 +12,7 @@ import BookingCalendar from './BookingCalendar';
 const Modal = ({ setShowModal, pro }) => {
   return (
     <>
-      <div>
+      <div key={pro[0].id}>
         <input type="checkbox" id="my-modal-5" className="modal-toggle" />
         <div className="modal bg-primary bg-opacity-30 ">
           <div className="modal-box w-11/12 max-w-5xl">

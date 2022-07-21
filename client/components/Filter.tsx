@@ -73,7 +73,7 @@ const Filter = ({ pros, filterItem }: any) => {
           <div id="dropdown">
             <ul aria-labelledby="dropdownDefault">
               {uniqueResort.map((resort) => (
-                <li>
+                <li key={resort}>
                   <a>
                     <Checkbox id={resort} pros={pros} filterItem={filterItem} />
                   </a>
@@ -106,7 +106,7 @@ const Filter = ({ pros, filterItem }: any) => {
             <div id="dropdown">
               <ul aria-labelledby="dropdownDefault">
                 {uniqueSkill.map((skill) => (
-                  <li>
+                  <li key={skill}>
                     <a>
                       <CheckLevel
                         id={skill}
