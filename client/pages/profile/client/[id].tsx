@@ -1,11 +1,11 @@
-import Layout from "../../../components/Layout";
-import User from "../../../components/ClientProfile/Client";
+import Layout from '../../../lib/layout/Layout';
+import User from '../../../components/ClientProfile/Client';
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:3000/api/clients");
+  const res = await fetch('http://localhost:3000/api/clients');
   const data = await res.json();
 
-  const paths = data.map((client) => {
+  const paths = data.map(client => {
     return {
       params: {
         id: client.id.toString(),
@@ -19,7 +19,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async context => {
   const id = context.params.id;
 
   const res = await fetch(`http://localhost:3000/api/clients/${id}`);

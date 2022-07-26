@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import Layout from '../lib/layout/Layout';
 const Faq = () => {
   return (
     <Layout signup={undefined}>

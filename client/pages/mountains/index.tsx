@@ -1,6 +1,6 @@
-import Layout from "../../components/Layout";
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import Layout from '../../lib/layout/Layout';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 function FrontOfCard({ resort }) {
   return (
@@ -63,11 +63,11 @@ function BackOfCard({ resort }) {
 const Mountains = () => {
   const [resorts, setResorts] = useState([]);
   const fetchResorts = () => {
-    fetch("/api/resorts", {
-      method: "GET",
+    fetch('/api/resorts', {
+      method: 'GET',
     })
-      .then((res) => res.json())
-      .then((data) => setResorts(data));
+      .then(res => res.json())
+      .then(data => setResorts(data));
   };
   useEffect(() => fetchResorts(), []);
 
@@ -83,7 +83,7 @@ const Mountains = () => {
       </div>
 
       <div className=" flex flex-wrap justify-center">
-        {resorts.map((resort) => (
+        {resorts.map(resort => (
           <div className="flip-card">
             <div className="flip-card-inner">
               <div className="flip-card-front">

@@ -1,9 +1,9 @@
-import Layout from "../../../components/Layout";
-import Instructor from "../../../components/Instructor";
-import useSWR from "swr";
-import { Pros, Resorts } from "@prisma/client";
+import Layout from '../../../lib/layout/Layout';
+import Instructor from '../../../components/Instructor';
+import useSWR from 'swr';
+import { Pros, Resorts } from '@prisma/client';
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json());
+const fetcher = (url: any) => fetch(url).then(res => res.json());
 
 interface ResortProps {
   resorts: Resorts[];
@@ -14,7 +14,7 @@ interface ProProps {
 }
 
 const Instructors = () => {
-  const { data, error } = useSWR<Pros[]>("/api/pros/", fetcher);
+  const { data, error } = useSWR<Pros[]>('/api/pros/', fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 

@@ -1,13 +1,13 @@
-import Layout from "../../components/Layout";
-import BookingCalendar from "../../components/BookingCalendar";
-import ContactForm from "../../components/ContactForm";
+import Layout from '../../lib/layout/Layout';
+import BookingCalendar from '../../components/BookingCalendar';
+import ContactForm from '../../components/ContactForm';
 
 // Next JS to get static paths
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:3000/api/pros");
+  const res = await fetch('http://localhost:3000/api/pros');
   const data = await res.json();
 
-  const paths = data.map((pro) => {
+  const paths = data.map(pro => {
     return {
       params: {
         id: pro.id.toString(),
@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
 };
 
 // Next JS to get static props
-export const getStaticProps = async (context) => {
+export const getStaticProps = async context => {
   const id = context.params.id;
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
   const data = await res.json();
@@ -53,7 +53,7 @@ const Booking = ({ pro }) => {
               src={pro[0].image}
               alt="profileImage"
               className="shadow-xl rounded-full h-auto align-middle border-none"
-              style={{ maxWidth: "350px" }}
+              style={{ maxWidth: '350px' }}
             />
           </div>
           <div className="flex justify-start m-2">

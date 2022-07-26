@@ -1,10 +1,10 @@
-import Layout from "../../../components/Layout";
-import Instructor from "../../../components/Instructor";
+import Layout from '../../../lib/layout/Layout';
+import Instructor from '../../../components/Instructor';
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:3000/api/pros");
+  const res = await fetch('http://localhost:3000/api/pros');
   const data = await res.json();
-  const paths = data.map((resort) => {
+  const paths = data.map(resort => {
     return {
       params: {
         id: resort.resortId.toString(),
@@ -18,7 +18,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async context => {
   const resortId = context.params.id;
   const res = await fetch(
     `http://localhost:3000/api/pros/resortfinder/${resortId}`
