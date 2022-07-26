@@ -6,7 +6,7 @@ import Layout from '../lib/layout/Layout';
 import Map from '../components/Map';
 
 // NEXT MAIN PAGE
-const Home: NextPage = ({ resort }) => {
+const Home: NextPage = ({ resort } :any) => {
   return (
     <Layout>
       <div className={styles.container}>
