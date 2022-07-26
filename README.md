@@ -4,7 +4,7 @@
 
 A ski instructor booking platform, with the intention of helping instructiors connect with new clients more easily. 
 
-- This webapp was build using Nextjs, Prisma, Express, postgress, Tailwind.
+- This webapp was built using Nextjs, Prisma, Express, postgress, Tailwind.
 
 # Getting Started
 
