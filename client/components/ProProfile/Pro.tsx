@@ -1,84 +1,46 @@
-import BookingRequests from '../BookingRequests';
-
 import { useState, useRef, useEffect } from 'react';
 import InstructorCalendar from './InsCalender';
-import UploadCert from '../Upload/UploadCertification';
-import UploadAvatar from '../Upload/UploadAvatar';
-import Avatar from '../Avatar';
+import Requests from './components/Requests';
+import Edit from './components/Edit';
+import Profile from './components/Profile';
+import { Pros } from '@prisma/client';
 import { useRouter } from 'next/router';
 
-const Pro = ({ pro }) => {
-  const [component, setComponent] = useState('Profile');
-  const [certUpload, setCertUpload] = useState();
+interface IProProps {
+  pro: [Pros];
+}
+interface IForm {
+  uniqueID?: number;
+  firstName?: string;
+  lastName?: string;
+  bio?: string;
+  email?: string;
+  phoneNumber?: string;
+}
+interface IEvent {
+  target?: any;
+  preventDefault: () => void | undefined;
+}
+
+const Pro = ({ pro }: IProProps) => {
+  const [component, setComponent] = useState<string>('Profile');
+  const [notification, setNotification] = useState([]);
+  const [bubble, setBubble] = useState([]);
   const clearForm = useRef(null);
   const router = useRouter();
 
-  const Profile = ({ pro }) => {
-    return (
-      <div className="flex flex-col w-[86%]">
-        <div className="flex justify-center">
-          <div className="mt-10">
-            <Avatar proId={pro[0].id} />
-          </div>
-        </div>
-        <div className="text-center mt-12">
-          <h3 className="text-4xl font-semibold leading-normal  text-gray-800 mb-2">
-            {pro[0].firstName} {pro[0].lastName}{' '}
-          </h3>
-          <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
-            <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>{' '}
-            Vancouver, British Columbia
-          </div>
-          <div className="mb-2 text-gray-700 mt-10">
-            <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
-            Ski Instructor
-          </div>
-          <div className="mb-2 text-gray-700">
-            <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
-            University of British Columbia
-          </div>
-        </div>
-        <div className="mt-10 py-10 border-t border-gray-300 text-center">
-          <div className="flex flex-wrap justify-center">
-            <div className="w-full lg:w-9/12 px-4">
-              <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                {pro[0].bio}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // <div className="flex justify-between">
-  //   <div className="text-4xl ml-[16vw]">
-  //   <h3 className='text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2'>
-  //     {pro[0].firstName} {pro[0].lastName}{' '}
-  //       </h3>
-  //   </div>
-  // </div>
-  // <div className="flex justify-around ">
-  //   <div>
-  //     <Avatar proId={pro[0].id} />
-  //   </div>
-  //   <div className="flex h-80 w-80 bg-blue-200">
-  //     <div className="justify-self-center self-center">{pro[0].bio}</div>
-  //   </div>
-  // </div>
-
   // Function that updates the pro info
-  const updateProInfo = e => {
+  const updateProInfo = (e: IEvent) => {
     e.preventDefault();
     const { firstName, lastName, bio, email, phoneNumber } = e.target;
-    const data = {};
+    const data: IForm = {};
     data.uniqueID = pro[0].id;
     data.firstName = firstName.value;
     data.lastName = lastName.value;
     data.bio = bio.value;
     data.email = email.value;
     data.phoneNumber = phoneNumber.value;
-    
+
     fetch(`/api/pros`, {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -91,128 +53,7 @@ const Pro = ({ pro }) => {
       });
   };
 
-  // Function that brings out the edit profile component ( Should probably make a separate component)
-  const Edit = () => {
-    const showCert = () => setCertUpload(true);
-    const unShowCert = () => setCertUpload(false);
-
-    return (
-      <div className="w-[86%] flex flex-col justify-center mb-5 mt-10">
-        <div className="flex items-center flex-col w-1/3 self-center">
-          {certUpload ? (
-            <>
-              <button className="btn btn-primary" onClick={unShowCert}>
-                Click to Upload Avatar
-              </button>
-              <UploadCert proId={pro[0].id} />
-            </>
-          ) : (
-            <>
-              <button className="btn btn-primary" onClick={showCert}>
-                Click to Upload Certification
-              </button>
-              <UploadAvatar proId={pro[0].id} />
-            </>
-          )}
-        </div>
-        <div className="self-center w-full ">
-          <div className="py-8 px-16">
-            <form method="patch" onSubmit={updateProInfo} ref={clearForm}>
-              <div className="flex items-center flex-col">
-                <label htmlFor="firstName">First Name:</label>
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  required
-                  placeholder="First Name"
-                  className="input input-bordered w-full max-w-xs m-1"
-                />
-              </div>
-              <div className="flex items-center flex-col">
-                <label htmlFor="lastName">Last Name:</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  required
-                  placeholder="Last Name"
-                  className="input input-bordered w-full max-w-xs m-1"
-                />
-              </div>
-              <div className="flex items-center flex-col">
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  required
-                  placeholder="Email"
-                  className="input input-bordered w-full max-w-xs m-1"
-                />
-              </div>
-              <div className="flex items-center flex-col">
-                <label htmlFor="phone">Phone:</label>
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  id="phone"
-                  maxLength={14}
-                  minLength={10}
-                  pattern="^\d{3}\d{3}\d{4}"
-                  placeholder="(000) 000-0000"
-                  className="input input-bordered w-full max-w-xs m-1"
-                />
-              </div>
-              <div className="flex items-center flex-col">
-                <label htmlFor="phone">Bio:</label>
-                <textarea
-                  name="bio"
-                  id="bio"
-                  maxLength={140}
-                  minLength={1}
-                  placeholder="Enter your bio information here"
-                  className="textarea textarea-bordered w-full max-w-xs m-1 mb-5"
-                ></textarea>
-              </div>
-
-              <div className="flex items-center flex-col">
-                <button
-                  type="submit"
-                  className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-1/3"
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="light"
-                >
-                  Update profile
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // checks requests from booking requests component
-  const Requests = ({ pro }) => {
-    return (
-      <div className="request-box flex flex-wrap w-[86%]">
-        <div className="justify-self-center self-center">
-          <BookingRequests proId={pro[0].id} />
-        </div>
-      </div>
-    );
-  };
-
-  // instructor can setup their availability
-  const Availability = () => {
-    return <InstructorCalendar pro={pro} />;
-  };
-
-  
-  const [notification, setNotification] = useState([]);
-  const [bubble, setBubble] = useState([]);
-
+  // fetch booking requests
   const fetchData = () => {
     fetch(`/api/bookings/${pro[0].id}`)
       .then(res => res.json())
@@ -227,13 +68,15 @@ const Pro = ({ pro }) => {
   }, [notification]);
 
   const filterRequests = () => {
-    const pendingStatus = notification.filter(p => p.pending);
-    
+    const pendingStatus = notification.filter(
+      (p: { pending: number }) => p.pending
+    );
+
     if (pendingStatus.length > 0) {
       setBubble(pendingStatus);
     }
   };
-  
+
   return (
     <div className="mt-28 ml-5">
       <div className="flex flex-row w-auto justify-between">
@@ -379,9 +222,17 @@ const Pro = ({ pro }) => {
         </div>
         <div className="flex justify-between flex-col w-full">
           {component === 'Profile' ? <Profile pro={pro} /> : null}
-          {component === 'Edit' ? <Edit /> : null}
+          {component === 'Edit' ? (
+            <Edit
+              pro={pro}
+              updateProInfo={updateProInfo}
+              clearForm={clearForm}
+            />
+          ) : null}
           {component === 'Requests' ? <Requests pro={pro} /> : null}
-          {component === 'Availability' ? <Availability /> : null}
+          {component === 'Availability' ? (
+            <InstructorCalendar pro={pro} />
+          ) : null}
         </div>
       </div>
     </div>
