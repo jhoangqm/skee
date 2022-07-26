@@ -53,6 +53,7 @@ const Pro = ({ pro }: IProProps) => {
       });
   };
 
+  // fetch booking requests
   const fetchData = () => {
     fetch(`/api/bookings/${pro[0].id}`)
       .then(res => res.json())
