@@ -1,6 +1,5 @@
-import Layout from '../../../components/Layout';
+import Layout from '../../../lib/layout/Layout';
 import Pro from '../../../components/ProProfile/Pro';
-
 
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:3000/api/pros');
@@ -24,7 +23,6 @@ export const getStaticProps = async context => {
   const id = context.params.id;
   const res = await fetch(`http://localhost:3000/api/pros/${id}`);
   const data = await res.json();
-
 
   return {
     props: { pro: data },

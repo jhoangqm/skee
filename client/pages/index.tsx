@@ -1,9 +1,9 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
-import styles from "../styles/Home.module.css";
-import Layout from "../components/Layout";
-import Map from "../components/Map";
+import styles from '../styles/Home.module.css';
+import Layout from '../lib/layout/Layout';
+import Map from '../components/Map';
 
 // NEXT MAIN PAGE
 const Home: NextPage = ({ resort }) => {

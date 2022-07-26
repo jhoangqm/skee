@@ -1,12 +1,12 @@
-import Layout from "../../components/Layout";
-import Link from "next/link";
-import NotFound from "../../components/NotFound";
+import Layout from '../../lib/layout/Layout';
+import Link from 'next/link';
+import NotFound from '../../components/NotFound';
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:3000/api/resorts/");
+  const res = await fetch('http://localhost:3000/api/resorts/');
   const data = await res.json();
 
-  const paths = data.map((resort) => {
+  const paths = data.map(resort => {
     return {
       params: {
         id: resort.province.toString(),
@@ -19,7 +19,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async context => {
   const resortId = context.params.id;
   const res = await fetch(`http://localhost:3000/api/resorts/${resortId}`);
   const data = await res.json();
@@ -104,7 +104,7 @@ const Mountains = ({ resort }) => {
         </div>
 
         <div className=" flex flex-wrap justify-center">
-          {resort.map((resort) => (
+          {resort.map(resort => (
             <div key={resort.id} className="flip-card">
               <div className="flip-card-inner">
                 <div className="flip-card-front">

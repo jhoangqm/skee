@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import Layout from '../lib/layout/Layout';
 import { useState } from 'react';
 import ProSignup from '../components/Signup/ProSignup';
 import ClientSignup from '../components/Signup/ClientSignup';

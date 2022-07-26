@@ -1,4 +1,4 @@
-import Nav from '../components/Nav';
+import Nav from './Nav';
 import Footer from './Footer';
 interface LayoutProps {
   children?: JSX.Element | JSX.Element[];
