@@ -1,14 +1,8 @@
-import useSWR from 'swr';
-import { Pros } from '@prisma/client';
-import { useEffect, useState } from 'react';
-
-// interface ProProps {
-//   resorts: Pros[];
-// }
+import { MouseEvent, useEffect, useState } from 'react';
 
 // Instructor sets a time that hes available
 const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
-  const [timeData, setTimeData] = useState([{}]);
+  const [timeData, setTimeData] = useState<any>([{}]);
   let parsedDate = { date }.date.toISOString();
   useEffect(() => {
     timeFetcher();
@@ -27,7 +21,7 @@ const TimeSetter = ({ setShowModal, date, fetchData, pro }: any) => {
   };
 
   // booking function that sends query to API
-  const booking = async (e, date: any, time: string, pro: any) => {
+  const booking = async (e: MouseEvent, date: any, time: string, pro: any) => {
     e.preventDefault();
 
     const bookingRequest = { date: date, time: time, proId: pro[0].id };
