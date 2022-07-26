@@ -165,12 +165,7 @@ const User = ({ user }: IUserProps) => {
       </div>
     );
   };
-  // For:{'  '}
-  // {new Date(booking.timeSlot.startTime)
-  //   .toUTCString()
-  //   .replace(/GMT/, ' ')}{' '}
-
-  // Shows history of booking
+  
   const History = ({ user }) => {
     return (
       <div className="flex justify-center flex-wrap mt-16">
