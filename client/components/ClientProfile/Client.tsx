@@ -5,6 +5,9 @@ interface IUserProps {
   user: [Clients];
 }
 
+//this need to be refactored to be more modular and reusable
+// all instances of User should be changed to client
+
 const User = ({ user }: IUserProps) => {
   const [component, setComponent] = useState('Profile');
   const [skills, setSkills] = useState([]);
