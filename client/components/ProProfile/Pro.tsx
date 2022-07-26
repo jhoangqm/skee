@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import InstructorCalendar from './InsCalender';
+import InstructorCalendar from './components/InsCalender';
 import Requests from './components/Requests';
 import Edit from './components/Edit';
 import Profile from './components/Profile';
