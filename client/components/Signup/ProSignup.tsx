@@ -28,11 +28,10 @@ const ProSignup = () => {
       data[v.name] = v.value;
     }
 
-    //encrypt password
-    data.password = bcrypt.hashSync(data.password, process.env.SALT);
+    data.type = 'pro';
 
     // make request to api to create pro
-    const response = await fetch('/api/pros', {
+    const response = await fetch('/api/signup', {
       method: 'POST',
       body: JSON.stringify(data),
     })

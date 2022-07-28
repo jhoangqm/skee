@@ -25,34 +25,6 @@ export default withIronSessionApiRoute(
       });
       res.json(updatedInfo);
     }
-    // Adds user info to DB
-    if (req.method === 'POST') {
-      const parsed = JSON.parse(req.body);
-      const { firstName, lastName, email, password, phoneNumber } = parsed;
-
-      const url = 'http://localhost:8000/image/defaultAvatar.png';
-
-      try {
-        const client = await prisma.clients.create({
-          data: {
-            firstName,
-            lastName,
-            email,
-            password,
-            phoneNumber,
-            avatar: url,
-          },
-        });
-        req.session.user = {
-          id: client.id,
-          type: 'client',
-        };
-        await req.session.save();
-        res.json(client);
-      } catch (error) {
-        res.json('signup Error', error);
-      }
-    }
   },
   {
     cookieName: 'user',

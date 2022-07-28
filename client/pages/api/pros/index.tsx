@@ -4,49 +4,6 @@ import { withIronSessionApiRoute } from 'iron-session/next';
 // query function to find all pros
 export default withIronSessionApiRoute(
   async function handler(req: any, res: any) {
-    // creates pro info
-    if (req.method === 'POST') {
-      const parsed = JSON.parse(req.body);
-      const {
-        firstName,
-        lastName,
-        email,
-        password,
-        certBody,
-        level,
-        phoneNumber,
-        resortId,
-        skill,
-      } = parsed;
-      try {
-        const pro = await prisma.pros.create({
-          data: {
-            firstName,
-            lastName,
-            email,
-            password,
-            certBody,
-            bio: "This is my fight song, prove I'm alright song, take back my life sooooooOOOng",
-            level: Number(level),
-            phoneNumber,
-            resortId: Number(resortId),
-            ProsSkills: {
-              create: {
-                skillId: Number(skill),
-              },
-            },
-          },
-        });
-        req.session.user = {
-          id: pro.id,
-          type: 'pro',
-        };
-        await req.session.save();
-        res.json(pro);
-      } catch (error) {
-        res.json('signup Error', error);
-      }
-    }
     if (req.method === 'GET') {
       const pros = await prisma.pros.findMany({
         include: { resorts: true, ProsSkills: { select: { skills: true } } },
