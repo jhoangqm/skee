@@ -37,6 +37,7 @@ export default withIronSessionApiRoute(
       });
       res.json(updatedInfo);
     }
+    res.json('404 Not found');
   },
   {
     cookieName: 'user',

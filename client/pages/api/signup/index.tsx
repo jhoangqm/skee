@@ -89,7 +89,7 @@ export default withIronSessionApiRoute(
         await req.session.save();
         res.json(pro);
       } catch (error) {
-        res.json('signup Error', error);
+        res.json('signup Error');
       }
     }
   },
