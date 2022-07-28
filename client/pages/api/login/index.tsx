@@ -21,11 +21,12 @@ export default withIronSessionApiRoute(
             type: 'pro',
           };
           await req.session.save();
-          res.json(pro[0]);
+          return res.json(pro[0]);
         }
       } catch (error) {
         res.json('login Error');
       }
+      res.json('login Error');
     }
 
     // check which type of user is login in
@@ -42,13 +43,13 @@ export default withIronSessionApiRoute(
             type: 'client',
           };
           await req.session.save();
-          res.json(client);
+          return res.json(client);
         }
       } catch (error) {
         res.json('login Error');
       }
+      res.json('login Error');
     }
-    res.json('login Error');
   },
   {
     cookieName: 'user',
