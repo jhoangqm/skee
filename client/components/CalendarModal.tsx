@@ -1,9 +1,21 @@
 import useSWR from 'swr';
 import { Pros } from '@prisma/client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactElement, Dispatch } from 'react';
 
-interface ProProps {
-  resorts: Pros[];
+interface IUser {
+  id?: number;
+}
+interface ITimeData {
+  [index: number]: { startTime?: any };
+  length: number;
+}
+
+interface ICalMod {
+  showModal: ReactElement;
+  setShowModal: Dispatch<React.SetStateAction<boolean>>;
+  date: Date;
+  fetchAvailabilityData: () => {};
+  proId: string;
 }
 
 const CalMod = ({
@@ -12,9 +24,9 @@ const CalMod = ({
   date,
   fetchAvailabilityData,
   proId,
-}: any) => {
-  const [timeData, setTimeData] = useState([{}]);
-  const [user, setUser] = useState({});
+}: ICalMod) => {
+  const [timeData, setTimeData] = useState<ITimeData>([{}]);
+  const [user, setUser] = useState<IUser>({});
   const [AMConfirm, setAMConfirm] = useState(false);
   const [PMConfirm, setPMConfirm] = useState(false);
 
@@ -34,9 +46,6 @@ const CalMod = ({
 
   useEffect(() => {
     fetchUser('client');
-  }, [date]);
-
-  useEffect(() => {
     timeFetcher();
   }, [date]);
 
@@ -53,7 +62,12 @@ const CalMod = ({
   };
 
   //booking request function
-  const booking = async (e: any, date: any, time: string, proId: string) => {
+  const booking = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    date: Date,
+    time: string,
+    proId: string
+  ) => {
     e.preventDefault();
     const bookingRequest = {
       date: date,
@@ -77,7 +91,12 @@ const CalMod = ({
   };
 
   //confirm booking modal
-  const confirmBooking = (date: any, time: string, proId: string, num) => {
+  const confirmBooking = (
+    date: Date,
+    time: string,
+    proId: string,
+    num: number
+  ) => {
     return (
       <div className="flex justify-center flex-col">
         <p>
@@ -113,7 +132,7 @@ const CalMod = ({
   };
 
   // post request for time slots
-  const fetcher = (url: any) => fetch(url).then(res => res.json());
+  const fetcher = (url: URL) => fetch(url).then(res => res.json());
   const { data, error } = useSWR<Pros[]>('/api/resorts', fetcher);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
