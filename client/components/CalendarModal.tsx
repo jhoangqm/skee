@@ -1,13 +1,9 @@
 import useSWR from 'swr';
-import { Pros } from '@prisma/client';
+import { Pros, timeSlots } from '@prisma/client';
 import { useState, useEffect, ReactElement, Dispatch } from 'react';
 
 interface IUser {
   id?: number;
-}
-interface ITimeData {
-  [index: number]: { startTime?: any };
-  length: number;
 }
 
 interface ICalMod {
@@ -25,7 +21,7 @@ const CalMod = ({
   fetchAvailabilityData,
   proId,
 }: ICalMod) => {
-  const [timeData, setTimeData] = useState<ITimeData>([{}]);
+  const [timeData, setTimeData] = useState<timeSlots[]>([]);
   const [user, setUser] = useState<IUser>({});
   const [AMConfirm, setAMConfirm] = useState(false);
   const [PMConfirm, setPMConfirm] = useState(false);
