@@ -8,7 +8,7 @@ export default async function handler(
   let day = new Date(parsed.date);
   // Insert info to DB
   if (req.method === 'POST') {
-    day = new Date(day.setHours(-7));
+    day = new Date(day.setUTCHours(0));
     const slots = await prisma.timeSlots.findMany({
       where: {
         day: day,

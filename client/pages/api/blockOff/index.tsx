@@ -6,9 +6,9 @@ export default async function handler(
 ) {
   let { proId, time, date } = JSON.parse(req.body);
   date = new Date(date);
-  const am = new Date(date.setHours(2));
-  const pm = new Date(date.setHours(6));
-  const midnight = new Date(date.setHours(-7));
+  const am = new Date(date.setUTCHours(9));
+  const pm = new Date(date.setUTCHours(13));
+  const midnight = new Date(date.setUTCHours(0));
   // checks if time slot AM, if it is then execute create in timeSlots table
   if (time === 'AM') {
     try {
@@ -30,7 +30,7 @@ export default async function handler(
         },
       });
     }
-      // checks if time slot PM, if it is then execute create in timeSlots table
+    // checks if time slot PM, if it is then execute create in timeSlots table
   } else if (time === 'PM') {
     try {
       await prisma.timeSlots.findFirstOrThrow({
