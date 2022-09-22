@@ -38,6 +38,7 @@ const CalMod = ({
         } else setUser(data.userSession[0]);
       });
   };
+
   let parsedDate = { date }.date.toISOString();
 
   useEffect(() => {
