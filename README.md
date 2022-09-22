@@ -1,10 +1,26 @@
 # Skee App
 
-# Description 
+This project is on-going (updating to correct typescript types)
 
-A ski instructor booking platform, with the intention of helping instructiors connect with new clients more easily. 
+## Primary contributions:
+
+- Database schema creation and seeding
+- Calendar booking system
+- Login & Signup page
+- Signup system
+
+# Description
+
+A ski instructor booking platform, with the intention of helping instructiors connect with new clients more easily.
 
 - This webapp was built using Nextjs, Prisma, Express, postgress, Tailwind.
+
+# Screenshots
+
+![image](https://github.com/Jimmy-b36/skee/blob/main/_docs/resort/screenShots/Screenshot%202022-09-22%20at%208.49.22%20AM.png?raw=true)
+![image](https://github.com/Jimmy-b36/skee/blob/main/_docs/resort/screenShots/Screenshot%202022-09-22%20at%208.49.59%20AM.png?raw=true)
+![image](https://github.com/Jimmy-b36/skee/blob/main/_docs/resort/screenShots/Screenshot%202022-09-22%20at%208.50.59%20AM.png?raw=true)
+![image](https://github.com/Jimmy-b36/skee/blob/main/_docs/resort/screenShots/Screenshot%202022-09-22%20at%208.50.44%20AM.png?raw=true)
 
 # Getting Started
 
@@ -17,13 +33,13 @@ Client Server:
 2. npm install
 3. Setup .env using the example provided
 4. Setup next.config.js using the example provided
-5. npm run db:reset 
+5. npm run db:reset
 6. npm run dev
 
-Backend Server: 
+Backend Server:
 
 1. Cd into server
-2. npm install 
+2. npm install
 3. Setup the env. using the example provided
 4. npm run dev
 
@@ -42,9 +58,7 @@ Backend Server:
 - react: 18.2.0
 - react-calendar: 3.7.0
 - react-dom: 18.2.0
-    
 - swr: 1.3.0
-- tw-elements: *
 - postcss: 8.4.14
 - prisma: 4.0.0
 - tailwindcss: 3.1.5
@@ -53,4 +67,3 @@ Backend Server:
 - nodemon: 2.0.19
 - morgan: 1.10.0
 - multer: 1.4.5-lts.1
-
