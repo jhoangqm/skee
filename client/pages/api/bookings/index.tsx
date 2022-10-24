@@ -6,7 +6,7 @@ const booking = async (
   date: any,
   proId: string,
   clientId: string
-) =>
+) => {
   await prisma.bookings.create({
     data: {
       clientId: Number(clientId),
@@ -17,6 +17,7 @@ const booking = async (
       dateTo: date,
     },
   });
+};
 
 const createTimeSlot = async (
   hours: number,
@@ -25,8 +26,9 @@ const createTimeSlot = async (
   clientId: string
 ) => {
   const newDate = new Date(date);
-  const hrs = new Date(newDate.setHours(hours));
-  const midnight = new Date(newDate.setHours(-7));
+  const hrs = new Date(newDate.setUTCHours(hours));
+  const midnight = new Date(newDate.setUTCHours(0));
+  console.log('DATE', hrs);
   try {
     const timeSlot = await prisma.timeSlots.findMany({
       where: {
@@ -36,8 +38,7 @@ const createTimeSlot = async (
       },
     });
     booking(timeSlot[0].id, date, prosId, clientId);
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 
 export default async function handler(
@@ -48,9 +49,9 @@ export default async function handler(
     let { date, time, proId, clientId } = JSON.parse(req.body);
 
     if (time === 'AM') {
-      createTimeSlot(2, date, proId, clientId);
+      createTimeSlot(9, date, proId, clientId);
     } else if (time === 'PM') {
-      createTimeSlot(6, date, proId, clientId);
+      createTimeSlot(13, date, proId, clientId);
     }
     res.status(200).json({ message: 'success' });
   }
